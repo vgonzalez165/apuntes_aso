@@ -2,5 +2,5 @@
 
 ## UT01: Introducción y preparación del entorno
 
-- [PR0101: Introducción a Vagrant](./ut01/pr0101)
-- [PR0102: Redes en Vagrant](./ut01/pr0102)
+- [PR0101: Introducción a Vagrant](./ut01/pr0101.md)
+- [PR0102: Redes en Vagrant](./ut01/pr0102.md)
