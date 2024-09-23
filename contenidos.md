@@ -1,5 +1,179 @@
 # ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 
+## UT01: Introducción. Preparación del entorno (18 horas)
+
+- Evolución de la administración de sistemas
+- Máquinas virtuales con Virtual Box
+- Git
+- Vagrant
+- Contenedores Docker 
+
+
+## UT02: Instalación y puesta en marcha de Linux Server (20 horas)
+
+- Instalación
+- Administración remota con SSH
+- Configuración de la red en Linux
+- Gestión del almacenamiento. RAID y LVM
+- Gestión de procesos en Linux
+- El proceso de arranque (bootstraping)
+- Servicios del núcleo del sistema (init?, upstart????)
+- Programación de tareas con `cron` y `crontab`
+- El directorio `/proc`
+- Monitorización con Nagios (mirar a ver si hay algo de monitorización en el curriculo)
+
+
+## UT03: Lenguajes de scripting en Linux: Bash (24 horas)
+
+- Sintaxis básica de Bash
+- Variables y tipos de datos
+- Operadores en Bash
+- Entrada y salida en Bash
+- Estructuras de control
+- Bucles en Bash
+- Funciones en Bash
+- Manejo de archivos y directorios
+- Procesamiento de textos y cadenas
+- Trabajando con arrays
+- Manejo de señales y errores
+- Automatización y programación de tareas
+- Procesos y control de tareas
+- Scripts interactivos y menús
+- Scripting Bash y administración del sistema
+
+
+## UT04: Instalación y puesta en marcha de Windows Server (6 horas)
+
+- Instalación de Windows Server
+- Configuración del almacenamiento (grupos de almacenamiento)
+
+
+## UT05: Servicio de directorio en Windows (24 horas)
+
+- Conceptos básicos de Active Directory
+- Estructura del dominio. LDAP y Kerberos
+- Directivas de grupo. GPOs
+- Replicación de dominios
+- Gestión de contraseñas. LAPS
+
+
+## UT06: Lenguajes de scripting en Windows: Powershell (20 horas)
+
+- Conceptos básicos de Powershell
+- Manipulación de archivos y carpetas
+- Automatización con scripts
+- Condicionales y bucles
+- Funciones modulares
+- Gestión de procesos y servicios
+- Administración del sistema
+- Trabajando con objetos y pipelining
+- Cmdlets avanzados
+- Interacción con APIs y Servicios Web
+- Manejo de errores
+- Automatización de tareas con Powershell y Windows Task Scheduler
+- Powershell Remoting
+
+
+## UT07: Amazon AWS (16 horas)
+
+- Introducción a AWS y la nube
+- Estructura de AWS y la cuenta de AWS (???)
+- Servicios de computación
+  - Amazon EC2 (Elastic Compute Cloud)
+    - Creación y configuración de estancias
+    - Tipos de instancias y uso adecuado
+    - SSH. Acceso a instancias
+- Almacenamiento en AWS
+  - Amazon S3 (Simple Storage Service)
+    - Introducción a S3: Buckets y objetos
+    - Permisos y políticas de acceso
+    - Versionado y replicación de datos
+  - Amazon EBS (Elastic Block Store)
+    - Almacenamiento persistente para instancias EC2
+    - Creación y adjunto de volúmenes
+  - Amazon Glacier. Almacenamiento de archivos a largo plazo
+- Bases de datos en AWS
+  - Amazon RDS (Relational Database Service)
+    - Bases de datos soportadas
+    - Creación y administración de una base de datos RDS
+    - Copias de seguridad y restauración
+  - Amazon DynamoDB
+    - Base de datos NoSQL gestionada
+    - Creación de tablas y operaciones básicas
+- Redes y seguridad
+  - Amazon VPC (Virtual Private Cloud)
+  - Seguridad en AWS
+- Automatización y gestión de la infraestructura (???)
+  - AWS Elastic Beanstalk
+  - AWS Cloud Formation
+- Servicios sin servidor
+  - AWS Lambda
+  - Amazon API Gateway
+- Servicios de contenedores
+  - Amazon ECS (Elastic Container Service)
+  - Amazon EKS (Elastic Kubernetes Service)
+
+
+
+
+
+## UT07:
+
+- Instalación de Windows Server
+- Instalación de Linux Server
+
+## UT03: Servicios de acceso y administración remota
+
+- Acceso SSH en Linux
+- Acceso remoto para administración en Windows: Escritorio remoto, RSAT, ...
+
+## UT04: Lenguajes de scripting: Powershell
+
+- Introducción a Powershell
+- Variables en Powershell
+- Operaciones básicas con variables
+- Estructuras condicionales
+- Estructuras repetitivas
+- Variables que guardan múltiples valores
+
+## UT05: Lenguajes de scripting: Bash
+
+
+
+
+
+## Automatización de tareas
+
+## UT06: Administración de servidores de impresión
+
+## UT07: Amazon AWS?????????
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+
 ## UT01.- Introducción y preparación del entorno
 
 1. Evolución de la administración de sistemas operativos
