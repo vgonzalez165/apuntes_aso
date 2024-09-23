@@ -11,14 +11,32 @@
 
 ## UT02: Instalación y puesta en marcha de Linux Server
 
-- Configuración básica del sistema
-- Procesos en Linux
-  - Monitorización del sistema
-  - Gestión de servicios y demonios
-- Copias de seguridad en Linux
+### Apuntes
+
+- [Configuración de redes en Linux](./ut02/apuntes/)
+- [Gestión del almacenamiento](./ut02/apuntes/2_almacenamiento_discos.md)
+- [Usuarios y permisos](./ut02/apuntes/3_usuarios_permisos.md)
+- [Conexión remota mediante SSH](./ut02/apuntes/4_conexion_remota.md)
+- [Gestión de procesos](./ut02/apuntes/5_procesos.md)
+- [Copias de seguridad](./ut02/apuntes/6_copias_de_seguridad.md)
+
+### Prácticas
+
+- PR0201
+- PR0202
+- PR0203
 
 
 ## UT03: Lenguajes de scripting en Linux: Bash
+
+### Apuntes
+
+- Conceptos básicos de la creación de scripts
+- Ejecución condicional
+- Entrada y salida de datos
+- Funciones
+- Manipulación de cadenas
+
 
 ### Apuntes
 

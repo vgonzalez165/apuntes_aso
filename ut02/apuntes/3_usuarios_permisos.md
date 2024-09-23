@@ -81,7 +81,7 @@ Si se desea cambiar alguno de los parámetros por defecto al crear un nuevo usua
 
 ### 3.3.- Eliminación de un usuario
 
-Para eliminar un usuario del sistema el comando que hay que utilizar es `userdel`. Por defecto, este comando solo elimina la información del usuario del fichero `/etc/passwd`. No elimina ningún fichero de la cuenta.
+Para eliminar un usuario del sistema el comando que hay que utilizar es `userdel`. Por defecto, este comando solo elimina la información del usuario del fichero `/etc/passwd`. **No elimina ningún fichero de la cuenta.**
 
 Si se utiliza `userdel` con el parámetro `–r` también eliminará el directorio HOME del usuario, junto con el directorio de correo del usuario.
 
@@ -91,7 +91,7 @@ Linux proporciona unas pocas utilidades para modificar la información para cuen
 
 #### 3.4.1.- El comando `usermod`
 
-El comando usermod proporciona opciones para modificar la mayoría de los campos del fichero /etc/passwd. Para hacer esto solo es necesario utilizarlo con el parámetro correspondiente al campo que se quiere modificar. Algunos de estos parámetros son:
+El comando usermod proporciona opciones para modificar la mayoría de los campos del fichero `/etc/passwd`. Para hacer esto solo es necesario utilizarlo con el parámetro correspondiente al campo que se quiere modificar. Algunos de estos parámetros son:
 
 - `-c` para cambiar el campo de comentario
 - `-e` para cambiar la fecha de expiración
@@ -182,7 +182,7 @@ Sin embargo, el comando `umask` no muestra los permisos que se asignan tal cual,
 Esto quiere decir que si tenemos una máscara definida como 022 los permisos efectivos que se aplicarán a un fichero serán los resultantes de quitar los permisos de la máscara (022) a los permisos máximos (666), quedando unos permisos efectivos de 644 (lectura/escritura para el usuario y lectura para el resto).	
 
 
-#### 3.6.2.- Modificando permisos
+#### 3.6.2.- Modificando permisos con `chmod`
 
 El comando `chmod` es el que nos permitirá modificar los permisos asociados a un fichero o directorio. El formato de este comando es:
 
@@ -267,11 +267,9 @@ Sin embargo, en entornos con múltiples usuarios este proceso puede ser complica
 
 - **El set user id (SUID)**: cuando un fichero es ejecutado por un usuario, el programa se ejecuta bajo los permisos del propietario.
 - **El set group id (SGID)**: en fichero el programa se ejecuta utilizando los permisos del grupo propietario del fichero. Para directorios, los nuevos ficheros creados bajo ese directorio utilizan el grupo del directorio como grupo por defecto.
-- **El sticky bit**: el fichero permanece en memoria una vez que el proceso ha finalizado.
+- **El sticky bit**: es un permiso especial en Linux que se aplica a directorios compartidos para evitar el borrado accidental de archivos o directorios.
 
-El bit SGID es importante para compartir ficheros. Habilitando el bit SGID, puedes forzar que todos los ficheros creados en un directorio compartido pertenezcan al grupo del directorio y no al grupo del usuario individual que lo ha creado.
-
-El bit SGID se puede establecer con el comando `chmod`. Se puede añadir anteponiéndolo al valor de 3 dígitos octales de los permisos (quedando en ese caso 4 dígitos), o se puede utilizarse la notación simbólica.
+Estos tres bits se pueden establecer con el comando `chmod`. Se añaden anteponiendo al valor de 3 dígitos octales de los permisos (quedando en ese caso 4 dígitos), o se puede utilizarse la notación simbólica.
 
 | Binario	| Octal	| Descripción |
 | --------- | ----- | ----------- |
@@ -283,6 +281,70 @@ El bit SGID se puede establecer con el comando `chmod`. Se puede añadir antepon
 |  101      |  5    | Activados los bits *SUID* y *sticky bit*   |
 |  110      |  6    | Activados los bits *SUID* y *SGID*   |
 |  111      |  7    | Activados todos los bits (*sticky bit*, *SUID* y *SGID*)   |
+
+Si en lugar de utilizar notación decimal usamos notación simbólica en el comando `chmod`, lo haríamos de la forma:
+
+- Bit SUID: **`u+s`**
+- Bit SGID: **`g+s`**
+- Sticky Bit: **`+t`**
+
+#### 3.7.1.- El bit SUID
+
+El **bit SUID* se usa para que un archivo ejecutable se ejecute con los permisos del propietario del archivo, en lugar de los permisos del usuario que lo ejecuta. Este bit es útil para programas que necesitan permisos elevados temporalmente, como `passwd`.
+
+**Ejemplo de uso**
+
+```bash
+victor@SERVER:/tmp$ touch script.sh
+victor@SERVER:/tmp$ echo "echo SHADOW; cat /etc/shadow" > script.sh
+victor@SERVER:/tmp$ chmod a+x script.sh
+victor@SERVER:/tmp$ ls -l script.sh
+-rwxr-xr-x 1 victor victor 29 Sep 23 17:57 script.sh
+victor@SERVER:/tmp$ su alumno           # Cambio al usuario alumno
+Password:
+alumno@SERVER:/tmp$ ./script.sh
+SHADOW                                  # Aquí veo que puedo ejecutar el script
+cat: /etc/shadow: Permission denied     # pero al acceder a /etc/shadow da permiso denegado
+victor@SERVER:/tmp$ su victor           # Cambio al usuario victor
+victor@SERVER:/tmp$ sudo chown root script.sh   # Hago a root propietario
+victor@SERVER:/tmp$ sudo chmod u+s script.sh    # Activo el bit SUID
+victor@SERVER:/tmp$ ls -l script.sh
+-rwsr-xr-x 1 root victor 29 Sep 23 17:57 script.sh
+
+
+
+```
+
+
+#### 3.7.2.- El bit SGID
+
+
+#### 3.7.3.- El sticky bit
+
+La función principal del **sticky bit** es restringir la eliminación o modificación de los archivos dentro de un directorio, de modo que solo el propietario del archivo (o root) pueda eliminar o renombrar sus propios archivos, aunque otros usuarios tengan permisos de escritura en ese directorio.
+
+Es útil en directorios compartidos, como `/tmp`, donde múltiples usuarios tienen permisos de escritura y sería problemático que un usuario pudiera borrar los archivos de otro.
+
+**Ejemplo de uso**
+
+Supón que tienes un directorio `/compartido` en tu sistema y necesitas que todos los usuarios puedan escribir en él, pero quieres que nadie pueda eliminar archivos o modificar archivos creados por otros usuarios. Los pasos serían:
+
+```bash
+victor@SERVER:/$ sudo mkdir compartido          # Creamos el directorio
+victor@SERVER:/$ sudo chmod 777 /compartido     # Permiso RW para todo el mundo
+victor@SERVER:/$ sudo chmod +t /compartido      # Activamos el sticky bit
+victor@SERVER:/$ ls -ld /compartido
+drwxrwxrwt 2 root root 4096 Sep 23 17:40 /compartido
+```
+
+Observa que ahora podemos ver la **t** en los permisos de directorio. Ahora cualquier usuario del sistema podrá crear archivos dentro de ese directorio, pero no podrán eliminarlos ni modificarlos.
+
+
+
+
+El bit SGID es importante para compartir ficheros. Habilitando el bit SGID, puedes forzar que todos los ficheros creados en un directorio compartido pertenezcan al grupo del directorio y no al grupo del usuario individual que lo ha creado.
+
+
  
 Así, para crear un directorio compartido que mantenga la propiedad de los ficheros creados dentro de él para el grupo propietario del directorio podríamos hacer lo siguiente:
  
