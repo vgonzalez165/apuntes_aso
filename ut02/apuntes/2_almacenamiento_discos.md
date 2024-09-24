@@ -457,7 +457,7 @@ mount: /mnt: /home/vgonzalez/Descargas/slacko-6.3.0.iso ya está montado
 Una vez que hemos acabado de utilizar el dispositivo podemos desmontarlo con la orden `umount`. Este comando admite como parámetro o bien la ruta del dispositivo o bien el directorio donde está montado.
 
 
-### 2.4.3.- Montaje automático mediante el fichero `fstab`
+#### 2.4.3.- Montaje automático mediante el fichero `fstab`
 
 En el apartado anterior hemos visto como montar dispositivos desde la línea de comandos, pero este método tiene un inconveniente, y es que el dispositivo únicamente permanecerá montado hasta que apaguemos el equipo, debiendo volver a montarlo cada vez que iniciemos el ordenador.
 
@@ -539,7 +539,61 @@ Si queremos montar dispositivos con la opción `noauto` deberemos hacerlo explí
 
 
 
-### 2.4.- Logical Volume Manager (LVM)
+### 2.5.- Logical Volume Manager (LVM)
+
+**LVM (Logical Volume Manager)** es una herramienta para la gestión de volúmenes lógicos en Linux. Facilita la administración de espacio de disco permitiendo operaciones como redimensionar volúmenes sin detener el sistema, agregar nuevos discos o realizar snapshots de volúmenes.
+
+Las principales ventajas de LVM son:
+
+- Redimensionado dinámico de particiones (extensión o reducción).
+- Soporte para snapshots.
+- Agrupación de discos físicos en un único volumen lógico.
+
+Cuando hablamos de LVM hay tres conceptos que hay que tener muy claros:
+
+- **Volumen físico (PV)**: un volumen físico es el disco duro o partición que se añadirá al sistema LVM, es decir, corresponde a un dispositivo hardware de nuestro sistema.
+
+- **Grupo de volúmenes (VG)**: un grupo de volúmenes es una agrupación de volúmenes físicos, que forman un espacio común desde el cual se crean los volúmenes lógicos.
+
+- **Volumen lógico (LV)**: el volumen lógico es el equivalente a una partición que se utiliza para almacenar datos, y se crea desde un grupo de volúmenes.
+
+Veamos algunas funciones básicas que se pueden realizar con LVM.
+
+#### 2.5.1.- Creación de volúmenes lógicos
+
+El proceso de trabajo con LVM es el siguiente:
+
+- Primero convertimos todos los discos físicos que queramos pasar a LVM en volúmenes físicos, para los que debemos utilizar el comando `pvcreate`.
+
+```bash
+$ pvcreate /dev/sdb
+```
+
+- El siguiente paso es la creación de grupos de volúmenes. Cada grupo de volúmenes está formado por la agregación de uno o varios volúmenes físicos. Además, podemos crear tantos grupos de volúmenes como queramos, identificado cada uno por un nombre.
+
+```bash
+$ vgcreate mi_vg /dev/sdb /dev/sdc
+```
+
+- Ahora podemos extraer volúmenes lógicos de de un grupo de volúmenes con la orden `lvcreate`.
+
+```bash
+$ lvcreate -L 10G -n mi_lv mi_vg
+```
+
+- Por último, ya podemos formatearlo y montarlo de forma análoga a como hacíamos con las particiones.
+
+```bash
+$ mkfs.ext4 /dev/mi_vg/mi_lv
+$ mount /dev/mi_vg/mi_lv /mnt
+```
+
+
+
+
+
+
+
 
 
 ---
