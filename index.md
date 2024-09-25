@@ -22,9 +22,9 @@
 
 ### Prácticas
 
-- PR0201
-- PR0202
-- PR0203
+- [PR0201: Introducción a Vagrant](./ut01/practicas/pr0101.md)
+- [PR0202: Entornos multimáquina](./ut01/practicas/pr0102.md)
+- [PR0203: Redes en Vagrant](./ut01/practicas/pr0103.md)
 
 
 ## UT03: Lenguajes de scripting en Linux: Bash
