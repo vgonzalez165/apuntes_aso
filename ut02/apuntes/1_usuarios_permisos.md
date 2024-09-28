@@ -65,19 +65,46 @@ Los nueve campos de cada fila son:
 
 ### 3.2.- Añadir un nuevo usuario
 
-El comando para añadir nuevos usuarios en Linux es `useradd`. Este comando proporciona un medio sencillo para crear una nueva cuenta de usuario y establecer el directorio HOME del usuario a la vez. El comando `useradd` utiliza una combinación de valores predefinidos por el sistema y parámetros en la línea de comandos para definir una cuenta de usuario. Para ver los valores predefinidos por el sistema hay invocar el comando con el parámetro `–D`.
+Ubuntu dispone de dos comandos para crear usuarios: `useradd` y `adduser` siendo la única diferencia entre ellos que el segundo es interactivo. Así, si queremos crear un usuario en la línea de comandos es más cómodo usar `adduser`, que nos irá preguntando de forma interactiva por los diferentes datos que necesita, mientras que si queremos crear un usuario en un script utilizaremos `useradd` que toma todos los datos de sus parámetros y, por tanto, se puede ejecutar sin interacción por parte del usuario.
 
-Este comando nos mostrará:
+#### Creación de usuarios de forma interactiva: `adduser`
 
-- El grupo por defecto al que pertenecerá el usuario
-- El directorio donde se creará el directorio home del usuario
-- Los días tras los que se deshabilitará la cuenta desde que la contraseña expire
-- Si la cuenta expirará
-- El shell por defecto que utilizará la nueva cuenta
-- El directorio a partir del cual se construirá el directorio raíz del usuario suele ser /etc/skel
-- Fichero donde el usuario recibirá el correo
-- 
-Si se desea cambiar alguno de los parámetros por defecto al crear un nuevo usuario se puede hacer mediante la utilización del parámetro `–D` junto con otro parámetro que representará el valor que cambiará.
+Este comando es en realidad un script de Perl que invoca al comando `useradd` y su funcionamiento es muy sencillo, se le pasa como parámetro el nombre del usuario y preguntará por todos valores que necesita.
+
+```
+vagrant@ubuntu2004:~$ sudo adduser victor
+Adding user `victor' ...
+Adding new group `victor' (1001) ...
+Adding new user `victor' (1001) with group `victor' ...
+Creating home directory `/home/victor' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for victor
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] Y
+```
+
+#### Creación de usuarios automática: `useradd`
+
+El comando `useradd` crea un usuario, pero de forma limitada, ya que no realizará algunas funciones básicas como asignarle un directorio personal o contraseña. Para ello debemos utilizar algunos de los siguientes modificadores:
+
+- `-d`: para indicar cuál será el directorio personal del usuario
+- `-u`: UID personalizado del usuario
+- `-g`: GID personalizado del usuario
+- `-e`: indica la fecha de caducidad del usuario, el formato será de la forma `2024-02-28`
+- `-c`: añadimos un comentario al usuario
+- `-s`: shell que usará el usuario
+- `-D`: aplica una serie de configuraciones por defecto al usuario (estas se pueden ver ejecutando el comando `useradd -D` o también en el fichero `/etc/default/useradd`). Si se usa este modificador y alguno de los anteriores aplicará los valores por defecto salvo en el caso del modificador que hayamos indicado explícitamente.
+
+Ten en cuenta también que el usuario creado con `useradd` no tendrá contraseña, por lo que tendrás que asignarla posteriormente con el comando `passwd`.
+
 
 ### 3.3.- Eliminación de un usuario
 
