@@ -20,6 +20,9 @@ Necesitarás dos máquinas que se llamarán `server-{iniciales}-1` y `server{ini
 ### ¿Qué hay que hacer?
 
 
+[referencia](https://blog.elhacker.net/2022/02/icheros-etc-passwd-shadow-y-group.html)
+[salt](https://unix.stackexchange.com/questions/52108/how-to-create-sha512-password-hashes-on-command-line)
+
 A no ser que se indique lo contrario realiza todas las operaciones desde tu directorio personal.
 
 1.	Crea el directorio PR0201 dentro de tu directorio personal y dentro de él crea los directorios dir1 y dir2 ¿Cuáles son los permisos del directorio dir1? No pongas una captura, explica quiénes tienen permisos sobre el directorio y qué pueden hacer en él.
