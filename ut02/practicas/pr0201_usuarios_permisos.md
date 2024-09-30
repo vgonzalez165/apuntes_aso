@@ -1,47 +1,48 @@
 # PR0101: Introducción a Vagrant
 
-### ¿Qué vamos a aprender?
+## Aspectos generales
 
-Esta práctica servirá para afianzar tus conocimientos de configuración de redes en Linux
+### Objetivos de la práctica
 
-### ¿Qué recursos me pueden ser útiles?
-
-A continuación se indican algunos recursos que complementan los apuntes del módulo y que te pueden ser útiles para realizar esta práctica:
-
-- [Imagen Ubuntu 22.04](https://app.vagrantup.com/generic/boxes/ubuntu2204)
-
-### ¿Con qué entorno vamos a trabajar?
-
-Por comodidad utilizaremos máquinas levantadas con Vagrant, en concreto, usaremos la imagen denominada **generic/ubuntu2204**. Sin embargo, ten en cuenta que la configuración de red no se aplicará desde el Vagrantfile, sino que la realizaremos directamente desde la propia máquina.
-
-Necesitarás dos máquinas que se llamarán `server-{iniciales}-1` y `server{iniciales}-2`.
+Esta práctica servirá para profundizar tus conocimientos sobre usuarios y permisos en sistemas Linux.
 
 
-### ¿Qué hay que hacer?
+### Recursos
+
+1. [Box Ubuntu 22.04](https://app.vagrantup.com/generic/boxes/ubuntu2204)
+2. [Ficheros /etc/passwd /etc/shadow y /etc/group en GNU/Linux](https://blog.elhacker.net/2022/02/icheros-etc-passwd-shadow-y-group.html)ç
+3. [Understanding /etc/shadow file format on Linux](https://www.cyberciti.biz/faq/understanding-etcshadow-file/)
+4. [How to create SHA512 password hashes on command line](https://unix.stackexchange.com/questions/52108/how-to-create-sha512-password-hashes-on-command-line)
 
 
-[referencia](https://blog.elhacker.net/2022/02/icheros-etc-passwd-shadow-y-group.html)
-[salt](https://unix.stackexchange.com/questions/52108/how-to-create-sha512-password-hashes-on-command-line)
+### Entorno de trabajo
 
-A no ser que se indique lo contrario realiza todas las operaciones desde tu directorio personal.
-
-1.	Crea el directorio PR0201 dentro de tu directorio personal y dentro de él crea los directorios dir1 y dir2 ¿Cuáles son los permisos del directorio dir1? No pongas una captura, explica quiénes tienen permisos sobre el directorio y qué pueden hacer en él.
-
-2.	Utilizando   la   notación   simbólica, elimina   todos   los   permisos de   escritura (propietario, grupo, otros) del directorio dir2.
-
-3.	Utilizando la notación octal, elimina el permiso de lectura del directorio dir2, al resto de los usuarios.
-
-4.	¿Cuáles son ahora los permisos asociados a dir2?
-
-5.	Crear bajo dir2, un directorio llamado dir21.
-
-6.	Concédete a ti mismo permiso de escritura en el directorio dir2 e intenta de nuevo el paso anterior.
-
-7.	Dentro de dir2 crea un fichero en blanco llamado permisos.
+Esta práctica la realizaremos en un Ubuntu Server 22.04 LTS, para utilizar todos el mismo entorno usarás el box denominado `generic/ubuntu2204`.
 
 
+## Enunciado
 
-8.	Escribe el comando o comandos que necesitarías para establecer los siguientes permisos en el fichero anterior utilizando notación simbólica. En todos los casos, partimos de que el fichero tiene los permisos rw-r--r--
+### 1. Permisos de usuarios
+
+A no ser que se indique lo contrario realiza todas las operaciones desde el directorio personal de tu usuario.
+
+1.	Crea el directorio `pr0201` dentro de tu directorio personal y dentro de él crea los directorios `dir1` y `dir2` ¿Cuáles son los permisos del directorio `dir1`? No pongas una captura, explica quiénes tienen permisos sobre el directorio y qué pueden hacer en él.
+
+2.	Utilizando   la   notación   simbólica, elimina   todos   los   permisos de   escritura (propietario, grupo, otros) del directorio `dir2`.
+
+3.	Utilizando la notación octal, elimina el permiso de lectura del directorio `dir2`, al resto de los usuarios.
+
+4.	¿Cuáles son ahora los permisos asociados a `dir2`?
+
+5.	Crear bajo `dir2`, un directorio llamado `dir21`.
+
+6.	Concédete a ti mismo permiso de escritura en el directorio `dir2` e intenta de nuevo el paso anterior.
+
+
+
+### 2. Notación octal y simbólica
+
+1.	Supón que el fichero `~/file` tiene los permisos `rw-r--r--`. Escribe el comando o comandos que necesitarías para establecer los siguientes permisos en el fichero anterior utilizando **notación simbólica**. 
 
 - `rwxrwxr-x` :
 - `rwxr--r--` :
@@ -56,9 +57,9 @@ A no ser que se indique lo contrario realiza todas las operaciones desde tu dire
 - `rw-r-----` :
 - `rwx--x--x` :
 
-9.	Escribe el comando que necesitarías para establecer los siguientes permisos en el fichero anterior utilizando notación octal.
-rwxrwxrwx :
+2.	Escribe el comando que necesitarías para establecer los siguientes permisos en el fichero anterior utilizando **notación octal**.
 
+- `rwxrwxrwx` :
 - `--x--x--x` :
 - `r---w---x` :
 - `-w-------` :
@@ -68,6 +69,53 @@ rwxrwxrwx :
 - `r-x--x--x` :
 - `-w-r----x` :
 - `-----xrwx` :
+
+
+### 3. El bit setgid
+
+Vamos a ver ahora cómo funciona y para qué sirve el **bit setgid**. Realiza los siguientes pasos:
+
+1. Crea un grupo llamado `asir` y los usuarios `{iniciales}1` e `{iniciales}2`, donde `{iniciales}` son las iniciales de tu nombre. Por ejemplo, en mi caso se llamarían `vjgr1` y `vjgr2`.
+2. Crea el directorio `/compartido` y asigna propietario: `root` como usuario propietario y `asir` como grupo propietario.
+3.  Asigna al directorio creado permisos de lectura, escritura y ejecución para el usuario y el grupo propietario. El resto de usuarios no tendrá ningún tipo de permiso.
+4.  Establece el **bit setgid** en el directorio y verifica que se haya asignado.
+5.  Inicia sesión con `usuario1`, accede al directorio y crea un fichero llamado `fichero1` con algo de contenido. Comprueba los permisos del fichero que has creado.
+6.  Ahora inicia sesión con `usuario2` y comprueba si puedes acceder a `/compartido/fichero1` y si puedes añadirle contenido.
+7.  Responde las siguientes preguntas:
+    - ¿Qué ventajas tiene usar el bit setgid en entornos colaborativos?
+    - ¿Qué sucede si no se aplica el bit setgid en un entorno colaborativo?
+8. Cuando hayas acabado, limpia el sistema eliminando los usuarios y el directorio creado para la práctica.
+
+
+### 4. El sticky bit
+
+Ahora vamos a practicar con el **sticky  bit**. Realiza los siguientes pasos:
+
+1. Crea el directorio `/compartido` con todos los permisos para todos los usuarios.
+2. Crea dos usuarios `{iniciales}1` e `{iniciales}2`
+3. Vamos a probar primero el funcionamiento sin el sticky bit. Inicia sesión con el primer usuario, crea un fichero y luego, con el segundo usuario, intenta eliminarlo.
+4. Ahora establece el sticky bit en el directorio y verifica que se ve en los permisos.
+5. Vuelve a iniciar sesión con el primer usuario, crea un fichero e intenta eliminarlo con el segundo usuario.
+6. Responde las siguientes preguntas:
+   - ¿Qué efecto tiene el sticky bit en un directorio?
+   - Si tienes habilitado el sticky bit, ¿cómo tendrías que hacer para eliminar un fichero dentro del directorio?
+
+
+### 5. El directorio `/etc/shadow`
+
+El directorio `/etc/shadow` es un directorio cuya protección es vital en un sistema Linux ya que contiene los hashes de las contraseñas de los usuarios. 
+
+Para esta parte de la práctica tienes que utilizar la imagen `generic/ubuntu2004` de Vagrant.
+
+1. Crea un usuario llamado `{iniciales}` con contraseña `asir2`.
+2. Muestra la línea de l fichero `/etc/shadow` que contiene la contraseña de este usuario.
+3. En el segundo enlace del apartado [recursos](#recursos) puedes ver un listado de los diferentes tipos de hash soportados por este fichero. ¿Cuáles son?
+4. ¿Cuál es el tipo de hash utilizado en tu sistema?
+5. Seguro que has observado que hay un segundo campo en el hash que llama la **sal**. ¿Para qué sirve este campo?
+6. Dos tipos de ataque muy comunes para obtener las contraseñas de los usuarios son los **ataques de diccionario** y las **tablas rainbow**. Busca por Internet y averigua en qué consisten ambos tipos de ataque.
+7. En el tercer enlace de los [recursos](#recursos) puedes ver cómo se genera un hash SHA512 desde la línea de comandos. Verifica que el hash que hay guardado en el fichero `/etc/shadow` es el hash de la contraseña `asir1`
+
+
 
 
 

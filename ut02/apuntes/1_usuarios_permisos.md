@@ -315,6 +315,7 @@ Si en lugar de utilizar notación decimal usamos notación simbólica en el coma
 - Bit SGID: **`g+s`**
 - Sticky Bit: **`+t`**
 
+
 #### 3.7.1.- El bit SUID
 
 El **bit SUID* se usa para que un archivo ejecutable se ejecute con los permisos del propietario del archivo, en lugar de los permisos del usuario que lo ejecuta. Este bit es útil para programas que necesitan permisos elevados temporalmente, como `passwd`.
@@ -342,8 +343,13 @@ victor@SERVER:/tmp$ ls -l script.sh
 
 ```
 
-
 #### 3.7.2.- El bit SGID
+
+El **bit SGID** es importante para compartir ficheros. Habilitando el bit SGID, puedes forzar que todos los ficheros creados en un directorio compartido pertenezcan al grupo del directorio y no al grupo del usuario individual que lo ha creado.
+
+**Ejemplo de uso**
+
+
 
 
 #### 3.7.3.- El sticky bit
@@ -368,16 +374,6 @@ Observa que ahora podemos ver la **t** en los permisos de directorio. Ahora cual
 
 
 
-
-El bit SGID es importante para compartir ficheros. Habilitando el bit SGID, puedes forzar que todos los ficheros creados en un directorio compartido pertenezcan al grupo del directorio y no al grupo del usuario individual que lo ha creado.
-
-
- 
-Así, para crear un directorio compartido que mantenga la propiedad de los ficheros creados dentro de él para el grupo propietario del directorio podríamos hacer lo siguiente:
- 
- ```
-
- ```
 
 
 
