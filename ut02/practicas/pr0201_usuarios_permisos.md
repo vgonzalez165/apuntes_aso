@@ -78,7 +78,7 @@ A no ser que se indique lo contrario realiza todas las operaciones desde el dire
 
 Vamos a ver ahora cómo funciona y para qué sirve el **bit setgid**. Realiza los siguientes pasos:
 
-1. Crea un grupo llamado `asir` y los usuarios `{iniciales}1` e `{iniciales}2`, donde `{iniciales}` son las iniciales de tu nombre. Por ejemplo, en mi caso se llamarían `vjgr1` y `vjgr2`.
+1. Crea un grupo llamado `asir` y los usuarios `{iniciales}1` e `{iniciales}2`, donde `{iniciales}` son las iniciales de tu nombre. Por ejemplo, en mi caso se llamarían `vjgr1` y `vjgr2`. Haz que los usuarios pertenezcan al grupo.
 2. Crea el directorio `/compartido` y asigna propietario: `root` como usuario propietario y `asir` como grupo propietario.
 3.  Asigna al directorio creado permisos de lectura, escritura y ejecución para el usuario y el grupo propietario. El resto de usuarios no tendrá ningún tipo de permiso.
 4.  Establece el **bit setgid** en el directorio y verifica que se haya asignado.

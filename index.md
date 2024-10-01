@@ -1,49 +1,9 @@
 # ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 
-## UT01: Introducción y preparación del entorno
-
-### Prácticas
-
-- [PR0101: Introducción a Vagrant](./ut01/practicas/pr0101.md)
-- [PR0102: Entornos multimáquina](./ut01/practicas/pr0102.md)
-- [PR0103: Redes en Vagrant](./ut01/practicas/pr0103.md)
-
-
-## UT02: Instalación y puesta en marcha de Linux Server
-
-### Apuntes
-
-- [Configuración de redes en Linux](./ut02/apuntes/)
-- [Gestión del almacenamiento](./ut02/apuntes/2_almacenamiento_discos.md)
-- [Usuarios y permisos](./ut02/apuntes/3_usuarios_permisos.md)
-- [Conexión remota mediante SSH](./ut02/apuntes/4_conexion_remota.md)
-- [Gestión de procesos](./ut02/apuntes/5_procesos.md)
-- [Copias de seguridad](./ut02/apuntes/6_copias_de_seguridad.md)
-
-### Prácticas
-
-- [PR0201: Usuarios y permisos](./ut02/practicas/pr0201_usuarios_permisos.md)
-
-
-## UT03: Lenguajes de scripting en Linux: Bash
-
-### Apuntes
-
-- Conceptos básicos de la creación de scripts
-- Ejecución condicional
-- Entrada y salida de datos
-- Funciones
-- Manipulación de cadenas
-
-
-### Apuntes
-
-- Conceptos básicos de la creación de scripts
-- Ejecución condicional
-- Entrada y salida de datos
-- Miscelánea
-
-### Prácticas
-
-
-### Prácticas
+- [UT01: Introducción y preparación del entorno](./ut01/index.md)
+- [UT02: Instalación y puesta en marcha de Linux Server](./ut02/index.md)
+- UT03: Lenguajes de scripting en Linux: Bash
+- UT04: Instalación y puesta en marcha de Windows Server
+- UT05: Servicio de directorio en Windows Server
+- UT06: Lenguajes de scripting en Windows: Powershell
+- UT07: Integración de sistemas Windows y Linux
