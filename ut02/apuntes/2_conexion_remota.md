@@ -247,7 +247,7 @@ Tras hacerlo, establecer una conexión tal y como la hemos hecho otras veces. Al
 
 
 
-## 3.3.- SSH con **chrooted jail** (OPCIONAL)
+## 3.3.- SSH con **chrooted jail** 
 
 Algo en lo que te habrás fijado al configurar el acceso SSH a un servidor para diferentes usuarios es que cualquier usuario que se conecte mediante SSH podrá ver todos los ficheros del sistema de ficheros, incluso los de otros usuarios. Indudablemente, este comportamiento no es deseable en entornos en que múltiples usuarios comparten el acceso a un mismo servidor, por ejemplo, en un servidor web.
 
@@ -260,58 +260,75 @@ Veamos los pasos para conseguir esto .
 
 Comenzamos creando el directorio al que restringiremos el acceso al usuario. En este caso el usuario que tendrá acceso remoto se llamará `test`.
  
-Con el modificador -p simplemente indicamos que si no existiera el directorio padre lo cree. 
-En el fichero de configuración sshd_config, hay una entrada denominada ChrootDirectory que es la que utilizaremos. Podemos ir a la página del manual de sshd_config y buscar la parte correspondiente a esta entrada.
+Con el modificador `-p` simplemente indicamos que si no existiera el directorio padre lo cree. 
+
+En el fichero de configuración `sshd_config`, hay una entrada denominada `ChrootDirectory` que es la que utilizaremos. Podemos ir a la página del manual de `sshd_config` y buscar la parte correspondiente a esta entrada.
  
-Si te fijas, nos indica que el directorio que indiquemos debe contener, por lo menos, un shell y los nodos básicos de /dev tales como los dispositivos null, zero, stdin, stdout, stderr y tty.
-Busquemos primero estos ficheros en el directorio /dev.
+Si te fijas, nos indica que el directorio que indiquemos debe contener, por lo menos, un shell y los nodos básicos de `/dev` tales como los dispositivos `null`, `zero`, `stdin`, `stdout`, `stderr` y `tty`.
+
+Busquemos primero estos ficheros en el directorio `/dev`.
  
 De la anterior imagen nos interesan los números que se encuentran entre el grupo propietario y la fecha de creación. Estos números se denominan número mayor y menor y son propios de los ficheros de dispositivo. 
-•	El número mayor identifica el driver asociado con el dispositivo. Por ejemplo, el dispositivo /dev/null utiliza el driver 1. El kernel utiliza el número mayor cuando abre el dispositivo para ejecutar el driver correspondiente.
-•	El número menor es utilizado únicamente por el driver especificado por el número mayor. Esto se debe a que un driver suele controlar diversos dispositivos y este número le permite saber con cuál de ellos está tratando.
-Una vez que conocemos los números mayor y menor de los dispositivos que queremos copiar tenemos que crear estos ficheros de dispositivos dentro de nuestro directorio. Para ello utilizaremos el comando mknod, que permite crear ficheros especiales de bloques o de caracteres. 
+
+- El **número mayor** identifica el driver asociado con el dispositivo. Por ejemplo, el dispositivo `/dev/null` utiliza el driver 1. El kernel utiliza el número mayor cuando abre el dispositivo para ejecutar el driver correspondiente.
+- El **número menor** es utilizado únicamente por el driver especificado por el número mayor. Esto se debe a que un driver suele controlar diversos dispositivos y este número le permite saber con cuál de ellos está tratando.
+Una vez que conocemos los números mayor y menor de los dispositivos que queremos copiar tenemos que crear estos ficheros de dispositivos dentro de nuestro directorio. Para ello utilizaremos el comando `mknod`, que permite crear ficheros especiales de bloques o de caracteres. 
+
 La sintaxis de este comando es:
  
-Donde tipo puede ser c para indicar un dispositivo de caracteres y b si es un dispositivo de bloques. También usaremos el modificador -m para indicar los permisos que tendrá el fichero (en este caso todos).
+
+Donde tipo puede ser `c` para indicar un dispositivo de caracteres y `b` si es un dispositivo de bloques. También usaremos el modificador `-m` para indicar los permisos que tendrá el fichero (en este caso todos).
  
 A continuación, hay que asignar permisos a la jaula chroot. Fíjate que la jaula chroot y sus subdirectorios deben pertenecer al usuario root, y no deben tener permisos de escritura para ningún otro usuario normal o grupo.
  
-3.3.2.- CONFIGURAR EL SHELL INTERACTIVO
-Ahora vamos a crear el directorio bin copiar en él los ficheros /bin/bash de la siguiente forma:
+### 3.3.2.- Configurar el shell interactivo
+
+Ahora vamos a crear el directorio `bin` y copiar en él los ficheros `/bin/bash` de la siguiente forma:
  
-Hay que tener en cuenta que Bash utiliza librerías para su funcionamiento, por lo que tendremos que copiarlas en el directorio lib. Para saber qué librerías utiliza un programa tenemos el comando ldd.
+Hay que tener en cuenta que Bash utiliza librerías para su funcionamiento, por lo que tendremos que copiarlas en el directorio lib. Para saber qué librerías utiliza un programa tenemos el comando `ldd`.
  
-3.3.3.- CREAR Y CONFIGURAR EL USUARIO SSH
+### 3.3.3.- Crear y configurar el usuario ssh
+
 Ahora vamos a crear el comando useradd para crear el usuario. Ten en cuenta que este comando difiere del comando adduser en que no hace nada que no le indiquemos explícitamente en los parámetros (crear el directorio personal, crear la contraseña, …). Por tanto, para ponerle contraseña, debemos utilizar también el comando passwd.
  
 También debemos guardar una copia de los ficheros de configuración en nuestra jaula, en concreto, los ficheros /etc/passwd y /etc/group,
  
 Nota: cada vez que se añada un usuario SSH nuevo tienes que copiar estos ficheros actualizados.
-3.3.4.- CONFIGURAR SSH PARA QUE UTILICE LA JAULA SSH
-Ahora vamos al fichero de configuración sshd_config y añadimos las siguientes líneas:
+
+### 3.3.4.- Configurar SSH para que utilice la jaula SSH
+
+Ahora vamos al fichero de configuración `sshd_config` y añadimos las siguientes líneas:
  
 Tras ello solo queda reiniciar el servicio SSH.
-3.3.5.- CREAR EL DIRECTORIO HOME DEL USUARIO SSH Y AÑADIR COMANDOS
+
+### 3.3.5.- Crear el directorio home del usuario ssh y añadir comandos
+
 Ahora ya podemos probar a conectarnos con el usuario mediante SSH. Si nos conectamos veremos que lo podemos hacer sin ningún problema, pero unas pocas pruebas nos mostrarán que hay algunos comandos de Linux que no funcionan en nuestro entorno.
  
-Esto se debe a que, como el usuario está encerrado en la jaula chroot únicamente podrá acceder a comandos internos (builtin) de Bash, tales como pwd, cd, … pero no a comandos externos como ls o date. En un sistema normal, estos comandos se encuentran en el directorio /bin, y, como es un directorio fuera de la jaula, el usuario no podrá acceder a él.
+Esto se debe a que, como el usuario está encerrado en la jaula chroot únicamente podrá acceder a comandos internos (builtin) de Bash, tales como `pwd`, `cd`, … pero no a comandos externos como `ls` o `date`. En un sistema normal, estos comandos se encuentran en el directorio `/bin`, y, como es un directorio fuera de la jaula, el usuario no podrá acceder a él.
+
 Pero antes de eso vamos a crear un directorio personal para el usuario dentro de la jaula chroot. Esto lo hacemos con las siguientes órdenes:
  
 Una vez creado el directorio personal vamos a crear el directorio bin y copiar en él los comandos que queramos que tenga el usuario.
  
-Al igual que nos pasó con bash, estos comandos también pueden requerir librerías externas, por lo que tendremos que copiarlas a nuestra jaula. Recuerda que el comando para verificar qué librerías requiere un comando es ldd.
+Al igual que nos pasó con bash, estos comandos también pueden requerir librerías externas, por lo que tendremos que copiarlas a nuestra jaula. Recuerda que el comando para verificar qué librerías requiere un comando es `ldd`.
  
  
 Si probamos ahora ya veremos que el usuario puede acceder sin problemas mediante SSH y utilizar cualquier comando integrado de Bash o los comandos externos que hayamos añadido manualmente.
-3.3.6.- PERMITIR ÚNICAMENTE CONEXIONES SFTP
-El protocolo SFTP (SSH File Transfer Protocol) es un protocolo que permite realizar operaciones sobre ficheros (acceso, transferencia y administración) a través de la red sobre un túnel SSH. Hay que tener en cuenta que, a pesar del nombre, SFTP no es un FTP que se ejecuta sobre SSH, sino que es un protocolo nuevo.
+
+### 3.3.6.- Permitir únicamente conexiones SFTP
+
+El protocolo **SFTP (SSH File Transfer Protocol)** es un protocolo que permite realizar operaciones sobre ficheros (acceso, transferencia y administración) a través de la red sobre un túnel SSH. Hay que tener en cuenta que, a pesar del nombre, SFTP no es un FTP que se ejecuta sobre SSH, sino que es un protocolo nuevo.
+
 Comparado con el protocolo SCP, que únicamente permite transferencias de ficheros, el protocolo SFTP un mayor rango de operaciones sobre los ficheros remotos. Un cliente SFTP incluye características extra como retomar transferencias interrumpidas, listado de directorios o eliminación remota de ficheros.
+
 El protocolo SFTP lo podemos utilizar para permitir que un usuario remoto utilice SSH para transferir ficheros, pero sin tener la posibilidad de acceder a una terminal SSH. 
-El primer paso para ello será cambiar la siguiente línea del fichero de configuración /etc/ssh/ssd_config.
+
+El primer paso para ello será cambiar la siguiente línea del fichero de configuración `/etc/ssh/ssd_config`.
  
 Tras reiniciar el servicio, si intentamos acceder mediante SSH obtendremos un mensaje de error.
  
-Y sólo podremos tener acceso mediante el comando sftp.
+Y sólo podremos tener acceso mediante el comando `sftp`.
  
 
 
