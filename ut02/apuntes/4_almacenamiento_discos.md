@@ -1,9 +1,17 @@
 # UT02: INSTALACIÓN Y PUESTA EN MARCHA DE LINUX SERVER
 
 
-## 2.- Almacenamiento y discos
+## 4.- Almacenamiento y discos
 
-### 2.1.- Introducción
+### Índice
+
+- 4.1.- [Introducción](#41--introducción)
+- 4.2.- [Monitorizar el espacio en disco](#42--monitorizar-el-espacio-en-disco)
+- 4.3.- [Particionamiento con `fdisk`](#43--particionamiento-con-fdisk)
+- 4.4.- [Formatear y montar particiones](#44--formatear-y-montar-particiones)
+- 4.5.- [Logical Volume Manager (LVM)](#45--logical-volume-manager-lvm)
+
+### 4.1.- Introducción
 
 Aunque durante el proceso de instalación de Linux se configuran todo el almacenamiento y se deja preparado para su uso, es habitual tener que añadir nuevos discos con el tiempo y es importante saber configurarlos y dejarlos preparados para su uso. Esto incluye una serie de tareas:
 
@@ -13,7 +21,7 @@ Aunque durante el proceso de instalación de Linux se configuran todo el almacen
 - Configurar los volúmenes LVM
 
 
-### 2.2.- Monitorizar el espacio en disco
+### 4.2.- Monitorizar el espacio en disco
 
 El comando para monitorizar el espacio que tenemos libre en Linux es `df`, que muestra todos los sistemas de ficheros con información sobre los mismos. Por defecto utiliza como unidad de medida el byte, lo que hace incómodo calcular el tamaño exacto de los sistemas de ficheros, para evitarlo, es conveniente utilizar este comando en combinación con el modificador `-h` para que muestre los tamaños en megabytes.
  
@@ -87,7 +95,7 @@ ncdu 1.14.1 ~ Use the arrow keys to navigate, press ? for help
 ```
 
 
-### 2.3.- Particionamiento con `fdisk`
+### 4.3.- Particionamiento con `fdisk`
 
 Si queremos crear particiones en un disco duro tenemos a nuestra disposición un gran número de herramientas en cualquier sistema operativo. Por ejemplo, *GParted* en Linux, el *Administrador de Discos en Windows* o alguna de las múltiples herramientas comerciales disponibles como *Partition Magic*. Sin embargo, hay ocasiones, sobre todo cuando estamos trabajando con servidores, en las que no disponemos de una interfaz gráfica por lo que debemos acudir a una herramienta en línea de comandos.
 
@@ -113,7 +121,7 @@ Options:
 ```
  
 
-#### 2.3.1.- Listado de particiones
+#### 4.3.1.- Listado de particiones
 
 Lo primero que tenemos que hacer cuando vamos a trabajar con un disco duro es ejecutar el comando con el parámetro `–l`. Este parámetro hará que se nos muestre un listado de todos los discos que tenemos en el sistema, así como las particiones que hay en cada uno de los discos.
  
@@ -180,7 +188,7 @@ De la información proporcionada la más reseñable es la siguiente:
     - **Tipo**: tipo de partición de que se trata.
 
 
-#### 2.3.2.- Trabajando con particiones
+#### 4.3.2.- Trabajando con particiones
 
 Una vez que hemos decidido el disco duro sobre el que queremos trabajar tenemos que ejecutar el comando **fdisk** pasándole como parámetro el identificador del disco. Esto lanzará el programa interactivo que se quedará esperando nuestras órdenes.
  
@@ -242,7 +250,7 @@ Help:
    s   create a new empty Sun partition table
 ```
 
-##### 2.3.2.1.- Creación de una partición
+##### 4.3.2.1.- Creación de una partición
 
 Para crear una nueva partición debemos utilizar la orden `n`. Al hacerlo nos pedirá el tipo de partición que queremos crear: **primaria**, **extendida** o **lógica**. Como se ha comentado anteriormente el límite de particiones es de 4 primarias o de 3 primarias y 1 extendida.
 
@@ -293,12 +301,12 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 ```
 
-##### 2.3.2.2.- Borrado de una partición
+##### 4.3.2.2.- Borrado de una partición
 
 El proceso de borrado de una partición es mucho más sencillo. La orden correspondiente es `d` y el único valor que nos pide es el número de partición que deseamos eliminar. Nuevamente hasta que no utilicemos la orden `w` no escribirá los cambios en el disco, aun así hemos de ser cuidadosos ya que la eliminación de una partición implica perder todos los datos del disco.
 
 
-##### 2.3.2.3.- Información de particiones
+##### 4.3.2.3.- Información de particiones
 
 Dentro de `fdisk` disponemos de varias órdenes para obtener información de disco y sus particiones.
 La orden `p` imprimirá la tabla de particiones del disco de forma análoga a como hacía la versión no interactiva de `fdisk` con el parámetro `–l`.
@@ -333,13 +341,13 @@ Sector size (logical/physical): 512 bytes / 4096 bytes
 ```
 
 
-### 2.4.- Formatear y montar particiones
+### 4.4.- Formatear y montar particiones
 
 Hasta ahora hemos creado las particiones, pero como podrás observar no son accesibles de ninguna manera. Para ello necesitas realizar dos pasos: por un lado, debes **formatear** la partición con un sistema de ficheros, es decir, organizar la estructura interna de la partición para que el sistema operativo pueda trabajar con ella.
 
 El segundo paso es **montar** la partición para que así pueda ser accesible desde el sistema.
 
-#### 2.4.1.- Formateo de una partición
+#### 4.4.1.- Formateo de una partición
 
 Como se comentó formatear una partición consiste en asignarle un sistema de ficheros para que el sistema operativo pueda trabajar con ella.
 
@@ -383,7 +391,7 @@ El parámetro `–F` sirve para indicar el tamaño de la FAT, en este caso estam
 De forma análoga, el comando para formatear en NTFS es `mkfs.ntfs` y su funcionamiento es análogo a los que ya hemos visto.
 
 
-#### 2.4.2.- Montaje de dispositivos
+#### 4.4.2.- Montaje de dispositivos
 
 Como se vio anteriormente Linux combina todos los dispositivos de almacenamiento en un único directorio virtual. Antes de utilizar un nuevo disco en el sistema necesitas localizarlo en el directorio virtual. Esta tarea se denomina **montaje**.
 
@@ -457,7 +465,7 @@ mount: /mnt: /home/vgonzalez/Descargas/slacko-6.3.0.iso ya está montado
 Una vez que hemos acabado de utilizar el dispositivo podemos desmontarlo con la orden `umount`. Este comando admite como parámetro o bien la ruta del dispositivo o bien el directorio donde está montado.
 
 
-#### 2.4.3.- Montaje automático mediante el fichero `fstab`
+#### 4.4.3.- Montaje automático mediante el fichero `fstab`
 
 En el apartado anterior hemos visto como montar dispositivos desde la línea de comandos, pero este método tiene un inconveniente, y es que el dispositivo únicamente permanecerá montado hasta que apaguemos el equipo, debiendo volver a montarlo cada vez que iniciemos el ordenador.
 
@@ -539,7 +547,7 @@ Si queremos montar dispositivos con la opción `noauto` deberemos hacerlo explí
 
 
 
-### 2.5.- Logical Volume Manager (LVM)
+### 4.5.- Logical Volume Manager (LVM)
 
 **LVM (Logical Volume Manager)** es una herramienta para la gestión de volúmenes lógicos en Linux. Facilita la administración de espacio de disco permitiendo operaciones como redimensionar volúmenes sin detener el sistema, agregar nuevos discos o realizar snapshots de volúmenes.
 
@@ -559,7 +567,7 @@ Cuando hablamos de LVM hay tres conceptos que hay que tener muy claros:
 
 Veamos algunas funciones básicas que se pueden realizar con LVM.
 
-#### 2.5.1.- Creación de volúmenes lógicos
+#### 4.5.1.- Creación de volúmenes lógicos
 
 El proceso de trabajo con LVM es el siguiente:
 

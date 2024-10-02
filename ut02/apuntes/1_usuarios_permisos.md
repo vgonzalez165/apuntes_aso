@@ -1,9 +1,18 @@
 # UT02: INSTALACIÓN Y PUESTA EN MARCHA DE LINUX SERVER
 
+## 1.- Gestión de usuarios y permisos
 
-## 3.- Gestión de usuarios y permisos
+## Índice
 
-### 3.1.- La seguridad en Linux
+- 1.1.- [La seguridad en Linux](#11--la-seguridad-en-linux)
+- 1.2.- [Añadir un nuevo usuario](#12--añadir-un-nuevo-usuario)
+- 1.3.- [Eliminación de un usuario](#13--eliminación-de-un-usuario)
+- 1.4.- [Modificando un usuario](#14--modificando-un-usuario)
+- 1.5.- [Grupos en Linux](#15--grupos-en-linux)
+- 1.6.- [Permisos](#16--permisos)
+- 1.7.- [Compartición de ficheros](#17--compartición-de-ficheros)
+
+### 1.1.- La seguridad en Linux
 
 El elemento clave para gestionar la seguridad en Linux es la **cuenta de usuario**. Cada persona que acceda al sistema ha de hacerlo a través de la cuenta de usuario que tenga asignada. Los permisos que tenga entonces serán los mismos que tenga la cuenta con la que se loguee.
 
@@ -11,7 +20,7 @@ De forma similar a Windows, donde cada usuario tiene asignado un SID único, en 
 
 Para gestionar la seguridad un sistema Linux utiliza una serie de ficheros y utilidades que veremos a continuación.
 
-#### 3.1.1.- El fichero `/etc/passwd`
+#### 1.1.1.- El fichero `/etc/passwd`
 
 Los sistemas Linux utilizan un fichero especial denominado `/etc/passwd` para almacenar las correspondencias entre los nombres de usuario y sus correspondientes UIDs. 
  
@@ -41,7 +50,7 @@ Aparte del nombre de usuario y el UID el fichero passwd muestra mucha más infor
 - El shell por defecto del usuario
 
 
-#### 3.1.2.- El fichero `/etc/shadow`
+#### 1.1.2.- El fichero `/etc/shadow`
 
 Aunque el campo de contraseña se utilizaba anteriormente para almacenar la función hash de la contraseña del usuario, esto suponía un problema de seguridad porque muchos programas y usuarios debían acceder al directorio `/etc/passwd` por diversos motivos. Por ello se quitó la contraseña del usuario de este fichero (por ello en todos los usuarios hay un x en su lugar) y ahora se almacenan en un fichero diferente situado en `/etc/shadow`. El acceso a este fichero está **restringido** a unos pocos programas, como por ejemplo el de login.
 
@@ -63,7 +72,7 @@ Los nueve campos de cada fila son:
 - Campo reservado
 
 
-### 3.2.- Añadir un nuevo usuario
+### 1.2.- Añadir un nuevo usuario
 
 Ubuntu dispone de dos comandos para crear usuarios: `useradd` y `adduser` siendo la única diferencia entre ellos que el segundo es interactivo. Así, si queremos crear un usuario en la línea de comandos es más cómodo usar `adduser`, que nos irá preguntando de forma interactiva por los diferentes datos que necesita, mientras que si queremos crear un usuario en un script utilizaremos `useradd` que toma todos los datos de sus parámetros y, por tanto, se puede ejecutar sin interacción por parte del usuario.
 
@@ -106,17 +115,17 @@ El comando `useradd` crea un usuario, pero de forma limitada, ya que no realizar
 Ten en cuenta también que el usuario creado con `useradd` no tendrá contraseña, por lo que tendrás que asignarla posteriormente con el comando `passwd`.
 
 
-### 3.3.- Eliminación de un usuario
+### 1.3.- Eliminación de un usuario
 
 Para eliminar un usuario del sistema el comando que hay que utilizar es `userdel`. Por defecto, este comando solo elimina la información del usuario del fichero `/etc/passwd`. **No elimina ningún fichero de la cuenta.**
 
 Si se utiliza `userdel` con el parámetro `–r` también eliminará el directorio HOME del usuario, junto con el directorio de correo del usuario.
 
-### 3.4.- Modificando un usuario
+### 1.4.- Modificando un usuario
 
 Linux proporciona unas pocas utilidades para modificar la información para cuentas de usuario existentes.
 
-#### 3.4.1.- El comando `usermod`
+#### 1.4.1.- El comando `usermod`
 
 El comando usermod proporciona opciones para modificar la mayoría de los campos del fichero `/etc/passwd`. Para hacer esto solo es necesario utilizarlo con el parámetro correspondiente al campo que se quiere modificar. Algunos de estos parámetros son:
 
@@ -129,7 +138,7 @@ El comando usermod proporciona opciones para modificar la mayoría de los campos
 - `-U` para desbloquear la cuenta.
 
 
-#### 3.4.2.- Los comandos `passwd` y `chpasswd`
+#### 1.4.2.- Los comandos `passwd` y `chpasswd`
 
 La forma más rápida de cambiar la contraseña de un usuario es mediante el comando `passwd`. Si no se le indican parámetros modificará la contraseña del usuario actual. Si se le indica un nombre de usuario cambiará la contraseña de dicho usuario. Únicamente el usuario **root** puede cambiar la contraseña del resto de usuarios.
 
@@ -138,7 +147,7 @@ El parámetro `–e` forzará al usuario a modificar su contraseña la próxima 
 Si necesitas modificar la contraseña de un gran número de usuario la mejor opción es el comando `chpasswd`. Este comando lee una lista de pares nombre de `usuario, contraseña` (separados por una coma) de la entrada estándar y automática asigna cada contraseña a cada usuario.
 
 
-### 3.5.- Grupos en Linux
+### 1.5.- Grupos en Linux
 
 Las cuentas de usuario son útiles para controlar la seguridad de usuarios individuales, pero no son muy útiles a la hora de permitir a grupos de usuarios compartir recursos. Para esta labor Linux dispone del concepto de **grupos**.
 
@@ -171,7 +180,7 @@ miGrupo:x:1003:alumno
 El comando `usermod` también permite cambiar otra información de los grupos. El parámetro `–g` permitirá modificar el GID del grupo mientras que el parámetro `–n` permite cambiar el nombre del grupo.
 
 
-### 3.6.- Permisos
+### 1.6.- Permisos
 
 Como se ha visto anteriormente, al ejecutar el comando `ls` con el modificador `–l` se nos muestra una serie de caracteres al principio de cada línea. El primero de estos caracteres define el tipo del objeto.
 
@@ -197,7 +206,7 @@ Si un permiso está negado se mostrará con el símbolo guion en su posición. L
 Cuando creamos un fichero nuevo este tiene unos permisos por defectos predefinidos. Estos permisos predefinidos vienen dados por el comando `umask`, el cual establece los permisos por defecto para cualquier fichero o directorio que crees.
 
 
-#### 3.6.1.- El comando `umask`
+#### 1.6.1.- El comando `umask`
 
 El comando `umask` nos servirá para modificar los permisos por defecto que se asignarán a cada nuevo fichero o directorio creado en el sistema. Si lo ejecutamos veremos que nos muestra por pantalla 4 dígitos octales que representan los permisos por defecto. El primero corresponde al denomina **sticky bit**. Los otros tres son los permisos por defecto para el usuario que crea el objeto, el grupo del usuario y el resto de los usuarios respectivamente en la representación octal.
 
@@ -209,7 +218,7 @@ Sin embargo, el comando `umask` no muestra los permisos que se asignan tal cual,
 Esto quiere decir que si tenemos una máscara definida como 022 los permisos efectivos que se aplicarán a un fichero serán los resultantes de quitar los permisos de la máscara (022) a los permisos máximos (666), quedando unos permisos efectivos de 644 (lectura/escritura para el usuario y lectura para el resto).	
 
 
-#### 3.6.2.- Modificando permisos con `chmod`
+#### 1.6.2.- Modificando permisos con `chmod`
 
 El comando `chmod` es el que nos permitirá modificar los permisos asociados a un fichero o directorio. El formato de este comando es:
 
@@ -252,7 +261,7 @@ Finalmente, el último símbolo es el permiso que se va a modificar. Hay muchas 
 - `s` para establecer el SUID o el SGID
 
 
-#### 3.6.3.- Cambio de propietario
+#### 1.6.3.- Cambio de propietario
 
 Para cambiar el propietario de un fichero Linux dispone de dos comandos. El comando `chown` para cambiar el usuario propietario y el comando `chgrp` para cambiar el grupo propietario del objeto.
 
@@ -286,7 +295,7 @@ total 0
 El funcionamiento del comando `chgrp` es muy similar al anterior, con la única excepción de que el valor modificado es el grupo propietario y no el usuario propietario.
 
 
-### 3.7.- Compartición de ficheros
+### 1.7.- Compartición de ficheros
 
 El mecanismo que hemos visto para compartir fichero en Linux hasta ahora se basa en el establecimiento de permisos para usuarios y grupos. Así si queremos que un determinado usuario pueda acceder a un objeto podemos incluirlo en el grupo propietario de ese objeto y así obtener los permisos que tenga ese grupo.
 
@@ -316,7 +325,7 @@ Si en lugar de utilizar notación decimal usamos notación simbólica en el coma
 - Sticky Bit: **`+t`**
 
 
-#### 3.7.1.- El bit SUID
+#### 1.7.1.- El bit SUID
 
 El **bit SUID* se usa para que un archivo ejecutable se ejecute con los permisos del propietario del archivo, en lugar de los permisos del usuario que lo ejecuta. Este bit es útil para programas que necesitan permisos elevados temporalmente, como `passwd`.
 
@@ -343,7 +352,7 @@ victor@SERVER:/tmp$ ls -l script.sh
 
 ```
 
-#### 3.7.2.- El bit SGID
+#### 1.7.2.- El bit SGID
 
 El **bit SGID** es importante para compartir ficheros. Habilitando el bit SGID, puedes forzar que todos los ficheros creados en un directorio compartido pertenezcan al grupo del directorio y no al grupo del usuario individual que lo ha creado.
 
@@ -352,7 +361,7 @@ El **bit SGID** es importante para compartir ficheros. Habilitando el bit SGID, 
 
 
 
-#### 3.7.3.- El sticky bit
+#### 1.7.3.- El sticky bit
 
 La función principal del **sticky bit** es restringir la eliminación o modificación de los archivos dentro de un directorio, de modo que solo el propietario del archivo (o root) pueda eliminar o renombrar sus propios archivos, aunque otros usuarios tengan permisos de escritura en ese directorio.
 

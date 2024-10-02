@@ -1,6 +1,7 @@
 # UT02: INSTALACIÓN Y PUESTA EN MARCHA DE LINUX SERVER
 
-## Gestión de procesos en Linux
+
+## 5.- Gestión de procesos en Linux
 
 ### Índice
 
@@ -12,13 +13,12 @@
 - El directorio /proc
 
 
-
-
-# 6.- Gestión de procesos
+### 5.1.- Introducción
 
 Todo lo que hacemos en un servidor Linux toma la forma de procesos, por lo que es muy importante aprender a trabajar con ellos. Linux dispone de un gran número de comandos para monitorizar los procesos en nuestro sistema. Veamos los más importantes.
 
-## 6.1.- Procesos automáticos e interactivos
+
+### 5.2.- Procesos automáticos e interactivos
 
 Una clasificación de los procesos que hay en Linux puede ser la que los divide en procesos automáticos e interactivos.
 
@@ -44,7 +44,7 @@ systemd─┬─ModemManager───2*[{ModemManager}]
 ```
 
 
-## 6.2.- Procesos en primer y segundo plano
+### 5.3.- Procesos en primer y segundo plano
 
 Los procesos interactivos se pueden clasificar como procesos en primer y en segundo plano. Los procesos en **primer plano** interactúan directamente con el usuario tomando el control de la terminal. Por el contrario, los procesos en **segundo plano**, aunque también son procesos hijos del Shell, están desvinculados de este en el sentido de que no envían ni la salida estándar ni la de errores al Shell.
 
@@ -56,9 +56,9 @@ Hay dos formas de crear un proceso en segundo plano:
 Aunque el comando se está ejecutando en segundo plano, sigue siendo posible controlarlo. Con el comando `jobs` se puede ver la lista de procesos en segundo plano
 
 
-## 6.3.- Comandos relacionados con los procesos
+### 5.4.- Comandos relacionados con los procesos
 
-### 6.3.1.- Listado de procesos: `ps`
+#### 5.4.1.- Listado de procesos: `ps`
 
 El comando `ps` lista todos los procesos del sistema, su estado, tamaño, nombre, propietario, tiempo de CPU, tiempo de reloj y otros muchos.
 
@@ -108,7 +108,7 @@ El significado de cada columna es el siguiente:
 - `COMMAND`: Nombre del comando que ha invocado el proceso y sus parámetros.
 
 
-### 6.3.2.- Visualización interactiva: `top`
+#### 5.4.2.- Visualización interactiva: `top`
 
 El comando `top` es la versión interactiva de `ps`. Muestra los procesos, pero actualiza la información cada determinado tiempo. Además, permite al usuario realizar operaciones sobre los procesos mientras se ejecuta.
 
@@ -163,7 +163,7 @@ Además, el comando `top` dispone de algunas opciones interactivas:
 | `r`    | Cambia la prioridad de un proceso (*renice*). Pedirá el PID del proceso y el valor de la prioridad:  un valor positivo hará que el proceso pierda prioridad, un valor negativo aumentará la prioridad del proceso (esto solo puede hacerlo el usuario root) |
 
 
-### 6.3.3.- Envío de una señal a un proceso: `kill`
+#### 5.4.3.- Envío de una señal a un proceso: `kill`
 
 A pesar de su nombre este comando no mata procesos, sino que sirve para enviarles **señales** a los procesos en ejecución. El sistema operativo, por defecto, proporciona a cada proceso un conjunto estándar de **manejadores de señales** para gestionar las señales entrantes.
 
@@ -185,7 +185,7 @@ El parámetro opcional para `kill` es `–n` donde n representa el número de se
 
 La señal 9 es la forma brutal de finalizar un proceso. En lugar de pedirlo al proceso que se pare, el sistema operativo mata el proceso. La única vez que esto falla es cuando el proceso está en mitad de una llamada al sistema (como una petición de apertura de un archivo), en cuyo caso el proceso muere una vez que la llamada ha finalizado.
 
-### 6.3.4.- Visualizando la memoria: `free`
+#### 5.4.4.- Visualizando la memoria: `free`
 
 Muestra la cantidad de total de memoria física y de intercambio presente en el sistema, así como la memoria compartida y los buffers utilizados por el núcleo.
 
@@ -198,14 +198,14 @@ Sus modificadores son:
 - `-s seg` | Se actualiza cada seg segundos |
 
 
-### 6.3.5.- Tiempo de marcha: `uptime`
+#### 5.4.5.- Tiempo de marcha: `uptime`
 
 Muestra una línea con la siguiente información: hora actual, cuánto tiempo lleva en marcha el sistema, el número de usuarios actualmente conectados, y la carga media del sistema en los últimos 1, 5 y 15 minutos.
 
 El valor de **carga media** tiene la misma interpretación que tenía en el caso del comando `top`.
 
 
-### 6.3.6.- Mostrar el nombre del sistema: `uname`
+#### 5.4.6.- Mostrar el nombre del sistema: `uname`
 
 El comando uname imprime información acerca de la máquina y el sistema operativo en los que está corriendo. 
 Los diferentes modificadores que tiene son:
@@ -220,9 +220,9 @@ Los diferentes modificadores que tiene son:
 
 
 
-## 6.4.- Envío de señales entre procesos (ESTO NO)
+### 5.5.- Envío de señales entre procesos (ESTO NO)
 
-### 6.4.1.- Captura de señales con el comando `trap`
+#### 5.5.1.- Captura de señales con el comando `trap`
 
 Ya hemos visto que la comunicación entre procesos en Linux se realiza mediante señales que pueden ser lanzadas con el comando kill. 
 Desde los scripts que creamos, también es posible capturar las señales, bien para modificar su valor por defecto o bien para bloquearla e impedir que realice su función. El comando para capturar señales en un script es el comando trap.
@@ -236,6 +236,7 @@ Ten cuidado porque si ejecutas el script anterior entrará en un bucle infinito 
 También se pueden capturar varias señales en la misma orden de la siguiente forma:
  
 6.4.2.- EJECUCIÓN DE SCRIPT CON LA SESIÓN CERRADA
+
 Cuando cerramos la sesión, el Shell envía la señal SIGHUP a todos los procesos que cuelgan bajo él. Esta señal hace que los procesos finalicen su ejecución, pero esto en ocasiones no es lo deseable si queremos que los scripts continúen ejecutándose más allá de la sesión del usuario. Para evitar esto se dispone del comando nohup.
 La sintaxis es muy sencilla, simplemente se le debe pasar el comando exactamente igual que si lo hubiéramos ejecutado.
  
@@ -247,7 +248,7 @@ Información adicional en:
 
 
 
-## 6.5.- Programación de procesos con `cron` y `crontab`
+### 5.6.- Programación de procesos con `cron` y `crontab`
 
 El demonio `crond` permite a cualquier usuario de un sistema programar aplicaciones para ejecutar en cualquier fecha, hora o día de la semana. El uso del `cron` es una forma extremadamente eficiente de automatizar el sistema, generando informes en una base regular, y de realizar otras tareas periódicas.
 
@@ -260,7 +261,7 @@ $ ps auxw | grep cron | grep –v grep
 El servicio `crond` trabaja despertándose cada minuto y comprobando el archivo crontab de cada usuario (directorio `/var/spool/cron`) así como el archivo `crontab` del sistema (`/etc/ crontab`). Este archivo contiene la lista de los eventos de los usuarios que quieren que se ejecuten en una fecha y hora en particular. Cualquier evento que coincida con la fecha y hora actual se ejecutará.
 
 
-### 6.5.1.- El archivo `crontab`
+#### 5.6.1.- El archivo `crontab`
 
 La herramienta que permite editar entradas que ejecuta `cron` es `crontab`. Esencialmente todo lo que hace es verificar su permiso para modificar las configuraciones de `cron` y después invoca un editor de texto para que pueda realizar sus cambios.
 
@@ -333,6 +334,12 @@ Funcionan de la siguiente manera:
 •	Si no existen ni cron.allow ni cron.deny, entonces cualquier usuario puede programar tareas.
 
 
+
+## El directorio `/proc`
+
+Cada sistema operativo ofrece un mecanismo para que el administrador de sistemas investigue las interioridades del sistema operativo y para configurar los parámetros cuando lo necesite. En Linux este mecanismo es el sistema de archivos /proc. El directorio /proc fue creado para mejorar la comunicación entre los usuarios y el kernel. Este sistema es en realidad interesante porque realmente no existe del todo en disco; es una abstracción de la información del kernel. Todos los archivos del directorio corresponden a una función o a un conjunto de variables del kernel. Por ejemplo, para ver un informe sobre el tipo de procesador de sus servidores, podemos leer el archivo /proc/cpuinfo con el comando cat de la forma siguiente:
+
+El kernel creará dinámicamente el informe mostrando la información del procesador y devolviéndole a cat para que podamos verlo. Otra ventaja de este sistema es que el flujo de información no es unidireccional, sino que también sirve para enviar información al kernel. Por ejemplo, un vistazo al directorio /proc/sys/net/ipv4 nos mostrará un montón de ficheros con permiso de escritura. La mayoría de los ficheros de este fichero contienen solamente un número, pero su modificación puede suponer cambios importantes en el comportamiento de la pila TCP/IP. Por ejemplo, el archivo /proc/sys/net/ipv4/ip_forward contiene un 0 por defecto. Esto le dice a Linux que no realice IP Forwarding cuando tenemos varias interfaces en el sistema. Pero si queremos habilitar esta capacidad solo tenemos que modificar el valor de ese fichero por 1 con la orden: echo “1” > /proc/sys/net/ipv4/ip_forward Con esto conseguiremos que el servidor realice funciones de enrutamiento. Veamos ahora algunas entradas interesantes de este directorio: Nombre Contenido /proc/cpuinfo Información sobre la CPU del sistema /proc/interrupts Uso de las IRQ en el sistema /proc/meminfo Uso de la memoria /proc/swaps Información sobre las particiones de intercambio /proc/version Número de versión actual del kernel, la máquina en que se compiló y la fecha y hora de compilación. /proc/net/dev Información sobre cada dispositivo de red (contador de paquetes, contador de errores, etc..) /proc/net/sockstat Estadísticas de utilización de sockets de red /proc/sys/net/ipv4/ icmp_echo_ignore_broadcasts Por defecto es 0. Esto permite que se devuelvan las peticiones ICMP a las direcciones de broadcast. Esto supone un peligro frente a los ataques de denegación de servicio. /proc/sys/net/ipv4/ip_forward Ya lo vimos antes, habilita el encaminamiento IP /proc/sys/net/ipv4/syn_cookies Por defecto es 0. Al cambiarlo a 1 se activa la protección del sistema frente a ataques SYN FLOOD.
 
  
 ---

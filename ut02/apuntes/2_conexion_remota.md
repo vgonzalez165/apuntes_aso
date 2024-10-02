@@ -1,21 +1,20 @@
 # UT02: INSTALACIÓN Y PUESTA EN MARCHA DE LINUX SERVER
 
-## Conexión remota con SSH
+## 2.- Conexión remota con SSH
 
-### Índice
+## Índice
 
-1. Conexión mediante SSH
-2. Acceso SSH con clave pública
-3. SSH con *chrooted jail*
+- 2.1.- [Secure Shell (SSH)](#21--secure-shell-ssh)
+- 2.2.- [Conexión gráfica con SSH](#22--conexión-gráfica-con-ssh)
+- 2.3.- [SSH con chrooted jail](#23--ssh-con-chrooted-jail)
 
 
-### 1.- Conexión mediante SSH
 
-## 3.1.- Secure Shell (SSH)
+### 2.1.- Secure Shell (SSH)
 
 **SSH (Secure Shell)** es un protocolo que facilita las comunicaciones seguras entre dos sistemas utilizando una arquitectura cliente/servidor y que permite a los usuarios conectarse a un host remotamente. Su diferencia con respecto a otros protocolos, como Telnet o FTP, es que encripta la sesión de conexión, haciendo imposible que alguien pueda obtener contraseñas. Por defecto utiliza el **puerto 22**.
 
-### 3.1.1.- Conexión mediante SSH
+#### 2.1.1.- Conexión mediante SSH
 
 SSH es un protocolo cuya función principal es el acceso remoto a un servidor por medio de un canal seguro en el que toda la información está encriptada. Algunas de las posibilidades de SSH son:
 
@@ -26,7 +25,7 @@ SSH es un protocolo cuya función principal es el acceso remoto a un servidor po
 - Redirigir el tráfico del sistema X Window para poder ejecutar programas gráficos remotamente.
 
 
-### 3.1.2.- Preparación del servidor SSH
+#### 2.1.2.- Preparación del servidor SSH
 
 Para que un equipo acepte conexiones SSH debe tener instalado el servicio, por lo que el primer paso será instalar el paquete `openssh-server`. 
 
@@ -56,11 +55,11 @@ Como tantos otros ficheros de configuración en Linux, dispone de un gran númer
 Recuerda que, como siempre que cambiamos un fichero de configuración, debemos reiniciar el servicio para que se apliquen los cambios.
 
 
-### 3.1.3.- Preparación del cliente
+####2.1.3.- Preparación del cliente
 
 En la mayoría de las distribuciones de Linux ya está instalado el cliente. El comando se llama `ssh` y espera como parámetros el nombre de usuario, la IP del equipo remoto y opcionalmente el puerto (modificador `-p`)
  
-### 3.1.4.- Acceso SSH con clave pública
+#### 2.1.4.- Acceso SSH con clave pública
 
 El problema del proceso anterior es que **solicita la contraseña** cada vez que conectamos. Este proceso se puede simplificar si configuramos el acceso SSH con clave pública.
 
@@ -215,7 +214,7 @@ Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-110-generic x86_64)
 Last login: Sun May 22 06:05:53 2022 from 10.0.0.2
 ```
 
-## 3.2- Conexión gráfica con SSH
+### 2.2- Conexión gráfica con SSH
 
 Otra posibilidad es realizar una conexión a un entorno gráfico utilizando un túnel SSH. Para conseguir esto debemos configurar primero el servidor para que tenga habilitado el *X11 Forwarding*, que permite enviar la interfaz gráfica a través de la red usando SSH.
 
@@ -228,7 +227,7 @@ X11Forwarding yes
 ```
 
  
-### 3.2.1.- Conexión desde un cliente Linux
+#### 2.2.1.- Conexión desde un cliente Linux
 
 Lo más sencillo es configurar la conexión desde una máquina Linux, en este caso simplemente hay que utilizar el modificador -X al invocar el comando ssh desde el cliente.
  
@@ -236,7 +235,7 @@ Al ejecutar este comando nos mostrará la terminal del servidor, pero la diferen
  
 
 
-### 3.2.2.- Conexión gráfica desde un cliente Windows
+#### 2.2.2.- Conexión gráfica desde un cliente Windows
 
 Si queremos conectarnos a un entorno gráfico desde un cliente Windows, debemos hacerlo con **Putty**, pero necesitamos un programa adicional, **Xming**, que puedes descargar de [Sourceforge](https://sourceforge.net/projects/xming/).
 Tras descargarlo e instalarlo, se puede configurar yendo a Inicio -> XLaunch.
@@ -247,7 +246,7 @@ Tras hacerlo, establecer una conexión tal y como la hemos hecho otras veces. Al
 
 
 
-## 3.3.- SSH con **chrooted jail** 
+### 2.3.- SSH con **chrooted jail** 
 
 Algo en lo que te habrás fijado al configurar el acceso SSH a un servidor para diferentes usuarios es que cualquier usuario que se conecte mediante SSH podrá ver todos los ficheros del sistema de ficheros, incluso los de otros usuarios. Indudablemente, este comportamiento no es deseable en entornos en que múltiples usuarios comparten el acceso a un mismo servidor, por ejemplo, en un servidor web.
 
@@ -256,7 +255,7 @@ La técnica que permite solventar este problema se denomina **jaula chroot (*chr
 Veamos los pasos para conseguir esto .
 
 
-### 3.3.1.- Crear el SSH chroot jail
+#### 2.3.1.- Crear el SSH chroot jail
 
 Comenzamos creando el directorio al que restringiremos el acceso al usuario. En este caso el usuario que tendrá acceso remoto se llamará `test`.
  
@@ -281,13 +280,13 @@ Donde tipo puede ser `c` para indicar un dispositivo de caracteres y `b` si es u
  
 A continuación, hay que asignar permisos a la jaula chroot. Fíjate que la jaula chroot y sus subdirectorios deben pertenecer al usuario root, y no deben tener permisos de escritura para ningún otro usuario normal o grupo.
  
-### 3.3.2.- Configurar el shell interactivo
+#### 2.3.2.- Configurar el shell interactivo
 
 Ahora vamos a crear el directorio `bin` y copiar en él los ficheros `/bin/bash` de la siguiente forma:
  
 Hay que tener en cuenta que Bash utiliza librerías para su funcionamiento, por lo que tendremos que copiarlas en el directorio lib. Para saber qué librerías utiliza un programa tenemos el comando `ldd`.
  
-### 3.3.3.- Crear y configurar el usuario ssh
+#### 2.3.3.- Crear y configurar el usuario ssh
 
 Ahora vamos a crear el comando useradd para crear el usuario. Ten en cuenta que este comando difiere del comando adduser en que no hace nada que no le indiquemos explícitamente en los parámetros (crear el directorio personal, crear la contraseña, …). Por tanto, para ponerle contraseña, debemos utilizar también el comando passwd.
  
@@ -295,13 +294,13 @@ También debemos guardar una copia de los ficheros de configuración en nuestra 
  
 Nota: cada vez que se añada un usuario SSH nuevo tienes que copiar estos ficheros actualizados.
 
-### 3.3.4.- Configurar SSH para que utilice la jaula SSH
+#### 2.3.4.- Configurar SSH para que utilice la jaula SSH
 
 Ahora vamos al fichero de configuración `sshd_config` y añadimos las siguientes líneas:
  
 Tras ello solo queda reiniciar el servicio SSH.
 
-### 3.3.5.- Crear el directorio home del usuario ssh y añadir comandos
+#### 2.3.5.- Crear el directorio home del usuario ssh y añadir comandos
 
 Ahora ya podemos probar a conectarnos con el usuario mediante SSH. Si nos conectamos veremos que lo podemos hacer sin ningún problema, pero unas pocas pruebas nos mostrarán que hay algunos comandos de Linux que no funcionan en nuestro entorno.
  
@@ -316,7 +315,7 @@ Al igual que nos pasó con bash, estos comandos también pueden requerir librer�
  
 Si probamos ahora ya veremos que el usuario puede acceder sin problemas mediante SSH y utilizar cualquier comando integrado de Bash o los comandos externos que hayamos añadido manualmente.
 
-### 3.3.6.- Permitir únicamente conexiones SFTP
+#### 2.3.6.- Permitir únicamente conexiones SFTP
 
 El protocolo **SFTP (SSH File Transfer Protocol)** es un protocolo que permite realizar operaciones sobre ficheros (acceso, transferencia y administración) a través de la red sobre un túnel SSH. Hay que tener en cuenta que, a pesar del nombre, SFTP no es un FTP que se ejecuta sobre SSH, sino que es un protocolo nuevo.
 
