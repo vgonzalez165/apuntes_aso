@@ -337,6 +337,136 @@ Funcionan de la siguiente manera:
 
 ## El directorio `/proc`
 
+# Apuntes sobre el directorio `/proc` en Linux
+
+## 1. ¿Qué es el directorio `/proc`?
+
+El directorio **`/proc`** es un **sistema de archivos virtual** que proporciona información sobre el **sistema en tiempo real**. No es un directorio tradicional que almacene archivos en el disco duro, sino que actúa como una interfaz para acceder a los datos del kernel y otros procesos del sistema.
+
+El sistema de archivos `/proc` se monta automáticamente al iniciar el sistema y permite a los administradores y usuarios consultar información sobre el hardware, el kernel y los procesos en ejecución.
+
+---
+
+## 2. Características del sistema de archivos `/proc`
+
+- **Volátil**: Los archivos dentro de `/proc` no ocupan espacio en el disco; la información se genera dinámicamente cuando se consulta.
+- **Lectura de información en tiempo real**: Se puede acceder a estadísticas del sistema, información de procesos, uso de memoria, etc.
+- **Interfaz con el kernel**: Permite al usuario interactuar y modificar ciertos parámetros del kernel, como los parámetros de red o el rendimiento del sistema.
+
+---
+
+## 3. Estructura del directorio `/proc`
+
+Dentro del directorio `/proc`, se encuentran varios archivos y subdirectorios. Algunos de ellos contienen información específica del sistema, mientras que otros son directorios numerados que representan procesos en ejecución. A continuación, se explican algunos de los más relevantes:
+
+### 3.1. Archivos importantes
+
+- **`/proc/cpuinfo`**: Muestra información sobre la **CPU** del sistema, incluyendo el modelo, la frecuencia, la cantidad de núcleos, etc.
+
+    ```bash
+    cat /proc/cpuinfo
+    ```
+
+- **`/proc/meminfo`**: Contiene información sobre la **memoria** del sistema, como la cantidad de RAM disponible y usada, el uso de swap, etc.
+
+    ```bash
+    cat /proc/meminfo
+    ```
+
+- **`/proc/uptime`**: Indica el tiempo que el sistema ha estado funcionando desde el último arranque.
+
+    ```bash
+    cat /proc/uptime
+    ```
+
+- **`/proc/loadavg`**: Muestra la **carga del sistema** (el número de procesos que están ejecutándose o esperando ser ejecutados) en los últimos 1, 5 y 15 minutos.
+
+    ```bash
+    cat /proc/loadavg
+    ```
+
+- **`/proc/version`**: Contiene información sobre la **versión del kernel** de Linux que está corriendo actualmente en el sistema.
+
+    ```bash
+    cat /proc/version
+    ```
+
+- **`/proc/partitions`**: Muestra las particiones de los discos del sistema.
+
+    ```bash
+    cat /proc/partitions
+    ```
+
+### 3.2. Directorios de procesos
+
+Cada proceso en el sistema tiene un subdirectorio en `/proc` con su **PID** (Process ID) como nombre. Dentro de cada uno de estos directorios, hay archivos que contienen información sobre el proceso.
+
+Por ejemplo, el proceso con PID **1234** tendrá un directorio en `/proc/1234/`. Algunos archivos comunes en estos directorios incluyen:
+
+- **`/proc/[PID]/cmdline`**: Muestra la línea de comando con la que fue ejecutado el proceso.
+- **`/proc/[PID]/status`**: Contiene información sobre el estado del proceso, como el usuario que lo ejecuta, el consumo de memoria, y el estado actual (en ejecución, suspendido, etc.).
+- **`/proc/[PID]/fd/`**: Es un directorio que contiene enlaces simbólicos a los **descriptores de archivos** abiertos por el proceso.
+
+---
+
+## 4. Modificación de parámetros del kernel
+
+Algunos archivos dentro de `/proc` permiten modificar el comportamiento del sistema, especialmente los relacionados con el **kernel**. Un ejemplo es el archivo **`/proc/sys/`**, que contiene varios subdirectorios con configuraciones del kernel.
+
+### 4.1. Modificar parámetros del kernel con `/proc/sys`
+
+Dentro de `/proc/sys`, puedes encontrar configuraciones para redes, seguridad y otros aspectos del sistema.
+
+- **`/proc/sys/net/ipv4/ip_forward`**: Controla el reenvío de paquetes IP. Si se quiere habilitar el reenvío (útil en servidores de routing), se puede hacer escribiendo en este archivo.
+
+    Para activar el reenvío de IP:
+
+    ```bash
+    echo 1 > /proc/sys/net/ipv4/ip_forward
+    ```
+
+    Para desactivarlo:
+
+    ```bash
+    echo 0 > /proc/sys/net/ipv4/ip_forward
+    ```
+
+### 4.2. Persistir cambios en parámetros del kernel
+
+Los cambios realizados en `/proc` se pierden después de reiniciar el sistema. Si quieres que se apliquen de forma permanente, debes editar el archivo `/etc/sysctl.conf`.
+
+---
+
+## 5. Ejemplos prácticos
+
+### 5.1. Ver los procesos en ejecución
+
+Puedes listar todos los procesos en ejecución consultando los subdirectorios numéricos de `/proc`:
+
+```bash
+ls /proc | grep -E '^[0-9]+$'
+```
+
+Este comando te dará una lista de los PID de todos los procesos actuales.
+
+
+### 5.2. Comprobar el uso de CPU y memoria
+
+Consulta la información detallada de la CPU y la memoria:
+
+```bash
+cat /proc/cpuinfo
+cat /proc/meminfo
+```
+
+### 5.3.- Ver estadísticas de red
+
+```bash
+cat /proc/net/dev
+```
+
+**Copiado de Word. Organizar**
+
 Cada sistema operativo ofrece un mecanismo para que el administrador de sistemas investigue las interioridades del sistema operativo y para configurar los parámetros cuando lo necesite. En Linux este mecanismo es el sistema de archivos /proc. El directorio /proc fue creado para mejorar la comunicación entre los usuarios y el kernel. Este sistema es en realidad interesante porque realmente no existe del todo en disco; es una abstracción de la información del kernel. Todos los archivos del directorio corresponden a una función o a un conjunto de variables del kernel. Por ejemplo, para ver un informe sobre el tipo de procesador de sus servidores, podemos leer el archivo /proc/cpuinfo con el comando cat de la forma siguiente:
 
 El kernel creará dinámicamente el informe mostrando la información del procesador y devolviéndole a cat para que podamos verlo. Otra ventaja de este sistema es que el flujo de información no es unidireccional, sino que también sirve para enviar información al kernel. Por ejemplo, un vistazo al directorio /proc/sys/net/ipv4 nos mostrará un montón de ficheros con permiso de escritura. La mayoría de los ficheros de este fichero contienen solamente un número, pero su modificación puede suponer cambios importantes en el comportamiento de la pila TCP/IP. Por ejemplo, el archivo /proc/sys/net/ipv4/ip_forward contiene un 0 por defecto. Esto le dice a Linux que no realice IP Forwarding cuando tenemos varias interfaces en el sistema. Pero si queremos habilitar esta capacidad solo tenemos que modificar el valor de ese fichero por 1 con la orden: echo “1” > /proc/sys/net/ipv4/ip_forward Con esto conseguiremos que el servidor realice funciones de enrutamiento. Veamos ahora algunas entradas interesantes de este directorio: Nombre Contenido /proc/cpuinfo Información sobre la CPU del sistema /proc/interrupts Uso de las IRQ en el sistema /proc/meminfo Uso de la memoria /proc/swaps Información sobre las particiones de intercambio /proc/version Número de versión actual del kernel, la máquina en que se compiló y la fecha y hora de compilación. /proc/net/dev Información sobre cada dispositivo de red (contador de paquetes, contador de errores, etc..) /proc/net/sockstat Estadísticas de utilización de sockets de red /proc/sys/net/ipv4/ icmp_echo_ignore_broadcasts Por defecto es 0. Esto permite que se devuelvan las peticiones ICMP a las direcciones de broadcast. Esto supone un peligro frente a los ataques de denegación de servicio. /proc/sys/net/ipv4/ip_forward Ya lo vimos antes, habilita el encaminamiento IP /proc/sys/net/ipv4/syn_cookies Por defecto es 0. Al cambiarlo a 1 se activa la protección del sistema frente a ataques SYN FLOOD.
