@@ -62,16 +62,16 @@ A no ser que se indique lo contrario realiza todas las operaciones desde el dire
 
 2.	Escribe el comando que necesitarías para establecer los siguientes permisos en el fichero anterior utilizando **notación octal**.
 
-- `rwxrwxrwx` :
-- `--x--x--x` :
-- `r---w---x` :
-- `-w-------` :
-- `rw-r-----` :
-- `rwx--x--x` :
-- `rwxr-xr-x` :
-- `r-x--x--x` :
-- `-w-r----x` :
-- `-----xrwx` :
+- `rwx rwx rwx` : 111 111 111  777
+- `--x --x --x` : 001 001 001  111
+- `r-- -w- --x` : 100 010 001  421
+- `-w- --- ---` : 010 000 000  200
+- `rw- r-- ---` :
+- `rwx --x --x` :
+- `rwx r-x r-x` :
+- `r-x --x --x` :
+- `-w- r-- --x` :
+- `--- --x rwx` :
 
 
 ### 3. El bit setgid
