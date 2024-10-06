@@ -38,10 +38,6 @@ Esta práctica la realizaremos en un Ubuntu Server 22.04 LTS, para utilizar todo
 3. Una vez que hayas verificado que la conexión funciona haz los cambios necesarios para que la conexión se realize mediante un par de claves pública-privada de forma transparente para el usuario.
 
 
-### 3. El protocolo `scp`
-
-
-
 
 ### ¿Qué hay que entregar?
 
