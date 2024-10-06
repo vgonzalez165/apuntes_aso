@@ -1,15 +1,15 @@
 # UT02: INSTALACIÓN Y PUESTA EN MARCHA DE LINUX SERVER
 
 
-## 3.- Redes en Linux
+## 2.- Redes en Linux
 
 ## Índice
 
-- 3.1.- [Introducción](#31--introducción)
-- 3.2.- [Configuración de redes con netplan](#32--configuración-de-redes-con-netplan)
-- 3.3.- [El comando ip](#33--el-comando-ip)
+- 2.1.- [Introducción](#31--introducción)
+- 2.2.- [Configuración de redes con netplan](#32--configuración-de-redes-con-netplan)
+- 2.3.- [El comando ip](#33--el-comando-ip)
 
-### 3.1.- Introducción
+### 2.1.- Introducción
 
 La versión 17.04 de Ubuntu trajo consigo un cambio en la gestión de las conexiones de red. El fichero `/etc/interfaces`, que había servido tradicionalmente para configurar las interfaces de red sigue estando presente pero simplemente para notificar que ahora la configuración de red se realiza mediante **netplan**.
 
@@ -27,7 +27,7 @@ Si hay varios ficheros, las configuraciones nuevas se añadirán y las que tenga
 - Igualmente, los ficheros se ordenan alfabéticamente, teniendo mayor prioridad los últimos que se encuentren en este orden alfabético.
 
 
-### 3.2.- Configuración de redes con netplan
+### 2.2.- Configuración de redes con netplan
 
 Un ejemplo de fichero YAML de Netplan puede ser el siguiente:
  
@@ -67,7 +67,7 @@ Las primeras líneas son siempre las mismas, correspondiendo estas a la **versi�
 A continuación, se indican los diferentes bloques de tipos de dispositivos (ethernet, wifi, …), indicando dentro de cada uno una entrada para cada dispositivo. Los nombres de las claves serán **ethernets**, **wifis** y **bonds**, correspondiendo con las interfaces claveadas, inalámbricas y los enlaces agregados respectivamente.
 
 
-#### 3.2.1.- Interfaces cableadas
+#### 2.2.1.- Interfaces cableadas
 
 Las interfaces cableadas se identifican mediante la clave `ethernets`, dentro de la cual se indicará una subclave para cada una de las interfaces del equipo. Estas subclaves podrán tener las siguientes propiedades:
 
@@ -120,7 +120,7 @@ Con la clave `metric` se indica la **métrica**, que puede ser útil cuando la t
 Observa también que, si utilizamos tablas de enrutamiento, no hay que indicar la opción puerta de enlace.
 
 
-#### 3.2.2.- Interfaces inalámbricas
+#### 2.2.2.- Interfaces inalámbricas
 
 Las opciones de configuración de las interfaces inalámbricas tienen una configuración muy similar a las interfaces cableadas, requiriendo una asignación dinámica o estática de la dirección IP. Sin embargo, también es necesario indicarle un método de autenticación para poder conectarse con el punto de acceso, lo cual se consigue con la clave **access-points**.
 
@@ -148,7 +148,7 @@ Dentro de esta clave tendremos una subclave con el SSID de cada una de las redes
  
  ```
  
-#### 3.2.3.- Interfaces agregadas
+#### 2.2.3.- Interfaces agregadas
 
 Las **interfaces agregadas** o ***bonding*** son el equivalente en Linux a los equipos NIC de Windows, donde varios adaptadores de red se combinan en una única conexión de red para conseguir alta disponibilidad. Se puede configurar durante el proceso de instalación de Ubuntu Server, mientras que para hacerlo una vez instalado el sistema deberemos recurrir al fichero de configuración de `netplan`. Las interfaces agregadas se indican dentro de la clave `bond`, que tendrá una subclave para cada uno de los enlaces agregados que queramos crear.
 
@@ -182,12 +182,12 @@ Las subclaves que tendrá cada enlace agregado pueden ser:
   - balance-alb.
 
 
-#### 3.2.4.- Aplicando los cambios
+#### 2.2.4.- Aplicando los cambios
 
 Para aplicar los cambios realizados en el fichero de configuración ya no es necesario reiniciar el servicio de red, sino que únicamente hay que invocar el comando `netplan` con el parámetro `apply`.
 
 
-#### 3.1.5.- Más información
+#### 2.1.5.- Más información
 
 Si quieres información más detallada sobre el fichero de configuración de netplan y sus múltiples opciones de configuración puedes recurrir a los siguientes recursos:
 
@@ -198,7 +198,7 @@ Si quieres información más detallada sobre el fichero de configuración de net
 
 
 
-### 3.3.- El comando `ip`
+### 2.3.- El comando `ip`
 
 Con la desaparición del fichero de configuración `/etc/network/interfaces`, también desaparecerá el comando `ipconfig`. Su sustituto será el comando `ip`. Este comando es bastante similar a `ipconfig` pero mucho más potente, con muchas funcionalidades asociadas.
 

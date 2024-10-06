@@ -1,20 +1,20 @@
 # UT02: INSTALACIÓN Y PUESTA EN MARCHA DE LINUX SERVER
 
-## 2.- Conexión remota con SSH
+## 3.- Conexión remota con SSH
 
 ## Índice
 
-- 2.1.- [Secure Shell (SSH)](#21--secure-shell-ssh)
-- 2.2.- [Conexión gráfica con SSH](#22--conexión-gráfica-con-ssh)
-- 2.3.- [SSH con chrooted jail](#23--ssh-con-chrooted-jail)
+- 3.1.- [Secure Shell (SSH)](#21--secure-shell-ssh)
+- 3.2.- [Conexión gráfica con SSH](#22--conexión-gráfica-con-ssh)
+- 3.3.- [SSH con chrooted jail](#23--ssh-con-chrooted-jail)
 
 
 
-### 2.1.- Secure Shell (SSH)
+### 3.1.- Secure Shell (SSH)
 
 **SSH (Secure Shell)** es un protocolo que facilita las comunicaciones seguras entre dos sistemas utilizando una arquitectura cliente/servidor y que permite a los usuarios conectarse a un host remotamente. Su diferencia con respecto a otros protocolos, como Telnet o FTP, es que encripta la sesión de conexión, haciendo imposible que alguien pueda obtener contraseñas. Por defecto utiliza el **puerto 22**.
 
-#### 2.1.1.- Conexión mediante SSH
+#### 3.1.1.- Conexión mediante SSH
 
 SSH es un protocolo cuya función principal es el acceso remoto a un servidor por medio de un canal seguro en el que toda la información está encriptada. Algunas de las posibilidades de SSH son:
 
@@ -25,7 +25,7 @@ SSH es un protocolo cuya función principal es el acceso remoto a un servidor po
 - Redirigir el tráfico del sistema X Window para poder ejecutar programas gráficos remotamente.
 
 
-#### 2.1.2.- Preparación del servidor SSH
+#### 3.1.2.- Preparación del servidor SSH
 
 Para que un equipo acepte conexiones SSH debe tener instalado el servicio, por lo que el primer paso será instalar el paquete `openssh-server`. 
 
@@ -55,11 +55,11 @@ Como tantos otros ficheros de configuración en Linux, dispone de un gran númer
 Recuerda que, como siempre que cambiamos un fichero de configuración, debemos reiniciar el servicio para que se apliquen los cambios.
 
 
-####2.1.3.- Preparación del cliente
+#### 3.1.3.- Preparación del cliente
 
 En la mayoría de las distribuciones de Linux ya está instalado el cliente. El comando se llama `ssh` y espera como parámetros el nombre de usuario, la IP del equipo remoto y opcionalmente el puerto (modificador `-p`)
  
-#### 2.1.4.- Acceso SSH con clave pública
+#### 3.1.4.- Acceso SSH con clave pública
 
 El problema del proceso anterior es que **solicita la contraseña** cada vez que conectamos. Este proceso se puede simplificar si configuramos el acceso SSH con clave pública.
 
@@ -214,7 +214,7 @@ Welcome to Ubuntu 20.04.4 LTS (GNU/Linux 5.4.0-110-generic x86_64)
 Last login: Sun May 22 06:05:53 2022 from 10.0.0.2
 ```
 
-### 2.2- Conexión gráfica con SSH
+### 3.2- Conexión gráfica con SSH
 
 Otra posibilidad es realizar una conexión a un entorno gráfico utilizando un túnel SSH. Para conseguir esto debemos configurar primero el servidor para que tenga habilitado el *X11 Forwarding*, que permite enviar la interfaz gráfica a través de la red usando SSH.
 
@@ -227,7 +227,7 @@ X11Forwarding yes
 ```
 
  
-#### 2.2.1.- Conexión desde un cliente Linux
+#### 3.2.1.- Conexión desde un cliente Linux
 
 Lo más sencillo es configurar la conexión desde una máquina Linux, en este caso simplemente hay que utilizar el modificador -X al invocar el comando ssh desde el cliente.
  
@@ -235,7 +235,7 @@ Al ejecutar este comando nos mostrará la terminal del servidor, pero la diferen
  
 
 
-#### 2.2.2.- Conexión gráfica desde un cliente Windows
+#### 3.2.2.- Conexión gráfica desde un cliente Windows
 
 Si queremos conectarnos a un entorno gráfico desde un cliente Windows, debemos hacerlo con **Putty**, pero necesitamos un programa adicional, **Xming**, que puedes descargar de [Sourceforge](https://sourceforge.net/projects/xming/).
 Tras descargarlo e instalarlo, se puede configurar yendo a Inicio -> XLaunch.
@@ -246,7 +246,7 @@ Tras hacerlo, establecer una conexión tal y como la hemos hecho otras veces. Al
 
 
 
-### 2.3.- SSH con **chrooted jail** 
+### 3.3.- SSH con **chrooted jail**  (Incompleto)
 
 Algo en lo que te habrás fijado al configurar el acceso SSH a un servidor para diferentes usuarios es que cualquier usuario que se conecte mediante SSH podrá ver todos los ficheros del sistema de ficheros, incluso los de otros usuarios. Indudablemente, este comportamiento no es deseable en entornos en que múltiples usuarios comparten el acceso a un mismo servidor, por ejemplo, en un servidor web.
 
@@ -257,17 +257,54 @@ Veamos los pasos para conseguir esto .
 
 #### 2.3.1.- Crear el SSH chroot jail
 
-Comenzamos creando el directorio al que restringiremos el acceso al usuario. En este caso el usuario que tendrá acceso remoto se llamará `test`.
- 
-Con el modificador `-p` simplemente indicamos que si no existiera el directorio padre lo cree. 
+Comenzamos creando el directorio al que restringiremos el acceso al usuario. En este caso el usuario que tendrá acceso remoto se llamará `jailed_user`.
+
+```bash
+admin@server:~$ sudo adduser jailed_user
+```
+
 
 En el fichero de configuración `sshd_config`, hay una entrada denominada `ChrootDirectory` que es la que utilizaremos. Podemos ir a la página del manual de `sshd_config` y buscar la parte correspondiente a esta entrada.
  
+```
+ChrootDirectory
+     Specifies the pathname of a directory to chroot(2) to after authentication.
+     At session startup sshd(8) checks that all components of the pathname are
+     root-owned directories which are not writable by any other user or group.
+     After the chroot, sshd(8) changes the working directory to the user's home
+     directory.  Arguments to ChrootDirectory accept the tokens described in the
+     TOKENS section.
+     The ChrootDirectory must contain the necessary files and directories to sup‐
+     port the user's session.  For an interactive session this requires at least
+     a shell, typically sh(1), and basic /dev nodes such as null(4), zero(4),
+     stdin(4), stdout(4), stderr(4), and tty(4) devices.  For file transfer ses‐
+     sions using SFTP no additional configuration of the environment is necessary
+     if the in-process sftp-server is used, though sessions which use logging may
+     require /dev/log inside the chroot directory on some operating systems (see
+     sftp-server(8) for details).
+     For safety, it is very important that the directory hierarchy be prevented
+     from modification by other processes on the system (especially those outside
+     the jail).  Misconfiguration can lead to unsafe environments which sshd(8)
+     cannot detect.
+     The default is none, indicating not to chroot(2).
+```
+
 Si te fijas, nos indica que el directorio que indiquemos debe contener, por lo menos, un shell y los nodos básicos de `/dev` tales como los dispositivos `null`, `zero`, `stdin`, `stdout`, `stderr` y `tty`.
 
 Busquemos primero estos ficheros en el directorio `/dev`.
+
+```bash
+admin@server:~$ ls -l /dev/{null,zero,stdin,stdout,stderr,random,tty}
+crw-rw-rw- 1 root root 1, 3 Oct  5 06:55 /dev/null
+crw-rw-rw- 1 root root 1, 8 Oct  5 06:55 /dev/random
+lrwxrwxrwx 1 root root   15 Oct  5 06:55 /dev/stderr -> /proc/self/fd/2
+lrwxrwxrwx 1 root root   15 Oct  5 06:55 /dev/stdin -> /proc/self/fd/0
+lrwxrwxrwx 1 root root   15 Oct  5 06:55 /dev/stdout -> /proc/self/fd/1
+crw-rw-rw- 1 root tty  5, 0 Oct  5 06:55 /dev/tty
+crw-rw-rw- 1 root root 1, 5 Oct  5 06:55 /dev/zero
+```
  
-De la anterior imagen nos interesan los números que se encuentran entre el grupo propietario y la fecha de creación. Estos números se denominan número mayor y menor y son propios de los ficheros de dispositivo. 
+De la anterior imagen nos interesan los números que se encuentran entre el grupo propietario y la fecha de creación. Estos números se denominan **número mayor** y **menor** y son propios de los ficheros de dispositivo (más información sobre estos números [aquí](https://www.oreilly.com/library/view/linux-device-drivers/0596000081/ch03s02.html))
 
 - El **número mayor** identifica el driver asociado con el dispositivo. Por ejemplo, el dispositivo `/dev/null` utiliza el driver 1. El kernel utiliza el número mayor cuando abre el dispositivo para ejecutar el driver correspondiente.
 - El **número menor** es utilizado únicamente por el driver especificado por el número mayor. Esto se debe a que un driver suele controlar diversos dispositivos y este número le permite saber con cuál de ellos está tratando.
@@ -275,29 +312,94 @@ Una vez que conocemos los números mayor y menor de los dispositivos que queremo
 
 La sintaxis de este comando es:
  
+ ```
+mkdon [OPTION]... NAME TYPE [MAJOR MINOR]
+ ```
 
 Donde tipo puede ser `c` para indicar un dispositivo de caracteres y `b` si es un dispositivo de bloques. También usaremos el modificador `-m` para indicar los permisos que tendrá el fichero (en este caso todos).
- 
+
+```bash
+admin@server:~$ sudo mkdir -p /home/jailed_user/dev/
+admin@server:~$ cd /home/jailed_user/dev/
+admin@server:/home/jailed_user/dev$ sudo mknod -m 666 null c 1 3
+admin@server:/home/jailed_user/dev$ sudo mknod -m 666 tty c 5 0
+admin@server:/home/jailed_user/dev$ sudo mknod -m 666 zero c 1 5
+admin@server:/home/jailed_user/dev$ sudo mknod -m 666 random c 1 8
+```
+
 A continuación, hay que asignar permisos a la jaula chroot. Fíjate que la jaula chroot y sus subdirectorios deben pertenecer al usuario root, y no deben tener permisos de escritura para ningún otro usuario normal o grupo.
+
+```bash
+admin@server:~$ sudo chown root:root /home/jailed_user/
+admin@server:~$ sudo chmod 0755 /home/jailed_user/
+admin@server:~$ ls -ld /home/jailed_user/
+drwxr-xr-x 3 root root 4096 Oct  5 07:04 /home/jailed_user/
+```
+
  
 #### 2.3.2.- Configurar el shell interactivo
 
 Ahora vamos a crear el directorio `bin` y copiar en él los ficheros `/bin/bash` de la siguiente forma:
  
+```bash
+admin@server:~$ sudo mkdir -p /home/jailed_user/bin
+admin@server:~$ sudo cp -v /bin/bash /home/jailed_user/bin
+'/bin/bash' -> '/home/jailed_user/bin/bash'
+```
+
 Hay que tener en cuenta que Bash utiliza librerías para su funcionamiento, por lo que tendremos que copiarlas en el directorio lib. Para saber qué librerías utiliza un programa tenemos el comando `ldd`.
- 
+
+```bash
+admin@server:~$ ldd /bin/bash
+        linux-vdso.so.1 (0x00007ffe859e2000)
+        libtinfo.so.6 => /lib/x86_64-linux-gnu/libtinfo.so.6 (0x00007f7668670000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f766866a000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f7668478000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f76687d5000)
+admin@server:~$ sudo mkdir -p /home/jailed_user/lib64
+admin@server:~$ sudo cp -v /lib/x86_64-linux-gnu/{libtinfo.so.6,libdl.so.2,libc.so.6} /home/jailed_user/lib64
+   '/lib/x86_64-linux-gnu/libtinfo.so.6' -> '/home/jailed_user/lib64/libtinfo.so.6'
+   '/lib/x86_64-linux-gnu/libdl.so.2' -> '/home/jailed_user/lib64/libdl.so.2'
+   '/lib/x86_64-linux-gnu/libc.so.6' -> '/home/jailed_user/lib64/libc.so.6'
+admin@server:~$ sudo cp -v /lib64/ld-linux-x86-64.so.2 /home/jailed_user/lib64
+   '/lib64/ld-linux-x86-64.so.2' -> '/home/jailed_user/lib64/ld-linux-x86-64.so.2'
+```
+
 #### 2.3.3.- Crear y configurar el usuario ssh
 
-Ahora vamos a crear el comando useradd para crear el usuario. Ten en cuenta que este comando difiere del comando adduser en que no hace nada que no le indiquemos explícitamente en los parámetros (crear el directorio personal, crear la contraseña, …). Por tanto, para ponerle contraseña, debemos utilizar también el comando passwd.
+Ahora vamos a crear el comando `useradd` para crear el usuario. Ten en cuenta que este comando difiere del comando adduser en que no hace nada que no le indiquemos explícitamente en los parámetros (crear el directorio personal, crear la contraseña, …). Por tanto, para ponerle contraseña, debemos utilizar también el comando `passwd`.
  
-También debemos guardar una copia de los ficheros de configuración en nuestra jaula, en concreto, los ficheros /etc/passwd y /etc/group,
- 
-Nota: cada vez que se añada un usuario SSH nuevo tienes que copiar estos ficheros actualizados.
+```bash
+admin@server:/home/jailed_user$ sudo useradd user
+admin@server:/home/jailed_user$ sudo passwd user
+New password:
+Retype new password:
+passwd: password updated successfully
+```
+
+También debemos guardar una copia de los ficheros de configuración en nuestra jaula, en concreto, los ficheros `/etc/passwd` y `/etc/group`,
+
+```bash
+admin@server:/home/jailed_user$ sudo mkdir /home/jailed_user/etc
+admin@server:/home/jailed_user$ sudo cp -vf /etc/{passwd,group} /home/jailed_user/etc/
+   '/etc/passwd' -> '/home/jailed_user/etc/passwd'
+   '/etc/group' -> '/home/jailed_user/etc/group'
+```
+
+**Nota**: cada vez que se añada un usuario SSH nuevo tienes que copiar estos ficheros actualizados.
+
 
 #### 2.3.4.- Configurar SSH para que utilice la jaula SSH
 
 Ahora vamos al fichero de configuración `sshd_config` y añadimos las siguientes líneas:
- 
+
+```bash
+# Definimos el usuario al que aplicaremos la jaula chroot
+Match User user
+# Especificamos la jaula chroot
+ChrootDirectory /home/jailed_user
+```
+
 Tras ello solo queda reiniciar el servicio SSH.
 
 #### 2.3.5.- Crear el directorio home del usuario ssh y añadir comandos
