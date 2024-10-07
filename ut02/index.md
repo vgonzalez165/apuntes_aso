@@ -3,8 +3,8 @@
 ## Apuntes
 
 1. [Usuarios y permisos](./apuntes/1_usuarios_permisos.md)
-2. [Redes Linux](./apuntes/3_redes_linux.md)
-3. [Conexión remota](./apuntes/2_conexion_remota.md)
+2. [Redes Linux](./apuntes/2_redes_linux.md)
+3. [Conexión remota](./apuntes/3_conexion_remota.md)
 4. [Almacenamiento y discos](./apuntes/4_almacenamiento_discos.md)
 5. [Gestión de procesos](./apuntes/5_procesos.md)
 6. [Copias de seguridad](./apuntes/6_copias_de_seguridad.md)
