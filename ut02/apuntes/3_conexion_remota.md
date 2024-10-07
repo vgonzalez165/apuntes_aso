@@ -9,7 +9,6 @@
 - 3.3.- [SSH con chrooted jail](#23--ssh-con-chrooted-jail)
 
 
-
 ### 3.1.- Secure Shell (SSH)
 
 **SSH (Secure Shell)** es un protocolo que facilita las comunicaciones seguras entre dos sistemas utilizando una arquitectura cliente/servidor y que permite a los usuarios conectarse a un host remotamente. Su diferencia con respecto a otros protocolos, como Telnet o FTP, es que encripta la sesión de conexión, haciendo imposible que alguien pueda obtener contraseñas. Por defecto utiliza el **puerto 22**.

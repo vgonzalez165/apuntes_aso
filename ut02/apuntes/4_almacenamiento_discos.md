@@ -21,6 +21,7 @@ Aunque durante el proceso de instalación de Linux se configuran todo el almacen
 - Configurar los volúmenes LVM
 
 
+
 ### 4.2.- Monitorizar el espacio en disco
 
 El comando para monitorizar el espacio que tenemos libre en Linux es `df`, que muestra todos los sistemas de ficheros con información sobre los mismos. Por defecto utiliza como unidad de medida el byte, lo que hace incómodo calcular el tamaño exacto de los sistemas de ficheros, para evitarlo, es conveniente utilizar este comando en combinación con el modificador `-h` para que muestre los tamaños en megabytes.
