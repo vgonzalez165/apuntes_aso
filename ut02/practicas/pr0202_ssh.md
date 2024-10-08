@@ -38,6 +38,10 @@ Esta práctica la realizaremos en un Ubuntu Server 22.04 LTS, para utilizar todo
 3. Una vez que hayas verificado que la conexión funciona haz los cambios necesarios para que la conexión se realize mediante un par de claves pública-privada de forma transparente para el usuario.
 
 
+### 3. Conexión transparente a Github
+
+Ahora que ya estás cómodo con la autenticación mediante par de claves pública-privada, intenta configurar tu Github para que te puedas conectar sin necesidad de introducir tu contraseña. Como pista, tienes que acceder a *tu perfil -> Settings -> SSH and GPG keys*
+
 
 ### ¿Qué hay que entregar?
 
