@@ -24,7 +24,7 @@ Esta práctica la realizaremos en un Ubuntu Server 22.04 LTS, para utilizar todo
 ### 1. Preparación de la máquina y configuración de la red
 
 
-1. Ponte de acuerdo con tus compañeros con la dirección de red que vais a utilizar y la IP asignada a cada equipo.
+1. Ponte de acuerdo con tus compañeros con la dirección de red que vais a utilizar y la IP asignada a cada equipo. Para evitar colisiones con la red del centro utiliza una red privada de clase B.
 2. En tu servidor crea una cuenta de usuario para tí y otra para cada uno de tus compañeros
 3. Realiza los pasos necesarios para que tus compañeros se puedan conectar de forma transparente desde su servidor al tuyo.
 4. Los usuarios no podrán conectarse por contraseña
