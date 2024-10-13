@@ -1,6 +1,5 @@
 # UT02: INSTALACIÓN Y PUESTA EN MARCHA DE LINUX SERVER
 
-
 ## 2.- Redes en Linux
 
 ## Índice
