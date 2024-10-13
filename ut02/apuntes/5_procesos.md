@@ -15,7 +15,46 @@
 
 ### 5.1.- Introducción
 
-Todo lo que hacemos en un servidor Linux toma la forma de procesos, por lo que es muy importante aprender a trabajar con ellos. Linux dispone de un gran número de comandos para monitorizar los procesos en nuestro sistema. Veamos los más importantes.
+Todos los ordenadores modernos pueden hacer varias cosas al mismo tiempo. Ahora bien, en términos estrictos la CPU únicamente pueden ejecutar un programa en un instante dado. Para
+dar la sensación de simultaneidad en la ejecución lo que se hace es alternar la ejecución de varios programas muy rápidamente, lo que se conoce como pseudoparalelismo, en contraste con el verdadero paralelismo hardware de los sistemas multiprocesador.
+
+En estos sistemas todo el software de la computadora se organiza en varios **procesos secuenciales**, o simplemente procesos. Un proceso no es más que un **programa en ejecución**, e incluye los valores que tienen el contador de programa, los registros y las variables. En lo conceptual cada proceso tiene su propia CPU virtual, aunque en la realidad la verdadera CPU cambia continuamente de un proceso a otro. Esta rápida conmutación se llama **multiprogramación**
+
+
+#### 5.1.1.- Creación de procesos
+
+En los sistemas operativos normalmente hace falta un mecanismo para crear y terminas procesos según se necesite durante la operación.
+
+Hay cuatro sucesos principales que causan la creación de procesos:
+
+- **Inicialización del sistema**: cuando se arranca el sistema operativo se crean varios procesos. Algunos son de **primer plano**, es decir, que interactúan con el usuario, y otros son en **segundo plano**, que no están asociados con un usuario en particular, sino que tienen una función específica, por ejemplo, podría diseñarse un proceso que acepte el correo electrónico entrante, el cual quedaría inactivo esperando la entrada de algún correo. A los procesos que se ejecutan en segundo plano se les denomina **demonios** (*daemons*)
+- **Ejecución de una llamada al sistema para crear procesos por un programa en ejecución**: es normal que un proceso en ejecución emita llamadas al sistema para crear uno o más procesos que le ayuden en su labor. La creación de procesos tiene especial utilidad cuando el trabajo a realizar puede formularse con facilidad a partir de varios procesos relacionados, pero independientes, que interactúan entre sí.
+- **Solicitud de un usuario para crear un proceso**: un usuario puede crear un proceso desde la línea de comandos del sistema o a través del entorno de ventanas.
+- **Como parte de un trabajo por lotes**: esta situación solo se da en los sistemas por lotes de los mainframes grandes. En ellos los usuarios pueden enviar trabajos por lotes al sistema. Cuando el sistema operativo decide que tiene los recursos suficientes para ejecutar otro trabajo, crea un proceso y ejecuta en él el siguiente trabajo de la cola de entrada.
+
+#### 5.1.2.- Terminación de procesos
+
+Pero los procesos no están indefinidamente en la memoria, sino que tarde o temprano han de finalizar, debido principalmente a uno de los siguientes motivos:
+
+- **Terminación normal**: una vez que el proceso ha finalizado las tareas que tenía que realizar se indica que ha terminado mediante una llamada al sistema operativo. Esta llamada en los sistemas UNIX es **exit**.
+- **Terminación por error**: por ejemplo, cuando uno de los parámetros del proceso no es válido. Por lo general los procesos interactivos por pantalla no terminan cuando se les proporcionan parámetros no válidos, sino que muestran una ventana para reintroducir dichos parámetros.
+- **Error fatal**: este motivo es producido por un error causado por el proceso, a menudo debido a un defecto en el programa, como hacer referencia a una posición de memoria no permitida o realizar una división entre cero.
+- **Terminado por otro proceso**: en este caso otro proceso (que tiene los permisos necesarios) pide al sistema operativo que termine con el proceso. En UNIX la llamada es `kill`.
+
+
+#### 5.1.3.- Estados de los procesos
+
+A lo largo de su ciclo de vida un proceso puede pasar por varios estados entre los que va cambiando como respuesta a determinados eventos. Estos estados son:
+
+- **En ejecución**: el proceso está utilizando la CPU en ese instante.
+- **Bloqueado**: tarde o temprano los procesos deberán realizar lentas operaciones de E/S, por lo que cede el turno de CPU a otro proceso, pasando al estado bloqueado hasta que se produzca el suceso que está esperando.
+- **Listo**: una vez que ocurra el evento que el proceso está esperando ya podrá volver a ejecutarse, aunque deberá esperar a que la CPU se encuentre disponible. También es posible que un proceso pase a este estado por decisión del planificador, por ejemplo, porque haya estado demasiado tiempo ocupando la CPU. Las transiciones entre los estados listo y en ejecución y viceversa son consecuencia de las acciones del calendarizador y de las cuales el proceso ni siquiera se entera. 
+- **Nuevo**: lo tienen los procesos que acaban de ser creados por el sistema operativo pero que aún no han sido admitidos en el grupo de procesos ejecutables. En este estado el proceso ya tiene asignado identificador (PID, process identifier) y se han creado las estructuras de datos asociadas, pero el sistema aún no se ha comprometido a su ejecución.
+- **Terminado**: corresponde a los procesos que han sido excluidos por el sistema operativo del grupo de procesos ejecutables, normalmente porque hayan finalizado su ejecución. Este estado permite conservar temporalmente las estructuras de datos asociadas al proceso, esto permite que programas auxiliares o de soporte puedan extraer información que necesiten, por ejemplo, un programa de auditoria.
+- **Suspendido**: la enorme diferencia de velocidad entre el procesador y las operaciones de E/S hace que sea probable que todos los procesos que están en memoria se encuentren en estado bloqueado esperando la finalización de un evento de E/S. La solución a este problema es el **intercambio**, que significa mover un proceso de la memoria principal al disco para dejar espacio libre en memoria para otros procesos. En este caso se dice que el proceso se encuentra en estado **Bloqueado Suspendido**. Mientras el proceso se encuentra en este estado, puede ocurrir que el evento que espera tenga lugar, en cuyo caso pasará al estado **Listo Suspendido**, indicando que el proceso ya puede ejecutarse a la espera de ser trasladado a memoria.
+
+![alt text](image.png)
+
 
 
 ### 5.2.- Procesos automáticos e interactivos
@@ -52,7 +91,7 @@ Hay dos formas de crear un proceso en segundo plano:
 
 - Poner el carácter *ampersand* (`&`) después del comando al iniciarlo. Esto hace que el proceso pase inmediatamente a segundo plano. Por ejemplo, `nmap 192.168.1.10 > ~/nmap.out &` ejecutará el comando `nmap` en segundo plano. Esto le permitirá realizar su función sin necesidad de que el usuario tenga que esperar su finalización para poder hacer otra cosa.
 - Interrumpir el proceso con la combinación de teclas `Ctrl+Z` y luego utilizar el comando `bg` para reiniciarlo en segundo plano.
-- 
+  
 Aunque el comando se está ejecutando en segundo plano, sigue siendo posible controlarlo. Con el comando `jobs` se puede ver la lista de procesos en segundo plano
 
 
@@ -66,13 +105,13 @@ Este comando dispone de muchos modificadores, los más utilizados son los siguie
 
 | Modificador | Descripción |
 | ----------- | ----------- |
-| `-a` | Muestra todos los procesos, incluso los que no están controlados por ningún terminal |
-| `-r` | Muestra solo los procesos en ejecución |
-| `-x` | Muestra los procesos que no tienen un terminal controlado |
-| `-u` | Muestra los propietarios de los procesos |
-| `-f` | Visualiza las relaciones padre/hijo entre los procesos |
-| `-l` | Produce un listado en formato largo |
-| `-w` | Salida ancha, no se truncan las líneas para que entren en la misma línea |
+| `-a`        | Muestra todos los procesos, incluso los que no están controlados por ningún terminal |
+| `-r`        | Muestra solo los procesos en ejecución |
+| `-x`        | Muestra los procesos que no tienen un terminal controlado |
+| `-u`        | Muestra los propietarios de los procesos |
+| `-f`        | Visualiza las relaciones padre/hijo entre los procesos |
+| `-l`        | Produce un listado en formato largo |
+| `-w`        | Salida ancha, no se truncan las líneas para que entren en la misma línea |
 
 Si invocamos la orden `ps –auxw` tendremos la siguiente salida:
 
@@ -92,7 +131,7 @@ El significado de cada columna es el siguiente:
 
 - `USER`: propietario del proceso
 - `PID`: identificador del proceso
-- `%CPU`: porcentaje de CPU utilizado por el proceso, en caso de tener varios procesadores en el sistema este valor puede ser superior a 100
+- `%CPU`: porcentaje de CPU utilizado por el proceso, en caso de tener varios *cores* en el sistema este valor puede ser superior a 100
 - `%MEM`: porcentaje de memoria ocupada por el proceso.
 - `VSZ`: Cantidad de memoria virtual utilizada por el proceso.
 - `RSS`: La cantidad de memoria residente ocupada por el proceso
@@ -151,8 +190,8 @@ Este comando dispone de varios modificadores:
 
 | Modificador | Descripción |
 | ------------| ----------- | 
-| `-b` | Se ejecuta en modo por lotes (batch). Esta opción es útil cuando se quiere redireccionar la salida a un fichero o a otro comando. Por defecto realiza una iteración pero se pueden realizar más utilizando el parámetro `–n num` |
-| `-i` | Ignora los procesos en estado *idle*, es decir, los inactivos. Solo muestra los procesos “interesantes” |
+| `-b`        | Se ejecuta en modo por lotes (batch). Esta opción es útil cuando se quiere redireccionar la salida a un fichero o a otro comando. Por defecto realiza una iteración pero se pueden realizar más utilizando el parámetro `–n num` |
+| `-i`        | Ignora los procesos en estado *idle*, es decir, los inactivos. Solo muestra los procesos “interesantes” |
 
 Además, el comando `top` dispone de algunas opciones interactivas:
 
@@ -171,7 +210,7 @@ Algunas de las señales más importantes son las siguientes:
 
 | Señal | Descripción |
 | ----- | ----------- |
-| `SIGHUP (1)`   | Esta señal es enviada por el Shell a todos los procesos cuando el usuario cierra sesión, lo que hace que se cierren dichos  |procesos.
+| `SIGHUP (1)`   | Esta señal es enviada por el Shell a todos los procesos cuando el usuario cierra sesión, lo que hace que se cierren dichos  procesos.
 | `SIGINT (2)`   | Interrumpe la ejecución de un proceso. Es la señal enviada cuando pulsamos `Ctrl-C` |
 | `SIGQUIT (3)`  | Muy similar a `SIGINT` |
 | `SIGKILL (9)`  | Mata el proceso, finaliza su ejecución incondicional e inmediatamente. No puede ser ignorada por el proceso. |
@@ -193,9 +232,9 @@ Sus modificadores son:
 
 | Modificador | Descripción |
 | ----------- | ----------- |
-- `-b|k|m` | Muestra la cantidad de memoria en bytes, kilobytes o megabytes |
-- `-t`     | Muestra en una línea los totales |
-- `-s seg` | Se actualiza cada seg segundos |
+| - `-b|k|m`  | Muestra la cantidad de memoria en bytes, kilobytes o megabytes |
+| - `-t`      | Muestra en una línea los totales |
+| - `-s seg`  | Se actualiza cada seg segundos |
 
 
 #### 5.4.5.- Tiempo de marcha: `uptime`
@@ -211,12 +250,13 @@ El comando uname imprime información acerca de la máquina y el sistema operati
 Los diferentes modificadores que tiene son:
 
 | Modificador | Descripción |
-| `-m`   | Escribe el tipo de hardware de la máquina |
-| `-n`   | Escribe el nombre de la máquina |
-| `-r`   | Escribe el número de versión del sistema operativo |
-| `-s`   | Escribe el nombre del sistema operativo |
-| `-v`   | Escribe la versión del sistema operativo |
-| `-a`   | Escribe todo lo anterior |
+|-------------|-------------|
+| `-m`        | Escribe el tipo de hardware de la máquina |
+| `-n`        | Escribe el nombre de la máquina |
+| `-r`        | Escribe el número de versión del sistema operativo |
+| `-s`        | Escribe el nombre del sistema operativo |
+| `-v`        | Escribe la versión del sistema operativo |
+| `-a`        | Escribe todo lo anterior |
 
 
 
@@ -224,7 +264,7 @@ Los diferentes modificadores que tiene son:
 
 #### 5.5.1.- Captura de señales con el comando `trap`
 
-Ya hemos visto que la comunicación entre procesos en Linux se realiza mediante señales que pueden ser lanzadas con el comando kill. 
+Ya hemos visto que la comunicación entre procesos en Linux se realiza mediante señales que pueden ser lanzadas con el comando `kill`. 
 Desde los scripts que creamos, también es posible capturar las señales, bien para modificar su valor por defecto o bien para bloquearla e impedir que realice su función. El comando para capturar señales en un script es el comando trap.
  
 Cada vez que se presiona Ctrl+C, la señal es atrapada y ejecuta la orden que se le ha pasado al comando trap. 
@@ -296,70 +336,122 @@ No se debería modificar este archivo, pero vamos a ver las partes que tiene. La
 
 A continuación, hay cuatro líneas con una serie de columnas cada una, cada línea corresponde con una tarea programada. Los significados de las columnas son:
 
-•	Las cinco primeras columnas representan los minutos, horas, día del mes, mes y día de la semana.
+Las cinco primeras columnas representan los minutos, horas, día del mes, mes y día de la semana.
  
+![alt text](image-1.png)
+
 Hay diferentes formas de indicar estos valores:
-o	Si contiene un valor numérico indicará el momento exacto. Por ejemplo, la última fila tiene una tarea que se ejecutará a las 5:52 horas.
+- Si contiene un **valor numérico** indicará el momento exacto. Por ejemplo, la última fila tiene una tarea que se ejecutará a las 5:52 horas.
 Una alternativa en los días de la semana y mes es utilizar abreviaturas de la forma sun o sug.
-o	Si contiene el símbolo asterisco indica que ese campo tomará todos los valores posibles. Por ejemplo, en la misma fila que antes (la última), al tener un asterisco en el campo mes indica que se ejecutará todos los meses. En cambio, como en el campo día del mes tiene un valor numérico, solo se ejecutará ese día concreto. Por tanto, esta tarea se ejecutará el primer día de cada mes todos los meses.
-o	Se pueden poner una serie de valores separados por comas, en cuyo caso la tarea se ejecutará para cada uno de los valores indicados.
-o	Otra opción es indicar días alternos poniéndolo de la forma */num, esto indicará que la tarea se ejecutará cuando el valor de ese campo sea múltiplo exacto de num.
-o	Otra opción es indicar rangos separando los dos valores con un guión (por ejemplo, 5-10).
-o	Por último, se pueden utilizar una serie de palabras reservadas. Estas son:
-	@reboot: se ejecuta una única vez al inicio.
-	@yearly/@annually: ejecutar cada año.
-	@monthly: ejecutar una vez al mes.
-	@weekly: una vez a la semana.
-	@daily/@midnight: una vez al día.
-	@hourly: cada hora.
-•	La siguiente columna indica el usuario en cuyo nombre se ejecutará el script.
-•	La última columna indica la tarea que se va a ejecutar. En este ejemplo concreto utiliza el comando run-parts. Este es un comando especial que ejecutará cualquier script ejecutable dentro del directorio especificado, en el último ejemplo sería el directorio /etc/cron.monthly.
-6.5.2.-CREACIÓN DE TAREAS POR PARTE DEL USUARIO
-Si analizas el fichero crontab anterior, verás que al final lo que hace es programar una serie de tareas con periodicidades fijas: cada hora, diaria, semanal, … de forma que cualquier script que se guarde en uno de los directorios indicados se ejecutará con dicha periodicidad. Por ejemplo, todo lo que se guarde en /etc/cron/weekly se ejecutará una vez cada semana. 
-Eso es una tarea propia del administrador, pero los usuarios normales también pueden crear tareas de cron. Para crear y modificar una crontab utilizaremos el comando crontab –e. Si aún no existe una crontab para el usuario, este comando creará un archivo crontab en /var/spool/cron/username.
-La sintaxis utilizada en los trabajos cron de los usuarios es idéntica a la del archivo crontab del sistema que vimos anteriormente, con una diferencia: no podemos indicar el nombre del usuario, ya que la tarea pertenecerá siempre al usuario que la cree.
-Para crear una tarea cron debemos invocar la orden crontab con el modificador –e. Eso nos abrirá un editor donde podremos añadir nuestra línea. La primera vez que lo invoquemos nos pedirá un editor por defecto 
+- Si contiene el **símbolo asterisco** indica que ese campo tomará todos los valores posibles. Por ejemplo, en la misma fila que antes (la última), al tener un asterisco en el campo mes indica que se ejecutará todos los meses. En cambio, como en el campo día del mes tiene un valor numérico, solo se ejecutará ese día concreto. Por tanto, esta tarea se ejecutará el primer día de cada mes todos los meses.
+- Se pueden poner una serie de **valores separados por comas**, en cuyo caso la tarea se ejecutará para cada uno de los valores indicados.
+- Otra opción es indicar días alternos poniéndolo **de la forma */num**, esto indicará que la tarea se ejecutará cuando el valor de ese campo sea múltiplo exacto de num.
+- Otra opción es indicar **rangos** separando los dos valores con un guión (por ejemplo, 5-10).
+- Por último, se pueden utilizar una serie de palabras reservadas. Estas son:
+    - `@reboot`: se ejecuta una única vez al inicio.
+    - `@yearly/@annually`: ejecutar cada año.
+    - `@monthly`: ejecutar una vez al mes.
+    - `@weekly`: una vez a la semana.
+    - `@daily/@midnight`: una vez al día.
+    - `@hourly`: cada hora.
+
+La siguiente columna indica el **usuario** en cuyo nombre se ejecutará el script.
+
+La última columna indica la tarea que se va a ejecutar. En este ejemplo concreto utiliza el comando `run-parts`. Este es un comando especial que ejecutará cualquier script ejecutable dentro del directorio especificado, en el último ejemplo sería el directorio `/etc/cron.monthly`.
+
+
+
+#### 5.6.2.-Creación de tareas por parte del usuario
+
+Si analizas el fichero `crontab` anterior, verás que al final lo que hace es programar una serie de tareas con periodicidades fijas: cada hora, diaria, semanal, … de forma que cualquier script que se guarde en uno de los directorios indicados se ejecutará con dicha periodicidad. Por ejemplo, todo lo que se guarde en `/etc/cron/weekly` se ejecutará una vez cada semana. 
+
+Eso es una tarea propia del administrador, pero los usuarios normales también pueden crear tareas de `cron`. Para crear y modificar una `crontab` utilizaremos el comando `crontab –e`. Si aún no existe una `crontab` para el usuario, este comando creará un archivo `crontab` en `/var/spool/cron/username`.
+
+La sintaxis utilizada en los trabajos cron de los usuarios es idéntica a la del archivo `crontab` del sistema que vimos anteriormente, con una diferencia: no podemos indicar el nombre del usuario, ya que la tarea pertenecerá siempre al usuario que la cree.
+
+Para crear una tarea cron debemos invocar la orden `crontab` con el modificador `–e`. Eso nos abrirá un editor donde podremos añadir nuestra línea. La primera vez que lo invoquemos nos pedirá un editor por defecto 
  
+```bash
+victor@SERVER:~$ crontab -e
+no crontab for victor - using an empty one
+
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.basic
+  3. /usr/bin/vim.tiny
+  4. /bin/ed
+
+Choose 1-4 [1]: 1
+
+```
+
 Y tras ello ya podremos introducir datos en nuestro fichero crontab.
+
+```bash
+# DO NOT EDIT THIS FILE - edit the master and reinstall.
+# (/tmp/crontab.dTvAKM/crontab installed on Sun Oct 13 09:16:24 2024)
+# (Cron version -- $Id: crontab.c,v 2.13 1994/01/17 03:20:37 vixie Exp $)
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+#
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+#
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+# m h  dom mon dow   command
+*/2 * * * * [ -e /tmp/log ] && rm -f /tmp/log
+
+```
+
  
-Algunas otras tareas que podemos realizar con crontab son:
-•	crontab –l: muestra nuestro fichero crontab para ver todas las tareas programadas.
-•	crontab –u user –l: si somos administradores podremos ver las tareas programadas de cualquier usuario del sistema.
-•	crontab –r: elimina todas las tareas de crontab. Esto hace que se elimine el fichero /var/spool/cron/user.
+Algunas otras tareas que podemos realizar con `crontab` son:
+- `crontab –l`: muestra nuestro fichero crontab para ver todas las tareas programadas.
+- `crontab –u user –l`: si somos administradores podremos ver las tareas programadas de cualquier usuario del sistema.
+- `crontab –r`: elimina todas las tareas de crontab. Esto hace que se elimine el fichero `/var/spool/cron/user`.
 
-Por parte del administrador, es posible restringir los usuarios que pueden programar tareas en el sistema. Esto se hace mediante dos ficheros: cron.allow y cron.deny. El contenido de estos ficheros es muy sencillo, únicamente tienen una lista de nombres de usuario, uno por línea.
+Por parte del administrador, es posible restringir los usuarios que pueden programar tareas en el sistema. Esto se hace mediante dos ficheros: `cron.allow` y `cron.deny`. El contenido de estos ficheros es muy sencillo, únicamente tienen una lista de nombres de usuario, uno por línea.
 Funcionan de la siguiente manera:
-•	Si cron.allow existe, solo los usuarios que están listados en dicho fichero pueden crear, editar, mostrar o eliminar ficheros crontab.
-•	Si cron.allow no existe, todos los usuario pueden usar ficheros crontab con excepción de los que están incluidos en el fichero cron.deny.
-•	Si no existen ni cron.allow ni cron.deny, entonces cualquier usuario puede programar tareas.
+
+- Si `cron.allow` existe, solo los usuarios que están listados en dicho fichero pueden crear, editar, mostrar o eliminar ficheros crontab.
+- Si `cron.allow` no existe, todos los usuario pueden usar ficheros crontab con excepción de los que están incluidos en el fichero cron.deny.
+- Si no existen ni `cron.allow` ni `cron.deny`, entonces cualquier usuario puede programar tareas.
 
 
 
-## El directorio `/proc`
+### 5.7.- El directorio `/proc`
 
-# Apuntes sobre el directorio `/proc` en Linux
-
-## 1. ¿Qué es el directorio `/proc`?
+#### 5.7.1.- ¿Qué es el directorio `/proc`?
 
 El directorio **`/proc`** es un **sistema de archivos virtual** que proporciona información sobre el **sistema en tiempo real**. No es un directorio tradicional que almacene archivos en el disco duro, sino que actúa como una interfaz para acceder a los datos del kernel y otros procesos del sistema.
 
 El sistema de archivos `/proc` se monta automáticamente al iniciar el sistema y permite a los administradores y usuarios consultar información sobre el hardware, el kernel y los procesos en ejecución.
 
----
-
-## 2. Características del sistema de archivos `/proc`
+#### 5.7.2.- Características del sistema de archivos `/proc`
 
 - **Volátil**: Los archivos dentro de `/proc` no ocupan espacio en el disco; la información se genera dinámicamente cuando se consulta.
 - **Lectura de información en tiempo real**: Se puede acceder a estadísticas del sistema, información de procesos, uso de memoria, etc.
 - **Interfaz con el kernel**: Permite al usuario interactuar y modificar ciertos parámetros del kernel, como los parámetros de red o el rendimiento del sistema.
 
----
-
-## 3. Estructura del directorio `/proc`
+#### 5.7.3.- Estructura del directorio `/proc`
 
 Dentro del directorio `/proc`, se encuentran varios archivos y subdirectorios. Algunos de ellos contienen información específica del sistema, mientras que otros son directorios numerados que representan procesos en ejecución. A continuación, se explican algunos de los más relevantes:
 
-### 3.1. Archivos importantes
+**Archivos importantes**
 
 - **`/proc/cpuinfo`**: Muestra información sobre la **CPU** del sistema, incluyendo el modelo, la frecuencia, la cantidad de núcleos, etc.
 
@@ -397,7 +489,7 @@ Dentro del directorio `/proc`, se encuentran varios archivos y subdirectorios. A
     cat /proc/partitions
     ```
 
-### 3.2. Directorios de procesos
+**Directorios de procesos**
 
 Cada proceso en el sistema tiene un subdirectorio en `/proc` con su **PID** (Process ID) como nombre. Dentro de cada uno de estos directorios, hay archivos que contienen información sobre el proceso.
 
@@ -407,9 +499,8 @@ Por ejemplo, el proceso con PID **1234** tendrá un directorio en `/proc/1234/`.
 - **`/proc/[PID]/status`**: Contiene información sobre el estado del proceso, como el usuario que lo ejecuta, el consumo de memoria, y el estado actual (en ejecución, suspendido, etc.).
 - **`/proc/[PID]/fd/`**: Es un directorio que contiene enlaces simbólicos a los **descriptores de archivos** abiertos por el proceso.
 
----
 
-## 4. Modificación de parámetros del kernel
+#### 5.7.4. Modificación de parámetros del kernel
 
 Algunos archivos dentro de `/proc` permiten modificar el comportamiento del sistema, especialmente los relacionados con el **kernel**. Un ejemplo es el archivo **`/proc/sys/`**, que contiene varios subdirectorios con configuraciones del kernel.
 
@@ -431,15 +522,13 @@ Dentro de `/proc/sys`, puedes encontrar configuraciones para redes, seguridad y 
     echo 0 > /proc/sys/net/ipv4/ip_forward
     ```
 
-### 4.2. Persistir cambios en parámetros del kernel
+Los cambios realizados en `/proc` se pierden después de reiniciar el sistema. Si quieres que se apliquen de **forma permanente**, debes editar el archivo `/etc/sysctl.conf`.
 
-Los cambios realizados en `/proc` se pierden después de reiniciar el sistema. Si quieres que se apliquen de forma permanente, debes editar el archivo `/etc/sysctl.conf`.
 
----
 
-## 5. Ejemplos prácticos
+#### 5.7.5.- Ejemplos prácticos
 
-### 5.1. Ver los procesos en ejecución
+**Ver los procesos en ejecución**
 
 Puedes listar todos los procesos en ejecución consultando los subdirectorios numéricos de `/proc`:
 
@@ -450,7 +539,7 @@ ls /proc | grep -E '^[0-9]+$'
 Este comando te dará una lista de los PID de todos los procesos actuales.
 
 
-### 5.2. Comprobar el uso de CPU y memoria
+**Comprobar el uso de CPU y memoria**
 
 Consulta la información detallada de la CPU y la memoria:
 
@@ -459,19 +548,12 @@ cat /proc/cpuinfo
 cat /proc/meminfo
 ```
 
-### 5.3.- Ver estadísticas de red
+**Ver estadísticas de red**
 
 ```bash
 cat /proc/net/dev
 ```
 
-**Copiado de Word. Organizar**
-
-Cada sistema operativo ofrece un mecanismo para que el administrador de sistemas investigue las interioridades del sistema operativo y para configurar los parámetros cuando lo necesite. En Linux este mecanismo es el sistema de archivos /proc. El directorio /proc fue creado para mejorar la comunicación entre los usuarios y el kernel. Este sistema es en realidad interesante porque realmente no existe del todo en disco; es una abstracción de la información del kernel. Todos los archivos del directorio corresponden a una función o a un conjunto de variables del kernel. Por ejemplo, para ver un informe sobre el tipo de procesador de sus servidores, podemos leer el archivo /proc/cpuinfo con el comando cat de la forma siguiente:
-
-El kernel creará dinámicamente el informe mostrando la información del procesador y devolviéndole a cat para que podamos verlo. Otra ventaja de este sistema es que el flujo de información no es unidireccional, sino que también sirve para enviar información al kernel. Por ejemplo, un vistazo al directorio /proc/sys/net/ipv4 nos mostrará un montón de ficheros con permiso de escritura. La mayoría de los ficheros de este fichero contienen solamente un número, pero su modificación puede suponer cambios importantes en el comportamiento de la pila TCP/IP. Por ejemplo, el archivo /proc/sys/net/ipv4/ip_forward contiene un 0 por defecto. Esto le dice a Linux que no realice IP Forwarding cuando tenemos varias interfaces en el sistema. Pero si queremos habilitar esta capacidad solo tenemos que modificar el valor de ese fichero por 1 con la orden: echo “1” > /proc/sys/net/ipv4/ip_forward Con esto conseguiremos que el servidor realice funciones de enrutamiento. Veamos ahora algunas entradas interesantes de este directorio: Nombre Contenido /proc/cpuinfo Información sobre la CPU del sistema /proc/interrupts Uso de las IRQ en el sistema /proc/meminfo Uso de la memoria /proc/swaps Información sobre las particiones de intercambio /proc/version Número de versión actual del kernel, la máquina en que se compiló y la fecha y hora de compilación. /proc/net/dev Información sobre cada dispositivo de red (contador de paquetes, contador de errores, etc..) /proc/net/sockstat Estadísticas de utilización de sockets de red /proc/sys/net/ipv4/ icmp_echo_ignore_broadcasts Por defecto es 0. Esto permite que se devuelvan las peticiones ICMP a las direcciones de broadcast. Esto supone un peligro frente a los ataques de denegación de servicio. /proc/sys/net/ipv4/ip_forward Ya lo vimos antes, habilita el encaminamiento IP /proc/sys/net/ipv4/syn_cookies Por defecto es 0. Al cambiarlo a 1 se activa la protección del sistema frente a ataques SYN FLOOD.
-
- 
 ---
 ---
 
