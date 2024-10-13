@@ -5,13 +5,13 @@
 
 ### Índice
 
-- Introducción a los procesos
-- Monitorización de procesos
-- Envío de señales entre procesos
-- Programación de procesos con cron y crontab
-- Arranque del sistema con systemd
-- El directorio /proc
-
+- [Introducción a los procesos](#51--introducción)
+- [Procesos automáticos e interactivos](#52--procesos-automáticos-e-interactivos)
+- [Procesos en primer y segundo plano](#53--procesos-en-primer-y-segundo-plano)
+- [Comandos relacionados con los procesos](#53--procesos-en-primer-y-segundo-plano)
+- [Envío de señales entre procesos](#55--envío-de-señales-entre-procesos-esto-no) **NO ENTRA**
+- [Programación de procesos con `cron`](#56--programación-de-procesos-con-cron-y-crontab)
+- [El directorio `/proc`](#57--el-directorio-proc)
 
 ### 5.1.- Introducción
 
@@ -503,8 +503,6 @@ Por ejemplo, el proceso con PID **1234** tendrá un directorio en `/proc/1234/`.
 #### 5.7.4. Modificación de parámetros del kernel
 
 Algunos archivos dentro de `/proc` permiten modificar el comportamiento del sistema, especialmente los relacionados con el **kernel**. Un ejemplo es el archivo **`/proc/sys/`**, que contiene varios subdirectorios con configuraciones del kernel.
-
-### 4.1. Modificar parámetros del kernel con `/proc/sys`
 
 Dentro de `/proc/sys`, puedes encontrar configuraciones para redes, seguridad y otros aspectos del sistema.
 

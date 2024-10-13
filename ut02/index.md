@@ -16,6 +16,7 @@
 - [PR0201: Usuarios y permisos](./practicas/pr0201_usuarios_permisos.md)
 - [PR0202: Conexión SSH](./practicas/pr0202_ssh.md)
 - [PR0203: Conexión SSH de varios usuarios](./practicas/pr0203_ssh_varios_usuarios.md)
+- [PR0204: Programación de tareas con `cron`](./practicas/pr0204_cron.md)
 
 
 --- 
