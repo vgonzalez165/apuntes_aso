@@ -7,7 +7,8 @@
 3. [Conexión remota](./apuntes/3_conexion_remota.md)
 4. [Almacenamiento y discos](./apuntes/4_almacenamiento_discos.md) (**REPASO**)
 5. [Gestión de procesos](./apuntes/5_procesos.md)
-6. [Programación de tareas con `cron` y `crontab`]()
+6. [Programación de tareas con `cron` y `crontab`](./apuntes/6_cron.md)
+7. [El directorio `/proc`](./apuntes/7_directorio_proc.md)
 
 
 ## Prácticas
