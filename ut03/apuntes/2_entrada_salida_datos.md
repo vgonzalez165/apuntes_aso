@@ -1,11 +1,11 @@
 # UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
 
 
-## 3.- Entrada y salida de datos
+## 2.- Entrada y salida de datos
 
-### 3.1.- Parámetros en la línea de comandos
+### 2.1.- Parámetros en la línea de comandos
 
-#### 3.1.1.- Referenciando los parámetros
+#### 2.1.1.- Referenciando los parámetros
 
 La forma más sencilla de pasar datos a un script es mediante parámetros en la línea de comandos. Bash asigna el valor de cada parámetro a unas variables especiales denominadas parámetros posicionales. Las denominaciones de estas variables son `$1`, `$2`,… y así sucesivamente. Además, Bash también tiene una variable especial, `$0`, que almacena el nombre del propio script.
 
@@ -38,7 +38,7 @@ fi
 
 
 
-#### 3.1.2.- Variable de parámetros especiales
+#### 2.1.2.- Variable de parámetros especiales
 
 Además de las variables que vimos en el punto anterior Bash proporciona una serie de variables especiales que proporcionan más información acerca de los parámetros del script.
 
@@ -85,9 +85,9 @@ $@ Parámetro #4 = d
 $@ Parámetro #5 = e
 ```
  
-### 3.2.- Obteniendo datos del usuario
+### 2.2.- Obteniendo datos del usuario
 
-#### 3.2.1.- Lectura básica
+#### 2.2.1.- Lectura básica
 
 El comando `read` acepta una entrada desde la entrada estándar (o de un descriptor de fichero) y la almacena en una variable. El uso más sencillo sería el siguiente:
 

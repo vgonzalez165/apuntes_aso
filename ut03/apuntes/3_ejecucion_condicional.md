@@ -1,9 +1,9 @@
 # UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
 
 
-## 2.- Ejecución condicional
+## 3.- Ejecución condicional
 
-### 2.1.- Bifurcación condicional
+### 3.1.- Bifurcación condicional
 
 
 El comando estructurado más sencillo de que disponemos es el comando `if-then`. La sintaxis de este comando es la siguiente:
@@ -29,7 +29,7 @@ then
 fi
 ```
  
-### 2.2. - El comando `if-then-else`
+### 3.2. - El comando `if-then-else`
 
 El comando `if-then-else` va un poco más allá del comando `if-then` permitiendo especificar dos grupos de comandos, uno que se ejecutará si el estado de salida del comando es cero y otro para ejecutar si el estado del comando no es cero.
 
@@ -44,7 +44,7 @@ else
 fi
 ```
 
-### 2.3.- El comando `test`
+### 3.3.- El comando `test`
 
 Por lo que se ha visto hasta ahora el comando `if` es poco versátil ya que únicamente es capaz de evaluar si el resultado de la ejecución de un comando es correcta o no.
 
@@ -81,7 +81,7 @@ Hay tres tipos de condiciones que el comando test puede evaluar:
 - Comparaciones de cadenas
 - Comparaciones de ficheros
 
-#### 2.3.1.- Comparaciones numéricas
+#### 3.3.1.- Comparaciones numéricas
 
 El uso más común del comando `test` es para realizar comparaciones entre dos números. Los valores a comparar pueden venir dados tanto por un número como por una variable.
 
@@ -105,7 +105,7 @@ Los diferentes operandos que podemos utilizar cuando realizamos comparaciones en
 | `n1 –lt n2` | Comprueba si n1 es menor que n2         |
 | `n1 –ne n2` | Comprueba si n1 no es igual a n2        |
 
-#### 2.3.2.- Comparaciones de cadenas
+#### 3.3.2.- Comparaciones de cadenas
 
 El comando `test` dispone de las siguientes comparaciones de cadenas:
 
@@ -163,7 +163,7 @@ victor@SERVER:~$ ls
 Las otras dos comparaciones serán útiles para comprobar si una cadena contiene datos o no.
 
 
-#### 2.3.3.- Comparaciones de ficheros
+#### 3.3.3.- Comparaciones de ficheros
 
 La última categoría de comparaciones nos va a permitir verificar el estado de ficheros y directorios en el sistema de ficheros. Las diferentes opciones vienen dadas por la siguiente tabla:
 
@@ -235,7 +235,7 @@ Eres el propietario del fichero /etc/passwd
 - **Fecha del fichero**: El último grupo de comparaciones nos permite evaluar dos ficheros y saber cuál tiene una fecha de creación anterior. Esto puede ser útil al escribir scripts que instalen software para evitar instalar ficheros anteriores a los que ya tenemos en el sistema. La comparación `–nt` nos sirve para saber si un fichero es más nuevo que otro mientras que la comparación `–ot` nos indica si es más antiguo.
 
 
-### 2.4.- Condiciones compuestas
+### 3.4.- Condiciones compuestas
 
 El comando `if-then` nos permite también utilizar **lógica booleana** para combinar comprobaciones. Se puede utilizar dos operadores booleanos:
 
@@ -267,7 +267,7 @@ Incluso se pueden combinar ambos operadores.
 victor@SERVER:~$ mkdir $HOME/bin && cd $HOME/bin || exit 1
 ```
 
-### 2.5.- El comando `case`
+### 3.5.- El comando `case`
 
 Hay ocasiones en las que se quieren ejecutar diferentes secuencias de código en función del valor de una variable. Aunque esta operación se puede realizar con varios comandos `if`, el shell nos proporciona un comando más adecuado para ello. Este es el comando `case`. Este comando compara una variable con múltiples valores y ejecuta secuencias de código diferentes para cada valor.
 
@@ -298,11 +298,11 @@ esac
 ```
 
  
-### 2.6.- Bucles
+### 3.6.- Bucles
 
 Los bucles sirven para ejecutar varias veces un conjunto de comandos. El *shell* proporciona tres tipos de bucles: `while`, `until` y `for`. Los dos primeros se ejecutan hasta que una condición sea verdadera o falsa, y el tercer itera sobre una lista de valores.
 
-#### 2.6.1.- El comando `while`
+#### 3.6.1.- El comando `while`
 
 El comando `while` ejecuta un conjunto de comandos mientras la condición sea verdadera. Su sintaxis es:
 
@@ -369,7 +369,7 @@ Nombre: Pepe - Apellidos:  Alonso - NIF:  12345678D
 ```
 
 
-#### 2.6.2.- El comando `until`
+#### 3.6.2.- El comando `until`
 
 Es el opuesto al comando `while`, se ejecutan los comandos mientras la condición sea falsa.
 
@@ -384,7 +384,7 @@ do
 done
 ```
 
-#### 2.6.3.- El comando `for`
+#### 3.6.3.- El comando `for`
 
 El comando `for` nos permitirá iterar una variable sobre una serie de valores. Cada iteración ejecutará los comandos definidos tomando el valor que le corresponda a la variable para esa iteración. El formato básico para este comando es:
 
@@ -396,7 +396,7 @@ done
 ```
 Los valores que va a tener la variable se pueden especificar de varias maneras.
 
-##### 2.6.3.1.- Indicando los valores en una lista
+##### 3.6.3.1.- Indicando los valores en una lista
 
 La forma más sencilla es enumerar los valores uno a uno en una lista dentro del propio comando `for`.
 
@@ -416,7 +416,7 @@ for localidad in Ponferrada León "San Andrés"
 ```
 
 
-##### 2.6.3.2.- Recorriendo un rango de números
+##### 3.6.3.2.- Recorriendo un rango de números
 
 Si queremos que la variable itere sobre un rango de números podemos hacerlo especificándolo de la siguiente manera:
 
@@ -426,11 +426,11 @@ for var in {1..10}
 
 Esto realizará 10 iteraciones en el bucle asignándole a la variable `i` los valores 1, 2, 3,…
 
-##### 2.6.3.3.- Leyendo la lista de una variable
+##### 3.6.3.3.- Leyendo la lista de una variable
 
 Otra opción que tenemos es que podemos utilizar una variable para ir acumulando los valores en la lista y luego indicar dicha variable en el comando `for`, como se puede ver en el siguiente ejemplo.
  
-##### 2.6.3.4.- Leyendo los valores de un comando
+##### 3.6.3.4.- Leyendo los valores de un comando
 
 Otra opción más es obtener los diferentes valores que va a tener la variable en las sucesivas iteraciones de la ejecución de un comando. Para ello utilizamos `$( )`. 
 
@@ -475,7 +475,7 @@ También podemos utilizar esta variable para definir otros separadores. Si por e
 IFS=$'/n:' 
 ```
  
-##### 2.6.3.5.- Leyendo un directorio utilizando caracteres comodín
+##### 3.6.3.5.- Leyendo un directorio utilizando caracteres comodín
 
 Finalmente, la última posibilidad del comando `for` es recorrer una serie de ficheros de un directorio. Para hacer esto podemos utilizar los caracteres comodín dentro de una ruta especificada en el comando `for`.
 
