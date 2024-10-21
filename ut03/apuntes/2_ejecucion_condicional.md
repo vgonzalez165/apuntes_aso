@@ -489,12 +489,12 @@ do
       echo '$file es un directorio'
    elif [ -f "$file" ]
    then
-      echo "$file es un fichero"
+      echo '$file es un fichero'
    fi
 done
 ```
 
-En este ejemplo hay que fijarse en que rodeamos la variable en el comando `if` entre comillas dobles. Esto porque en Linux es posible definir nombres de ficheros que tengan espacios en medio, por lo que al rodearlo de comillas forzamos a que trate a estos nombres compuestos como una única cadena. Si no hacemos esto y hay algún nombre compuesto el comando `if` nos dará un error ya que encontrará más parámetros de lo esperado.
+En este ejemplo hay que fijarse en que rodeamos la variable en el comando `if` entre comillas dobles. Esto es porque en Linux es posible definir nombres de ficheros que tengan espacios en medio, por lo que al rodearlo de comillas forzamos a que trate a estos nombres compuestos como una única cadena. Si no hacemos esto, y hay algún nombre compuesto, el comando `if` nos dará un error ya que encontrará más parámetros de lo esperado.
 Por último, señalar que también podemos especificar varias rutas dentro del comando for de la siguiente manera.
  
 ```bash
