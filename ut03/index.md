@@ -12,6 +12,7 @@
 ## Prácticas
 
 - [PR0301: Ejercicios básicos de Bash scripting](./practicas/pr0301_scripts.md)
+- [PR0301: Ejercicios con el comando `if`](./practicas/pr0301_comando_if.md)
 
 
 
