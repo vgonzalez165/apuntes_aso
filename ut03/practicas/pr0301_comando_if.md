@@ -1,4 +1,4 @@
-# PR0302: Condicional `if`
+# PR0301: Condicional `if`
 
 
 Realiza las siguientes tareas:
