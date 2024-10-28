@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 # PR0302: Ejercicios condicional `if`
-=======
+
 # PR0301: Condicional `if`
->>>>>>> 54f68c2acf52db27ab9e283760217b03dfaeccca
+
 
 
 Realiza las siguientes tareas:
