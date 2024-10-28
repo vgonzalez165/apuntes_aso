@@ -12,7 +12,11 @@
 ## Prácticas
 
 - [PR0301: Ejercicios con el comando `if`](./practicas/pr0301_comando_if.md)
+<<<<<<< HEAD
 - [PR0302: Ejercicios con `case`](./practicas/pr0302_comando_case.md)
+=======
+- [PR0302: Ejercicios con el comando `case`](./practicas/pr0302_case.md)
+>>>>>>> 54f68c2acf52db27ab9e283760217b03dfaeccca
 
 
 

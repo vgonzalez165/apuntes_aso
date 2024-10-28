@@ -210,3 +210,6 @@ var3=$[ var1 + var2 ]
 echo La suma es $var3
 exit 5
 ```
+
+### 1.5.- Operaciones aritméticas en Bash
+
