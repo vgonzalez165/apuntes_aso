@@ -1,13 +1,13 @@
 # UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
 
 
-## 4.- Funciones en Bash
+## 5.- Funciones en Bash
 
-### 4.1.- Funciones
+### 5.1.- Funciones
 
 Al igual que la mayoría de lenguajes de programación, Bash permite la definición de **funciones**. Una función se puede definir como **un bloque de código identificado por un nombre, cada vez que la función es invocada se ejecuta su código, permitiendo así la reutilización del código**.
 
-#### 4.1.1.- Declaración de funciones
+#### 5.1.1.- Declaración de funciones
 
 En Bash hay dos formas de declarar funciones:
 
@@ -50,7 +50,7 @@ function saludo {    echo "Hola mundo!!!"; echo "Esto es una función"; }
 Es importante que las funciones se declaren antes de invocarlas, ya que en caso contrario daría error.
 
 
-#### 4.1.2.- Paso de parámetros a funciones
+#### 5.1.2.- Paso de parámetros a funciones
 
 También es posible pasarle **parámetros** a una función, los parámetros son valores que se pasan a la función al invocarla que pueden condicionar su ejecución. Para invocar una función pasándole parámetros simplemente hay que indicar sus valores después de su nombre.
 
@@ -67,7 +67,7 @@ sumar() {
 sumar 5 10
 ```
 
-#### 4.1.3.- Valor de retorno de la función
+#### 5.1.3.- Valor de retorno de la función
 
 Aunque Bash, al contrario qeu otros lenguajes de programación, no tiene una palabra clave específica para devolver el valor de una función, hay formas de devolver un resultado.
 
@@ -111,7 +111,7 @@ fi
 
 ```
 
-#### 4.1.4.- Ámbito de las variables en Bash
+#### 5.1.4.- Ámbito de las variables en Bash
 
 Por defecto, todas las variables declaradas en Bash tienen un ámbito global, lo que significa que son accesibles tanto dentro como fuera de las funciones. Para evitar que una función modifique accidentalmente una variable global, puedes declarar variables locales dentro de una función.
 
@@ -131,7 +131,7 @@ contar 5
 echo "El contador global es: $contador"
 ```
 
-#### 4.1.5.- Buenas prácticas para funciones en Bash
+#### 5.1.5.- Buenas prácticas para funciones en Bash
 
 - **Uso de variables locales**: Siempre que sea posible, utiliza variables locales dentro de las funciones para evitar interferencias con variables globales.
 
