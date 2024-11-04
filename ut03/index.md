@@ -16,6 +16,7 @@
 - [PR0302a: Ejercicios con `case`](./practicas/pr0302_comando_case.md)
 - [PR0302b: Ejercicios con el comando `case`](./practicas/pr0302_case.md)
 - [PR0303: Ejercicios de bucles y condicionales](./practicas/pr0303_bucles_condicionales.md)
+- [PR0304: Ejercicios de entrada y salida](./practicas/pr0304_entrada_salida.md)
 
 **NOTA**: Por problemas al sincronizar el repositorio hay dos versiones de la práctica con el comando `case`. Tienen algunos ejercicios en común y otros difieren. Podéis entregar la que queráis de las dos.
 

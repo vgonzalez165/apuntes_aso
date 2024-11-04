@@ -429,6 +429,18 @@ Esto realizará 10 iteraciones en el bucle asignándole a la variable `i` los va
 ##### 3.6.3.3.- Leyendo la lista de una variable
 
 Otra opción que tenemos es que podemos utilizar una variable para ir acumulando los valores en la lista y luego indicar dicha variable en el comando `for`, como se puede ver en el siguiente ejemplo.
+
+```bash
+#!/bin/bash
+
+lista="León Zamora Salamanca"
+lista=$lista" Valladolid"     # Ojo, observa cómo hacemos para concatenar cadenas
+
+for provincia in $lista
+do
+   echo "Alguna vez has visitado $provincia?"
+done
+```
  
 ##### 3.6.3.4.- Leyendo los valores de un comando
 
@@ -501,3 +513,28 @@ Por último, señalar que también podemos especificar varias rutas dentro del c
 for file in /home/victor/.b* /home/victor/test
 ```
  
+
+### 3.7.- Lectura de ficheros de texto
+
+Ya vimos en el apartado anterior que podíamos leer un fichero de texto utilizando el comando `for`, que nos permite ir almacenando en una variabla, línea a línea, el contenido del fichero (salvo que modifiquemos la variable `$IFS`).
+
+Aunque este método es muy útil, hay ocasiones en que puede que necesitemos más control sobre los datos que leemos, especialmente si leemos ficheros donde cada línea contiene una serie de datos separados por algún carácter especial, como puede ser el caso de los ficheros CSV o ficheros del sistema como `/etc/passwd`.
+
+En estos casos es mejor utilizar el comando `while`, utilizando la estructura que se puede ver en el siguiente ejemplo.
+
+```bash
+#!/bin/bash
+
+while IFS=:
+read user pass uid gid desc home_path shell
+do
+   echo "El usuario $user tiene el UID $uid"
+done < /etc/passwd
+```
+
+Algunas cosas a tener en cuenta del código anterior:
+
+- Utilizamos la variable `$IFS` para indicar cuál será el separador de campos (en el caso del fichero `/etc/passwd` el carácter `:`)
+- En el comando `read` indicamos las variables en que se volcarán los datos de cada línea del fichero en cada iteración.
+- Si indicamos menos variables que campos tiene cada línea, almacenará varios campos en la última variable como una lista.
+- Observa cómo utilizamos el redireccionamiento de entrada para enviar el contenido del fichero `/etc/passwd` al comando `while`
