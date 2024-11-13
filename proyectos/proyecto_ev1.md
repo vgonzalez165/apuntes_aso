@@ -35,6 +35,12 @@ Este es un proyecto bastante abierto en el que se valorará la inclusión de fun
 - **Direcciones MAC**: junto con la dirección IP de cada equipo detectado se puede almacenar la dirección MAC del mismo.
 
 
+### Recursos
+
+- [Extrayendo subcadenas en Bash](https://www.baeldung.com/linux/bash-substring)
+- [Aplicar colores en Bash](https://soloconlinux.org.es/colores-en-bash/)
+- [Comando `netcat`](https://www.ochobitshacenunbyte.com/2021/11/04/uso-del-comando-ncat-nc-en-linux-con-ejemplos/)
+
 ### Calificación del proyecto
 
 Para la calificación del proyecto se tendrán en cuenta los siguientes aspectos:
