@@ -1,5 +1,13 @@
 # ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 
+
+## Proyectos
+
+- [Proyecto de la 1ª evaluación](./proyectos/proyecto_ev1.md)
+- Proyecto de la 2ª evaluación
+
+## Apuntes
+
 - [UT01: Introducción y preparación del entorno](./ut01/index.md)
 - [UT02: Instalación y puesta en marcha de Linux Server](./ut02/index.md)
 - [UT03: Lenguajes de scripting en Linux: Bash](./ut03/index.md)
