@@ -2,7 +2,7 @@
 
 ## Apuntes
 
-1. [Introducción](./apuntes/1_conceptos_basicos.md)
+1. [Introducción](./apuntes/1_introduccion.md)
 
 
 
