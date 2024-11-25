@@ -2,13 +2,16 @@
 
 ## Apuntes
 
-1. [Introducción](./apuntes/1_introduccion.md)
+1. [Repaso de Powershell](./apuntes/0_powershell_repaso.md)
+2. [Introducción](./apuntes/1_introduccion.md)
 
 
 
 ## Prácticas
 
-- [PR0401]()
+- [PR0401: Introducción a Powershell (I)](./practicas/pr0401_introducción_powershell.md)
+- [PR0402: Introducción a Powershell (II)](./practicas/pr0401_introducción_powershell_ii.md)
+- [PR0403: Pipeline en Powershell](./practicas/pr0403_powershell_pipeline.md)
 
 
 --- 
