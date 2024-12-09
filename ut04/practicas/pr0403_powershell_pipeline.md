@@ -1,4 +1,4 @@
-# PR0402: El pipeline en Powershell
+# PR0403: El pipeline en Powershell
 
 Realiza las siguientes tareas que se te piden utilizando **Powershell**. Para contestar lo mejor es que hagas una captura de pantalla donde se vea el comando que has introducido y las primeras líneas de la salida de este.
 
