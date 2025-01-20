@@ -2,9 +2,9 @@
 
 Eres el administrador de sistemas de una empresa que cuenta con las siguientes características:
 
-- Dominio: `techworld.local`
+- Dominio: `aso.local`
 - Unidades Organizativas:
-    - `Usuarios`: contiene los usuarios del dominio, divididos en dos grupos:
+    - `Usuarios`: contiene los usuarios del dominio, divididos en dos unidades organizativas:
         - `management`.
         - `development`.
     - `Equipos`: Contiene los equipos de los empleados.
@@ -50,5 +50,7 @@ Eres el administrador de sistemas de una empresa que cuenta con las siguientes c
 
 
 
+## Qué hay que entregar
 
+Tienes que hacer un documento donde en el que expliques qué haces para que la GPO correspondiente se aplique a quienes pide el enunciado. Puedes acompañarlo de capturas de pantalla, pero lo importante es la explicación de cómo gestionas cada GPO
 
