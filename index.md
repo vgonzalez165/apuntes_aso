@@ -4,7 +4,7 @@
 ## Proyectos
 
 - [Proyecto de la 1ª evaluación](./proyectos/proyecto_ev1.md)
-- Proyecto de la 2ª evaluación
+- [Proyecto de la 2ª evaluación](./proyectos/proyecto_ev2.md)
 
 ## Apuntes
 
