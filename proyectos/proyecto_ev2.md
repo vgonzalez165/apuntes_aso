@@ -28,7 +28,7 @@ Debes realizar, por lo menos, las siguientes tareas:
 
 ## Entrega
 
-La entrega del proyecto consistirá en un documento que refleje la estructura del dominio, así como las decisiones tomadas. Este documento **no debe tener capturas de pantalla**, sino que será un documento técnico que refleje la estructura del dominio.
+La entrega del proyecto consistirá en un documento que refleje la estructura del dominio, así como las decisiones tomadas. Este documento será un documento técnico que refleje la estructura del dominio, por lo que  **únicamente debe tener capturas de pantalla representativas** y cuya función será únicamente complementar las explicaciones.
 
 Durante la corrección, y en caso de duda, el profesor podrá solicitarte que le muestres tu controlador de dominio para comprobar que todo se corresponde con la documentación entregada o para comprobar que realmente entiendes la estructura de tu dominio.
 
