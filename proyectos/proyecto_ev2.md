@@ -58,7 +58,7 @@ Para cada uno de los puntos anteriores, se evaluarán los siguientes aspectos:
 
 ### 3. Corrección de la solución (25%)
 - Implementación funcional y sin errores.
-- Las capturas incluidas en la documentación son representativas
+- Se siguen buenas prácticas recomendadas. 
 - Cumple con los requisitos establecidos.
 
 ### 4. Justificación de las decisiones tomadas (25%)
