@@ -33,20 +33,38 @@ La entrega del proyecto consistirá en un documento que refleje la estructura de
 Durante la corrección, y en caso de duda, el profesor podrá solicitarte que le muestres tu controlador de dominio para comprobar que todo se corresponde con la documentación entregada o para comprobar que realmente entiendes la estructura de tu dominio.
 
 
-### Calificación del proyecto
+## Calificación del proyecto
 
 Para la calificación del proyecto se tendrán en cuenta los siguientes aspectos:
 
-| Concepto                             | Valoración  |
-|--------------------------------------|-------------|
-| Organización del dominio             | 1.5 puntos  |
-| Automatización                       | 4 puntos    |
-| Estructura de carpeta compartidas    | 1 punto     |
-| Política de directivas               | 3.5 puntos  |
+| Concepto                              | Valoración  |
+|---------------------------------------|-------------|
+| Organización del dominio              | 1.5 puntos  |
+| Automatización                        | 4 puntos    |
+| Estructura de carpetas compartidas    | 1 punto     |
+| Política de directivas                | 3.5 puntos  |
 
-Para cada uno de los puntos se valorará:
+Para cada uno de los puntos anteriores, se evaluarán los siguientes aspectos:
 
-- Presentación de la documentación
-- Claridad con que se presentan los datos
-- Corrección de la solución 
-- Justificación de las decisiones tomadas
+### 1. Presentación de la documentación (25%)
+- Se incluye toda la información necesaria.
+- El formato es claro y estructurado.
+- Uso adecuado de diagramas o esquemas si es necesario.
+
+### 2. Claridad con que se presentan los datos (25%)
+- La información es comprensible y bien explicada.
+- No hay ambigüedades en la descripción de los procesos.
+- Se utilizan términos técnicos adecuados.
+
+### 3. Corrección de la solución (25%)
+- Implementación funcional y sin errores.
+- Las capturas incluidas en la documentación son representativas
+- Cumple con los requisitos establecidos.
+
+### 4. Justificación de las decisiones tomadas (25%)
+- Explicación clara de las decisiones tomadas.
+- Razones técnicas bien argumentadas.
+- Comparación con posibles alternativas cuando sea relevante.
+
+
+
