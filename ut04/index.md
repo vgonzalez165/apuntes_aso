@@ -2,8 +2,8 @@
 
 ## Apuntes
 
-1. [Repaso de Powershell](./apuntes/0_powershell_repaso.md)
-2. [Introducción](./apuntes/1_introduccion.md)
+
+Los apuntes de esta unidad están en Teams
 
 
 
