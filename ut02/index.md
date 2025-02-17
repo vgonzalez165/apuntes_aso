@@ -18,6 +18,10 @@
 - [PR0203: Conexión SSH de varios usuarios](./practicas/pr0203_ssh_varios_usuarios.md)
 - [PR0204: Programación de tareas con `cron`](./practicas/pr0204_cron.md)
 
+## Prácticas de repaso
+
+- [PR02R1: SSH](./practicas/PR02R1_ssh.md)
+
 
 --- 
 
