@@ -21,6 +21,7 @@
 ## Prácticas de repaso
 
 - [PR02R1: SSH](./practicas/PR02R1_ssh.md)
+- [PR02R2: Procesos y programación de tareas](./practicas/PR02R2_cron.md)
 
 
 --- 
