@@ -22,6 +22,7 @@
 
 - [PR02R1: SSH](./practicas/PR02R1_ssh.md)
 - [PR02R2: Procesos y programación de tareas](./practicas/PR02R2_cron.md)
+- [PR02R3: Procesos](./practicas/PR02R3_procesos.md)
 
 
 --- 
