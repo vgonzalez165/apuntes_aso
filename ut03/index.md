@@ -20,6 +20,10 @@
 
 **NOTA**: Por problemas al sincronizar el repositorio hay dos versiones de la práctica con el comando `case`. Tienen algunos ejercicios en común y otros difieren. Podéis entregar la que queráis de las dos.
 
+## Prácticas de repaso
+
+- [PR03R1: Bash scripting](./practicas/PR03R1.md)
+
 
 --- 
 
