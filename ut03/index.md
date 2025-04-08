@@ -22,10 +22,9 @@
 
 ## Prácticas de repaso
 
-[PR0301](./practicas/PR03R1.md)
 - [PR03R1: Bash scripting](./practicas/PR03R1.md)
 - [PR03R2: Bash scripting (II)](./practicas/PR03R2.md)
-
+- [PR03R1: Bash scripting](./practicas/PR03R1.md)
 
 --- 
 
