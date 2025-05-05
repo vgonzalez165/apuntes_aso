@@ -15,6 +15,9 @@ Los apuntes de esta unidad están en Teams
 - [PR0404: Administración remota del servidor](./practicas/pr0404_administracion_remota.md)
 
 
+## Repaso
+- [PR04R1: Scripts de Powershell](./practicas/pr04r1_ejercicios_powershell.md)
+
 --- 
 
 [Volver al índice](../index.md) 
