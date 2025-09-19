@@ -4,7 +4,7 @@
 
 ## Prácticas
 
-- [PR0101: Repositorio en GitHub]
+- [PR0101: Repositorio en GitHub](./practicas/pr0101.md)
 
 
 --- 
