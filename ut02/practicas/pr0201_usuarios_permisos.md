@@ -20,7 +20,7 @@ Esta práctica servirá para profundizar tus conocimientos sobre usuarios y perm
 
 ### Entorno de trabajo
 
-Esta práctica la realizaremos en un Ubuntu Server 22.04 LTS, para utilizar todos el mismo entorno usarás el box denominado `generic/ubuntu2204`.
+Esta práctica la realizaremos en un Ubuntu Server 24.04 LTS o alguna edición posterior.
 
 
 ## Enunciado
@@ -62,10 +62,10 @@ A no ser que se indique lo contrario realiza todas las operaciones desde el dire
 
 2.	Escribe el comando que necesitarías para establecer los siguientes permisos en el fichero anterior utilizando **notación octal**.
 
-- `rwx rwx rwx` : 111 111 111  777
-- `--x --x --x` : 001 001 001  111
-- `r-- -w- --x` : 100 010 001  421
-- `-w- --- ---` : 010 000 000  200
+- `rwx rwx rwx` : 
+- `--x --x --x` : 
+- `r-- -w- --x` :
+- `-w- --- ---` : 
 - `rw- r-- ---` :
 - `rwx --x --x` :
 - `rwx r-x r-x` :
