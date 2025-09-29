@@ -327,7 +327,7 @@ Si en lugar de utilizar notación decimal usamos notación simbólica en el coma
 
 #### 1.7.1.- El bit SUID
 
-El **bit SUID* se usa para que un archivo ejecutable se ejecute con los permisos del propietario del archivo, en lugar de los permisos del usuario que lo ejecuta. Este bit es útil para programas que necesitan permisos elevados temporalmente, como `passwd`.
+El *bit SUID* se usa para que un archivo ejecutable se ejecute con los permisos del propietario del archivo, en lugar de los permisos del usuario que lo ejecuta. Este bit es útil para programas que necesitan permisos elevados temporalmente, como `passwd`.
 
 **Ejemplo de uso**
 
@@ -356,7 +356,33 @@ victor@SERVER:/tmp$ ls -l script.sh
 
 El **bit SGID** es importante para compartir ficheros. Habilitando el bit SGID, puedes forzar que todos los ficheros creados en un directorio compartido pertenezcan al grupo del directorio y no al grupo del usuario individual que lo ha creado.
 
-**Ejemplo de uso**
+**Ejemplo de uso en un fichero**
+
+```bash
+victor@SERVER:~$ cp /usr/bin/id /tmp/id_copy
+victor@SERVER:~$ sudo groupadd -f shared
+victor@SERVER:~$ cd /tmp
+victor@SERVER:/tmp$ sudo chgrp shared id_copy
+victor@SERVER:/tmp$ sudo chmod g+s id_copy
+victor@SERVER:/tmp$ ls -l id_copy
+-rwxr-sr-x 1 victor shared 39432 sep 29 09:22 id_copy
+victor@SERVER:/tmp$ sudo -u nobody ./id_copy
+uid=65534(nobody) gid=65534(nogroup) egid=1000(victor) groups=1000(victor),65534(nogroup)
+```
+
+**Ejemplo de uso en un directorio**
+
+```bash
+victor@SERVER:~$ sudo mkdir -p /tmp/shared_dir
+victor@SERVER:~$ sudo chgrp shared /tmp/shared_dir
+victor@SERVER:~$ sudo chmod 2777 /tmp/shared_dir
+victor@SERVER:~$ ls -ld /tmp/shared_dir
+drwxrwsr-x 2 root shared 4096 sep 29 09:27 /tmp/shared_dir
+victor@SERVER:~$ sudo -u nobody bash -c 'echo "hola" > /tmp/shared_dir/ejemplo.txt'
+victor@SERVER:~$ ls -l /tmp/shared_dir/ejemplo.txt
+-rw-r--r-- 1 nobody shared 5 sep 29 09:29 /tmp/shared_dir/ejemplo.txt
+
+```
 
 
 
