@@ -3,12 +3,12 @@
 ## Apuntes
 
 1. [Usuarios y permisos](./apuntes/1_usuarios_permisos.md)
-2. [Redes Linux](./apuntes/2_redes_linux.md)
-3. [Conexión remota](./apuntes/3_conexion_remota.md)
-4. [Almacenamiento y discos](./apuntes/4_almacenamiento_discos.md) (**REPASO**)
-5. [Gestión de procesos](./apuntes/5_procesos.md)
-6. [Programación de tareas con `cron` y `crontab`](./apuntes/6_cron.md)
-7. [El directorio `/proc`](./apuntes/7_directorio_proc.md)
+<!-- 2. [Redes Linux](./apuntes/2_redes_linux.md) -->
+2. [Conexión remota](./apuntes/3_conexion_remota.md)
+<!-- 4. [Almacenamiento y discos](./apuntes/4_almacenamiento_discos.md) (**REPASO**) -->
+3. [Gestión de procesos](./apuntes/5_procesos.md)
+4. [Programación de tareas con `cron` y `crontab`](./apuntes/6_cron.md)
+5. [El directorio `/proc`](./apuntes/7_directorio_proc.md)
 
 
 ## Prácticas
