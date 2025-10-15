@@ -16,18 +16,17 @@ Esta práctica servirá para profundizar tus conocimientos sobre usuarios y perm
 
 ### Entorno de trabajo
 
-Esta práctica la realizaremos en un Ubuntu Server 22.04 LTS, para utilizar todos el mismo entorno usarás el box denominado `generic/ubuntu2204`.
+Esta práctica la realizaremos en un Ubuntu Server 22.04 LTS.
 
 
 ## Enunciado
 
 ### 1. Preparación de la máquina y configuración de la red
 
-
 1. Desde la interfaz de VirtualBox añade un segundo adaptador de red en modo *red solo anfitrión*. 
 2. Indica la dirección IP que asigna VirtualBox a este adaptador de red, así como la dirección IP del adaptador correspondiente en la máquina anfitrión.
 3. Comprueba que hay conectividad entre el anfitrión y la máquina virtual.
-4. Cambia el *hostname* de Ubuntu para que se llame `{iniciales}_server`. Esta operación la tienes que realizar directamente en el sistema, no mediante Vagrant.
+4. Cambia el *hostname* de Ubuntu para que se llame `{iniciales}_server`. 
 5. Realiza los cambios necesarios en tu equipo Windows para que te resuelva localmente el nombre del servidor Ubuntu (si tienes dudas, en los recursos tienes una breve explicación de cómo hacerlo)
 
 
