@@ -1,4 +1,4 @@
-# PR02R1: Conexión remota con SSH
+# PR0203: Conexión remota con SSH entre redes
 
 ## Entorno de trabajo
 
