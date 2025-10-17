@@ -16,8 +16,8 @@
 - [PR0201: Usuarios y permisos](./practicas/pr0201_usuarios_permisos.md) **Entrega**: 24 de octubre de 2025
 - [PR0202: Conexión SSH](./practicas/pr0202_ssh.md) **Entrega**: 24 de octubre de 2025
 - [PR0203: Conexión SSH entre redes](./practicas/PR02R1_ssh.md)]
-- [PR0203: Conexión SSH de varios usuarios]
-- [PR0204: Programación de tareas con `cron`](./practicas/pr0204_cron.md)
+- [PR0204: Gestión de procesos](./practicas/PR0204_procesos.md)
+<!-- - [PR0204: Programación de tareas con `cron`](./practicas/pr0204_cron.md) -->
 
 ## Prácticas de repaso
 
