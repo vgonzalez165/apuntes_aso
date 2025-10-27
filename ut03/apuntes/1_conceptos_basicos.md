@@ -27,7 +27,6 @@ También hay que tener en cuenta dos cosas más antes de ejecutar el script:
 - Primero debemos asegurarnos de que el fichero tenga **permisos de ejecución** y en caso contrario debemos dárselos.
 - En segundo lugar, debemos referenciar el script a ejecutar mediante su ruta (absoluta o relativa). Alternativamente a esto podemos guardar el script en uno de los directorios incluidos en el `PATH` (podemos ver estos ficheros mediante la orden `echo $PATH`)
 
-
 ### 1.2.- Mostrar mensajes por pantalla
 
 #### 1.2.1.- El comando `echo`
@@ -47,73 +46,106 @@ Otra característica de este comando es que por defecto incluye un salto de lín
 
 #### 1.2.2.- Imprimiendo datos con formato
 
-El comando del shell `printf` deriva de la función del mismo nombre del lenguaje de programación C y se basa en el uso de una cadena donde se indica cómo se presentarán el resto de argumentos.
+El comando `printf` en **Linux** es una herramienta muy útil para **mostrar texto formateado** en la salida estándar (pantalla o fichero). Funciona de forma similar al `printf()` del lenguaje **C**, y es **más potente y predecible** que el clásico `echo`.
 
-Su sintaxis es:
+##### Sintaxis general
 
 ```bash
-printf FORMAT ARG …
+printf FORMAT [ARGUMENTO...]
 ```
 
-La cadena FORMAT puede tener caracteres ordinarios, secuencias de escape y especificadores de formato. 
-- Los caracteres ordinarios son impresos tal cual en la salida
-- Las secuencias de escape son convertidas a los caracteres que representan. La secuencia de escape más utilizada es `\n`, que representa un salto de línea.
-- Los especificadores de formato son reemplazados por los argumentos que se indican a continuación.
+- **FORMAT** → cadena de formato que indica cómo deben mostrarse los valores.
+- **ARGUMENTO** → uno o varios valores a mostrar según el formato.
 
-Los especificadores de formato son letras precedidas del símbolo de porcentaje. Los modificadores son reemplazados por el argumento correspondiente. Cuando hay más argumentos que especificadores, la cadena de formato es reutilizada hasta que todos los argumentos se han consumido. Los especificadores más utilizados son `%s`, `%d`, `%f` y `%x`.
 
-- `%s`: imprime los caracteres literales en el argumento.
+##### Ejemplos básicos
+
+Mostrar texto simple
 
 ```bash
-victor@SERVER:~$ printf "%s\n" Imprime argumentos en "Lineas separadas"
-Imprime
-argumentos
-en
-Lineas separadas
-```
- 
-- `%b`:  es cómo `%s` con la diferencia de que si hay secuencias de escape en los argumentos las reemplaza por su equivalente.
- 
-```bash
-victor@SERVER:~$ printf "%s\n" "Hola\n mundo"
-Hola\n mundo
-victor@SERVER:~$ printf "%b\n" "Hola\n mundo"
-Hola
- mundo
+printf "Hola mundo\n"
 ```
 
-- `%d`: imprime números enteros. El entero puede ser especificado como decimal, octal (comenzando con un `0`) o hexadecimal (precediéndole de `0x`). Si el número no es válido mostrará un error.
+> Muestra: `Hola mundo`
+> 🔸 Es obligatorio añadir `\n` al final si quieres un salto de línea.
+
+Mostrar varias líneas
+
 ```bash
-victor@SERVER:~$ printf "%d\n" 23 45 56.78 0xff 011
-23
-45
--bash: printf: 56.78: invalid number
-56
-255
-9
-```
- 
-- `%f`: se usa para fracciones o números en coma flotante. Por defecto, se imprimen con seis decimales.
-```bash
-victor@SERVER:~$ printf "%f\n" 12.34 23 56.789 1.23456789
-12.340000
-23.000000
-56.789000
-1.234568
+printf "Línea 1\nLínea 2\nLínea 3\n"
 ```
 
-- `%x` y `%X`: sirven para representar números enteros en formato hexadecimal Los enteros se pueden imprimir en hexadecimal usando %x para minúsculas y %X para mayúsculas. 
+##### Formatos de impresión
+
+| Código | Tipo de dato        | Ejemplo                   | Resultado |
+| ------ | ------------------- | ------------------------- | --------- |
+| `%s`   | Cadena de texto     | `printf "%s\n" "Hola"`    | `Hola`    |
+| `%d`   | Entero decimal      | `printf "%d\n" 42`        | `42`      |
+| `%f`   | Número flotante     | `printf "%.2f\n" 3.14159` | `3.14`    |
+| `%x`   | Entero hexadecimal  | `printf "%x\n" 255`       | `ff`      |
+| `%o`   | Entero octal        | `printf "%o\n" 8`         | `10`      |
+| `%c`   | Carácter individual | `printf "%c\n" 65`        | `A`       |
+
+
+##### Ejemplos prácticos de formato
+
+Mostrar columnas alineadas
+
 ```bash
-victor@SERVER:~$ printf "Color: #%02x%02x%02x;\n" 12 105 225
-Color: #0c69e1;
+printf "%-10s %-10s %-10s\n" "Nombre" "Edad" "País"
+printf "%-10s %-10d %-10s\n" "Ana" 23 "España"
+printf "%-10s %-10d %-10s\n" "Luis" 30 "Chile"
 ```
- 
-- También es posible modificar los formatos indicando un ancho después del símbolo de porcentaje. El argumento será impreso rellenando por la derecha en un campo del ancho indicado o bien por la izquierda si el número es negativo. Si la especificación del ancho es precedida de un 0, entonces el ancho es completado utilizando ceros.
+
+> `%-10s` → reserva 10 caracteres alineado a la izquierda (el `-` alinea).
+> Resultado:
+
+```
+Nombre     Edad       País      
+Ana        23         España    
+Luis       30         Chile     
+```
+
+Números con ceros a la izquierda
+
 ```bash
-victor@SERVER:~$ printf "%8s %-15s:\n" primero segundo tercero cuarto quinto sexto
- primero segundo        :
- tercero cuarto         :
-  quinto sexto          :
+printf "%04d\n" 7
+```
+
+> Resultado: `0007`
+
+
+Redondear números decimales
+
+```bash
+printf "%.3f\n" 3.1415926
+```
+
+> Resultado: `3.142`
+
+Crear salidas CSV o tablas
+
+```bash
+printf "%s,%s,%s\n" "Nombre" "Edad" "País" > datos.csv
+printf "%s,%s,%s\n" "Ana" "23" "España" >> datos.csv
+```
+
+
+##### Caracteres de escape comunes
+
+| Secuencia | Significado     |
+| --------- | --------------- |
+| `\n`      | Nueva línea     |
+| `\t`      | Tabulación      |
+| `\\`      | Barra invertida |
+| `\"`      | Comillas dobles |
+| `\a`      | Campana (beep)  |
+| `\b`      | Retroceso       |
+
+Ejemplo:
+
+```bash
+printf "Col1\tCol2\tCol3\n"
 ```
 
 
