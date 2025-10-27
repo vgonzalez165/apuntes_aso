@@ -67,7 +67,7 @@ printf "Hola mundo\n"
 ```
 
 > Muestra: `Hola mundo`
-> 🔸 Es obligatorio añadir `\n` al final si quieres un salto de línea.
+
 
 Mostrar varias líneas
 
