@@ -7,9 +7,9 @@
 
 Realiza las siguientes tareas:
 
-## Ejercicio 1: Comprobación de número par o impar
+## Ejercicio 1: Contar líneas de un archivo
 
-Escribe un script que solicite al usuario un número y determine si es par o impar utilizando una estructura if.
+Escribe un script que solicite el nombre de un archivo y luego imprima cuántas líneas tiene ese archivo. Verifica que el archivo exista antes de contar las líneas.
 
 ## Ejercicio 2: Verificación de archivo
 
@@ -19,13 +19,21 @@ Crea un script que compruebe si un archivo (cuya ruta pedirá al usuario por tec
 
 Realiza un script que solicite dos números al usuario y los compare, mostrando cuál es mayor, o si son iguales.
 
+Para solicitar al usuario que tiene que introducir un valor por teclado tienes que utilizar el comando `read` tal como se muestra en el siguiente ejemplo:
+
+```bash
+read -p "Introduce tu usuario: " usuario
+echo Bienvenido, $usuario
+
+```
+
 ## Ejercicio 4: Validación de contraseña
 
 Escribe un script que solicite al usuario una contraseña y verifique si coincide con una contraseña predefinida (que estará almacenada en una variable de tu script). Si es correcta, muestra un mensaje de éxito, de lo contrario, indica que es incorrecta.
 
 ## Ejercicio 5: Comprobación de directorio
 
-Crea un script que compruebe si un directorio existe y si tiene permisos de escritura. Si el directorio no existe, crea uno nuevo.
+Crea un script que compruebe si un directorio (que solicitará por teclado al usuario) existe y si tiene permisos de escritura. Si el directorio no existe, crea uno nuevo.
 
 ## Ejercicio 6: Verificar si el usuario es root
 
@@ -47,8 +55,6 @@ Escribe un script que muestre un menú con tres opciones. El usuario debe introd
 
 Haz un script que solicite al usuario su edad y determine si es menor, adulto o mayor de edad, según un umbral predefinido (por ejemplo, menor de 18, entre 18 y 65, y mayor de 65).
 
-## Ejercicio 11: Contar líneas de un archivo
 
-Escribe un script que solicite el nombre de un archivo y luego imprima cuántas líneas tiene ese archivo. Verifica que el archivo exista antes de contar las líneas.
 
 
