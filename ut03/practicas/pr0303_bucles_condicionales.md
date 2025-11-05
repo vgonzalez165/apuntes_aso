@@ -42,6 +42,9 @@ Solicita un número al usuario y calcula su factorial usando un bucle for.
 
 Usa until para pedir al usuario que ingrese una contraseña correcta, y repite hasta que la acierte.
 
+
+## Opcionales
+
 ### 11. Adivinar un número
 
 Crea un juego con while en el que el usuario intenta adivinar un número entre 1 y 10. Repite hasta que lo adivine.
