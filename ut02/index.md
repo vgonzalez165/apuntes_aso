@@ -20,6 +20,8 @@
 | PR0203   | [Conexión SSH entre redes](./practicas/PR02R1_ssh.md)           |  5 de noviembre de 2025 |
 | PR0204   | [Gestión de procesos](./practicas/PR0204_procesos.md)           | 29 de octubre de 2025   |
 | PR0205   | [Programación de tareas con `cron`](./practicas/pr0205_cron.md) | 12 de noviembre de 2025 |
+
+
 <!-- 
 ## Prácticas de repaso
 
