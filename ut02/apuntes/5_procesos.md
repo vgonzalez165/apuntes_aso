@@ -10,8 +10,7 @@
 - [Procesos en primer y segundo plano](#53--procesos-en-primer-y-segundo-plano)
 - [Comandos relacionados con los procesos](#53--procesos-en-primer-y-segundo-plano)
 - [Envío de señales entre procesos](#55--envío-de-señales-entre-procesos-esto-no) **NO ENTRA**
-- [Programación de procesos con `cron`](#56--programación-de-procesos-con-cron-y-crontab)
-- [El directorio `/proc`](#57--el-directorio-proc)
+
 
 ### 5.1.- Introducción
 

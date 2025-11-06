@@ -12,18 +12,23 @@
 
 ## Prácticas
 
-- [PR0301: Ejercicios con el comando `if`](./practicas/pr0301_comando_if.md)
-- [PR0302a: Ejercicios con `case`](./practicas/pr0302_comando_case.md)
-- [PR0302b: Ejercicios con el comando `case`](./practicas/pr0302_case.md)
-- [PR0303: Ejercicios de bucles y condicionales](./practicas/pr0303_bucles_condicionales.md)
-- [PR0304: Ejercicios de entrada y salida](./practicas/pr0304_entrada_salida.md)
 
-**NOTA**: Por problemas al sincronizar el repositorio hay dos versiones de la práctica con el comando `case`. Tienen algunos ejercicios en común y otros difieren. Podéis entregar la que queráis de las dos.
+| Práctica | Título                                                                             | Fecha de entrega        |
+|----------|------------------------------------------------------------------------------------|-------------------------|
 
-## Prácticas de repaso
+
+| PR0301   | [Ejercicios con el comando `if`](./practicas/pr0301_comando_if.md)                 | 12 de noviembre de 2025  |
+| PR0302   | [Ejercicios con `case`](./practicas/pr0302_comando_case.md)                        | 12 de noviembre de 2025 |
+| PR0303   | [Ejercicios de bucles y condicionales](./practicas/pr0303_bucles_condicionales.md) | 14 de noviembre de 2025 |
+| PR0302   | [Ejercicios con el comando `case`](./practicas/pr0302_case.md)                     | |
+| PR0304   | [Ejercicios de entrada y salida](./practicas/pr0304_entrada_salida.md)             | |
+
+
+
+<!-- ## Prácticas de repaso
 
 - [PR03R1: Bash scripting](./practicas/pr03r1.md)
-- [PR03R2: Bash scripting (II)](./practicas/PR03R2.md)
+- [PR03R2: Bash scripting (II)](./practicas/PR03R2.md) -->
 
 --- 
 
