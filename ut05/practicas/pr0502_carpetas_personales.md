@@ -6,7 +6,7 @@ Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 Profesor:                   Víctor J. González
 Unidad de Trabajo:          UT05
 Práctica:                   PR0502. Carpetas personales y compartidas por grupo
-Resultados de aprendizaje:  
+Resultados de aprendizaje:  RA1
 ```
 
 

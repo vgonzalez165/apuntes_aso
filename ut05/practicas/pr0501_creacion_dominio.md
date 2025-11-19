@@ -6,7 +6,7 @@ Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 Profesor:                   Víctor J. González
 Unidad de Trabajo:          UT05
 Práctica:                   PR0501. Implantación de un controlador de dominio
-Resultados de aprendizaje:  
+Resultados de aprendizaje:  RA1
 ```
 
 
