@@ -1,31 +1,22 @@
-# PR0501: Aplicación de directivas
+# PR0503: Aplicación de directivas
 
-Eres el administrador de sistemas de una empresa que cuenta con las siguientes características:
-
-- Dominio: `aso.local`
-- Unidades Organizativas:
-    - `Usuarios`: contiene los usuarios del dominio, divididos en dos unidades organizativas:
-        - `management`.
-        - `development`.
-    - `Equipos`: Contiene los equipos de los empleados.
-
-## Requisitos
+Para esta práctica seguirás trabajando con el dominio que creamos en la primera práctica de la unidad
 
 ### Directiva 1
 
 - **Directiva**: No se puede  cambiar el fondo de pantalla del escritorio (`Configuración de usuario -> Plantillas administrativas -> Escritorio`)
-- **A quienes se aplica**: a los usuarios del grupo `management`
+- **A quienes se aplica**: a los usuarios de ASIR
 
 ### Directiva 2
 
 - **Directiva**: se pueden ejecutar scripts de Powershell sin restricciones (`Configuración de equipo -> Plantillas administrativas -> Componentes de Windows -> Windows Powershell`).
-- **A quienes se aplica**: a los usuarios del grupo `development`
+- **A quienes se aplica**: a los usuarios de DAM
 
 ### Directiva 3
 
 - **Directiva**: el firewall de Windows está habilitado (`Configuración de equipo -> Directivas -> Configuración de Windows -> Configuración de seguridad -> Windows Defender Firewall -> Perfil del dominio`)
 - **A quienes se aplica**: todos los equipos del dominio
-- **Excepciones**: esta directiva no debe aplicarse a un equipo específico denominado `DEV-PC1`
+- **Excepciones**: esta directiva no debe aplicarse a un equipo específico denominado `DEV-PC1` (lo puedes poner en cualquier aula)
 
 ### Directiva 4
 
@@ -41,7 +32,7 @@ Eres el administrador de sistemas de una empresa que cuenta con las siguientes c
 
 - **Directiva**: el usuario no podrá repetir ninguna de las 10 últimas contraseñas-
 - **A quienes se aplica**: a todos los usuarios del dominio
-- **Excepciones**: habrá dos usuarios en el dominio llamados `mgmt_director` y `dvlp_directo`, que pertenecen a las UO `management` y `development` respectivamente que no podrán repetir ninguna de las 2 últimas contraseñas.
+- **Excepciones**: habrá dos usuarios en el dominio llamados `jefe_dpto_1` y `jefe_dpto_2`, que pertenecen a las UO `informatica` y `administracion` respectivamente que no podrán repetir ninguna de las 2 últimas contraseñas.
 
 ### Directiva 7
 
