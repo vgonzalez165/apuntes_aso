@@ -11,7 +11,7 @@ Resultados de aprendizaje:  RA1
 
 
 
-# PR0503: Directivas de seguridad, GPP y Filtros WMI
+# PR0504: Directivas de seguridad, GPP y Filtros WMI
 
 Continuamos con la administración del dominio **`iessanandres.local`**. La dirección del centro quiere endurecer la seguridad de los equipos basándose en las normativas de seguridad y mejorar la experiencia de usuario desplegando configuraciones dinámicas mediante Preferencias (GPPs).
 
