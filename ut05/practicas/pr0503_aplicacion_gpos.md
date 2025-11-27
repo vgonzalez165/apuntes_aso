@@ -1,3 +1,16 @@
+```
+---------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS Y REDES ----------------
+---------------------------------------------------------------------------------
+
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT05
+Práctica:                   PR0503. Aplicación de directivas
+Resultados de aprendizaje:  RA1
+```
+
+
+
 # PR0503: Aplicación de directivas
 
 Para esta práctica seguirás trabajando con el dominio que creamos en la primera práctica de la unidad
