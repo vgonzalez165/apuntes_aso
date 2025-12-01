@@ -18,7 +18,7 @@
 
 El diseño de Windows PowerShell integra conceptos de muchos entornos distintos. Algunos de estos conceptos son:
 
-- **Los comandos no están basados en texto**: los cmdlets están diseñados para usar objetos: información estructurada que es más que una simple cadena de caracteres que se muestra en pantalla.
+- **Los comandos no están basados en texto**: los cmdlets están diseñados para usar **objetos**: información estructurada que es más que una simple cadena de caracteres que se muestra en pantalla.
 - **El conjunto de comandos es ampliable**: las interfaces como `cmd.exe` no proporcionan al usuario una manera de ampliar directamente el conjunto de comandos integrados. Los comandos nativos de PowerShell, denominados **cmdlets**, se pueden ampliar con cmdlets que crees o agregues mediante complementos o módulos.
 - **PowerShell controla la entrada y la presentación de la consola**: cuando se escribe un comando la información es procesada y aplica un formato a los resultados que se muestren en pantalla. Esto es importante porque el usuario siempre puede hacer las cosas de la misma manera independientemente del cmdlet utilizado.
 - **PowerShell utiliza sintaxis del lenguaje C#**: incluye palabras clave y funciones de sintaxis muy parecidas a las que se usan en el lenguaje C# por lo que su aprendizaje facilitaría el aprendizaje de C#.
@@ -46,6 +46,7 @@ Tras instalarlo podremos acceder a uno u otro entorno ejecutando los comandos `p
 Si quieres personalizar más Windows Terminal tienes múltiples guías por internet, por ejemplo [aquí](https://terminaldelinux.com/terminal/wsl/configurar-windows-terminal/) o [aquí](https://www.developerro.com/2020/11/18/custom-windows-terminal/).
 
 Un complemento de Powershell es el editor **Powershell ISE**, un editor que ya viene instalado en Windows 10 y que permite el trabajo con scripts de Powershell. Sin embargo, este editor es bastante limitado y además, solo compatible con Powershell (no con Core). Por ello, en caso de querer realizar scripts de Powershell, lo ideal es utilizar el editor [**Visual Studio Code**](https://code.visualstudio.com/) con el [plugin de Powershell](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell). En la [documentación de Microsoft](https://docs.microsoft.com/es-es/powershell/scripting/dev-cross-plat/vscode/using-vscode?view=powershell-7.1) se explican los pasos a realizar para configurar este editor.
+
 
 ## 2.- Conociendo los *cmdlets*
 
@@ -531,7 +532,7 @@ Un parámetro útil con `Format-Table` es `-AutoSize`, que adapta el tamaño de 
 Por último, `Format-List` muestra la salida del comando como una lista de propiedades, indicando cada una de estas propiedades en una línea diferente.
 
 
-
+## 6.- Variables y tipos de datos
 
 
 
