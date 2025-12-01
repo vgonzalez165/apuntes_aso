@@ -10,19 +10,6 @@
 6. [Manipulación de cadenas]()
 
 
-## Prácticas
-
-
-| Práctica | Título                                                                             | Fecha de entrega        |
-|----------|------------------------------------------------------------------------------------|-------------------------|
-
-
-| PR0301   | [Ejercicios con el comando `if`](./practicas/pr0301_comando_if.md)                 | 12 de noviembre de 2025  |
-| PR0302   | [Ejercicios con `case`](./practicas/pr0302_comando_case.md)                        | 12 de noviembre de 2025 |
-| PR0303   | [Ejercicios de bucles y condicionales](./practicas/pr0303_bucles_condicionales.md) | 14 de noviembre de 2025 |
-| PR0302   | [Ejercicios con el comando `case`](./practicas/pr0302_case.md)                     | |
-| PR0304   | [Ejercicios de entrada y salida](./practicas/pr0304_entrada_salida.md)             | |
-
 
 
 <!-- ## Prácticas de repaso
