@@ -1,24 +1,17 @@
-# UT04.- INSTALACIÓN Y PUESTA EN MARCHA DE WINDOWS SERVER
+# UT06.- LENGUAJES DE SCRIPTING EN WINDOWS: POWERSHELL
 
+## 2.- Control de la salida con pipelines
 
-## Índice
+**Índice**
 
 <!-- no toc -->
-1. Introducción
-2. Conociendo los *cmdlets*
-3. Control de salida con pipelines
-4. Comandos para la manipulación de objetos
-5. Aplicando formato a la salida
+1. [La canlización o pipeline](#21--la-canalización-o-pipeline)
+2. [Objetos en PowerShell](#22--objetos-en-powershell)
+3. [Comandos para la manipulación de objetos](#23--comandos-para-la-manipulación-de-objetos)
+4. [Aplicando formato a la salida](#24--aplicando-formato-a-la-salida)
 
 
-
-
-
-
-
-## 3.- Control de la salida con pipelines
-
-### 3.1.- La canalización o pipeline
+### 2.1.- La canalización o pipeline
 
 El **pipeline** o la **canalización**, representado por el símbolo barra vertical (`|`), es utilizado para combinar diversos cmdlets de forma que la salida de uno es enviada a la entrada del siguiente, de forma muy similar a cómo se hace en Linux. Esto permite enlazar varios comandos en una especie de flujo de datos en el que cada uno de los comandos realiza algún tipo de operación sobre los datos generados por el comando anterior. 
 
@@ -40,7 +33,7 @@ Aquí, el primer comando de la canalización buscará todos los procesos que hay
 
 
 
-### 3.2.- Objetos en Powershell
+### 2.2.- Objetos en Powershell
 
 Un aspecto importante al trabajar con la canalización, sobre todo si has trabajado antes con Linux, es que Powershell es un Shell **orientado a objetos**, y, por tanto, la información que se intercambia entre los comandos no son meras cadenas de caracteres, sino que son objetos.
 
@@ -167,12 +160,12 @@ PrincipalSource        : Local
 ObjectClass            : User
 ```
 
-## 4.- Comandos para la manipulación de objetos
+### 2.3.- Comandos para la manipulación de objetos
 
-Hay comandos que proporcionan un gran número de elementos al ejecutarse por lo que puede ser conveniente manipular dicha salida para que sea más fácilmente comprensible. Para ello utilizaremos los cmdlets `Sort-Object`, `Group-Object` y `Measure-Object`, que ordenan, agrupan y cuentan respectivamente.
+Hay comandos que proporcionan un gran número de elementos al ejecutarse por lo que puede ser conveniente manipular dicha salida para que sea más fácilmente comprensible. Para ello utilizaremos los *cmdlets* `Sort-Object`, `Group-Object` y `Measure-Object`, que ordenan, agrupan y cuentan respectivamente.
 
 
-### 4.1.- Ordenando con el comando `Sort-Object`
+#### 2.3.1.- Ordenando con el comando `Sort-Object`
 
 El comando `Sort-Object` admite un conjunto de objetos como entrada y devuelve ese mismo conjunto de objetos pero **ordenados** según el valor de la propiedad que se indique. 
 
@@ -193,7 +186,7 @@ PS C:\> get-process | Sort-Object cpu
 El parámetro más relevante de este comando es `-Descending`, que ordena la salida de mayor a menor.
 
 
-### 4.2.- Agrupando con `Group-Object`
+#### 2.3.2.- Agrupando con `Group-Object`
 
 El comando `Group-Object` recoge un conjunto de objetos y, en lugar de mostrarlos todos secuencialmente, los agrupa en función del valor de la propiedad que indiquemos.
 
@@ -235,7 +228,7 @@ Count Name                      Group
    43 Running, Manual           {Appinfo, AppXSvc, BthAvctpSvc, cbdhsvc_1f230e…}
 ```
 
-### 4.3.- Midiendo con el `Measure-Object`
+#### 2.3.3.- Midiendo con el `Measure-Object`
 
 Este comando realiza cálculos con los valores de las propiedades de un objeto. En el caso de propiedades numéricas puede calcular el mínimo, el máximo, la suma y el promedio. En el caso de propiedades de tipo texto puede contar y calcular el número de líneas, palabras y caracteres.
 
@@ -254,7 +247,7 @@ Property          : Length
 Por ejemplo, el comando anterior muestra el tamaño máximo, mínimo y medio de todos los ficheros que se encuentran en un directorio.
 
 
-### 4.4.- Filtrado de objetos con `Where-Object`
+#### 2.3.4.- Filtrado de objetos con `Where-Object`
 
 Muchos comandos disponen de parámetros para filtrar la salida en función del valor de alguna propiedad. Por ejemplo, se puede utilizar el parámetro `-Name` del comando `Get-Process` para que solo nos devuelva los procesos que tengan un nombre determinado.
 
@@ -270,12 +263,12 @@ Pero esta opción solo está disponible en algunos comandos y para propiedades m
 
 Los operadores de comparación que soporta el comando se muestran en la siguiente tabla.
 
-| Operador        | Significado       | Operador        | Significado       |
-|-----------------|-------------------|-----------------|-------------------|
-| `-eq`           | Es igual a        | `-ne`           | No es igual a     |
-| `-lt`           | Es menor que      | `-gt`           | Es mayor que      |
-| `le`            | Es menor o igual que  | `-ge`       | Es mayor o igual que    |
-| `-like`         | Es como           | `-notlike`      | No es como        |
+| Operador        | Significado           | Operador        | Significado          |
+|-----------------|-----------------------|-----------------|----------------------|
+| `-eq`           | Es igual a            | `-ne`           | No es igual a        |
+| `-lt`           | Es menor que          | `-gt`           | Es mayor que         |
+| `-le`           | Es menor o igual que  | `-ge`           | Es mayor o igual que |
+| `-like`         | Es como               | `-notlike`      | No es como           |
 
 Se pueden utilizar dos sintaxis diferentes para indicar el filtro en este comando: mediante *scriptblocks* o indicando directamente las comparaciones en los parámetros de `Where-Object`. La primera opción es válida para todas las versiones de Powershell, aunque tiende a hacer menos legible el código, la segunda opción es la recomendada porque aumenta la legibilidad, pero solo está disponible a partir de la versión 3 de Powershell.
 
@@ -330,94 +323,31 @@ PS C:\> Get-Process | Where-Object Name -like *word*
 ```
 
 
-## 5.- Aplicando formato a la salida
+### 2.4.- Aplicando formato a la salida
 
 Cuando ejecutamos un comando en Powershell vemos un texto con la salida del comando, pero en realidad cualquier comando devuelve uno o varios objetos y lo que se nos muestra por pantalla son las propiedades más relevantes de dichos objetos en un formato predeterminado. Sin embargo, es posible modificar tanto las propiedades que se nos muestran de cada objeto, como el formato en que se hace.
 Powershell tiene cinco cmdlets para el **formato de la salida** de comandos, de los que nosotros veremos `Format-List`, `Format-Table` y `Format-Wide`.
 
 
-### 5.1.- Format-Wide
+#### 2.4.1.- Format-Wide
 
 Este comando muestra únicamente una propiedad de cada objeto, mostrando todos estos valores en una tabla. Como alternativa más breve se puede utilizar el alias `fw`.
 Los parámetros más destacables de este comando son:
 •	`-Property`: para indicar si queremos que se muestre una propiedad diferente a la que muestra por defecto.
 •	`-Column`: que mediante un valor numérico señalará cuántas columnas tendrá la tabla con los resultados mostrados.
 
-### 5.2.- Format-Table
+#### 2.4.2.- Format-Table
 
 Formatea la salida del comando redireccionado en forma de tabla donde mostrará un objeto en cada fila y las propiedades más relevante en las columnas. El alias para este comando es `ft`.
 Un parámetro útil con `Format-Table` es `-AutoSize`, que adapta el tamaño de la salida para que se ajuste al tamaño disponible en la pantalla y así evitar que se recorte la salida.
 
 
-### 5.3.- Format-List
+#### 2.4.3.- Format-List
 
 Por último, `Format-List` muestra la salida del comando como una lista de propiedades, indicando cada una de estas propiedades en una línea diferente.
 
 
-## 6.- Variables y tipos de datos
 
+---
 
-
-
-#### Módulo 3: Scripting y Lógica de Programación
-*Aquí dejamos de ejecutar comandos sueltos y empezamos a crear scripts (`.ps1`).*
-
-8.  **Variables y Tipos de Datos**
-    * Declaración de variables (`$variable`).
-    * Tipos: Strings, Integers, Booleans.
-    * Comillas simples vs. Comillas dobles (Expansión de variables).
-9.  **Estructuras de Datos Complejas**
-    * Arrays (Arreglos) y ArrayLists.
-    * Hash Tables (Diccionarios/Mapas) `@{ Clave = Valor }`.
-    * Objetos personalizados (`PSCustomObject`).
-10. **Operadores**
-    * Aritméticos (`+`, `-`, `*`, `/`).
-    * Comparación (`-eq`, `-ne`, `-gt`, `-lt`, `-like`, `-match`).
-    * Lógicos (`-and`, `-or`, `-not`).
-11. **Control de Flujo (Condicionales)**
-    * Sentencia `if`, `elseif`, `else`.
-    * Sentencia `switch`.
-12. **Bucles (Iteraciones)**
-    * `foreach` (el bucle clásico).
-    * `for`, `while`, `do-while`.
-    * Diferencia entre `foreach` (bucle) y `ForEach-Object` (cmdlet).
-
-#### Módulo 4: Administración del Sistema y Archivos
-*Casos de uso prácticos para el día a día.*
-
-13. **Gestión de Archivos y Directorios**
-    * Navegación (`Set-Location`, `Get-ChildItem`).
-    * Crear, copiar, mover y borrar ítems (`New-Item`, `Copy-Item`, etc.).
-    * Lectura y escritura de contenido (`Get-Content`, `Set-Content`).
-14. **Gestión del Sistema**
-    * Procesos (`Get-Process`, `Stop-Process`).
-    * Servicios (`Get-Service`, `Restart-Service`).
-    * Registro de eventos (Event Logs).
-15. **Importación y Exportación de Datos**
-    * Trabajar con **CSV** (`Import-Csv`, `Export-Csv`).
-    * Trabajar con **JSON** (`ConvertTo-Json`, `ConvertFrom-Json`).
-    * Salida a HTML o archivo de texto (`Out-File`).
-
-#### Módulo 5: Técnicas Avanzadas y Modularidad
-*Para crear herramientas profesionales y reutilizables.*
-
-16. **Funciones Avanzadas**
-    * Definición básica `function Nombre { ... }`.
-    * Bloque `param()`: Definir parámetros obligatorios y tipos.
-    * Soporte para Pipeline en funciones (`begin`, `process`, `end`).
-17. **Manejo de Errores**
-    * `Terminating` vs `Non-Terminating` errors.
-    * Bloque `Try`, `Catch`, `Finally`.
-    * Variable `$Error`.
-18. **Seguridad y Ejecución**
-    * Execution Policies (`Set-ExecutionPolicy`).
-    * Scope (Ámbito) de variables (`Global`, `Script`, `Local`).
-    * Manejo de credenciales seguras (`Get-Credential`).
-19. **Administración Remota (Remoting)**
-    * Configuración de WinRM.
-    * `Enter-PSSession` (Interactivo).
-    * `Invoke-Command` (Ejecución masiva en servidores remotos).
-
-
-
-
+[Volver al índice](./)
