@@ -24,87 +24,205 @@ $nombreServidor = "SRV-DC02"
 Write-Host "Cambiando destino a $nombreServidor..."
 ```
 
-### 3.2.- Tipos de datos básicos
+Una característica fundamental que hay que tener en cuenta en Powershell es que puede tener tipado tanto dinámico como estático. 
 
-PowerShell es un lenguaje de **tipado dinámico**, lo que significa que intenta adivinar qué tipo de dato le estás pasando. Sin embargo, para scripts robustos, podemos usar el **tipado estático**, que consiste en forzar el tipo de datos que tendrá la variable.
+Por defecto, cuando asignamos valor a una variable estamos utilizando **tipado dinámico**. Esto quiere decir que Powershell analizará el valor que le asignamos a la variable e inferirá el tipo de datos que tiene que tener. Si posteriormente hacemos una asignación de la misma variable con otro valor de otro tipo de datos diferente cambiará el tipo de la variable.
+
+```powershell
+PS C:\> $var = 10
+PS C:\> $var.GetType().Name
+Int32
+PS C:\> $var = "hola"
+PS C:\> $var.GetType().Name
+String
+```
+
+En cambio, cuando usamos **tipado estático**, indicamos explícitamente qué tipo de datos queremos que tenga la variable de forma que, si intentamos asignarle un valor de otro tipo de datos nos dará error.
+
+```powershell
+PS C:\> [int]$my_var = 32
+PS C:\> $my_var.GetType().Name
+Int32
+PS C:\> $my_var = "Hola"
+No se puede convertir el valor "Hola" al tipo "System.Int32". Error: "La cadena de entrada no tiene el formato
+correcto."
+```
+
+### 3.2.- Tipos de datos básicos
 
 Dado que PowerShell está construido sobre **.NET Framework**, tiene una inmensa variedad de datos, de entre los que se pueden destacar:
 
 - **Tipos de texto**
-  - **String (`[string]`):** es el más común. Almacena cadenas de caracteres (texto). *Ejemplo:* `$nombre = "Juan"`
-  - **Char (`[char]`):** almacena un **único** carácter. Es útil cuando recorres texto letra por letra. *Ejemplo:* `$letra = 'A'`.
+  - **String (`[string]`):** es el más común. Almacena cadenas de caracteres (texto). 
   
+    ```powershell
+    [string]$mensaje = "Bienvenido a PowerShell"
+
+    # Podemos manipular el texto fácilmente
+    Write-Host $mensaje.ToUpper()   # Convierte a mayúsculas
+    Write-Host $mensaje.Length      # Cuenta los caracteres (31)
+    ```
+
+  - **Char (`[char]`):** almacena un **único** carácter. Es útil cuando recorres texto letra por letra.
+
+    ```powershell
+    [char]$letra = 'A'
+    [char]$simbolo = '$'
+
+    # Convertir un número a su carácter ASCII
+    [char]64  # Salida: @
+    ```
+
 - **Tipos numéricos**: PowerShell distingue entre números enteros y decimales, y dentro de ellos, por su capacidad de almacenamiento.
-  - **Integer (`[int]` o `Int32`):** números enteros (sin decimales) estándar. Rango aproximado de -2 mil millones a +2 mil millones. *Uso:* Contadores, edades, números de puertos.
-  - **Long (`[long]` o `Int64`):** enteros muy grandes. *Uso:* Tamaños de archivos en bytes, cálculos de disco duro.
-  - **Double (`[double]`):** es el tipo por defecto para números con decimales (coma flotante). *Uso:* Cálculos matemáticos generales, porcentajes.
-  - **Decimal (`[decimal]`):** números con decimales de **alta precisión**. *Uso:* **Dinero y finanzas**. El tipo `Double` puede tener errores de redondeo pequeños; `Decimal` es exacto. Se fuerza añadiendo una `d` al final del número o usando el cast `[decimal]`.
+
+  - **Integer (`[int]` o `Int32`):** números enteros (sin decimales) estándar. Rango aproximado de -2 mil millones a +2 mil millones. 
+    ```powershell
+    [int]$puertoSSH = 22
+    [int]$intentos = 3
+
+    # Operaciones básicas
+    $resultado = $intentos * 2
+    Write-Host "El puerto es $puertoSSH y el resultado es $resultado"
+    ```
+
+  - **Long (`[long]` o `Int64`):** enteros muy grandes. 
+
+    ```powershell
+    # Un disco de 1 TB en bytes
+    [long]$bytesDisco = 1099511627776 
+
+    # Si intentaras poner este número en un [int], daría error de desbordamiento
+    Write-Host "Bytes totales: $bytesDisco"
+      ```
+
+  - **Double (`[double]`):** es el tipo por defecto para números con decimales (coma flotante). Cálculos matemáticos generales, porcentajes.
+
+    ```powershell
+    [double]$pi = 3.14159
+    [double]$temperatura = 36.5
+
+    # Precisión estándar
+    $calculo = $pi * 2
+    Write-Host "El diámetro es: $calculo"
+    ```
+
+  - **Decimal (`[decimal]`):** números con decimales de **alta precisión**. Se usa para dinero y finanzas ya que el tipo `Double` puede tener errores de redondeo pequeños; `Decimal` es exacto. Se fuerza añadiendo una `d` al final del número o usando el cast `[decimal]`.
+
+    ```powershell
+    # Sin la 'd', PowerShell lo trataría como double
+    $precio = 19.99d 
+    $impuesto = 4.50d
+
+    $total = $precio + $impuesto
+    Write-Host "El total a pagar es: $total €"
+    ```
 
 - **Tipos lógicos**
-  - **Boolean (`[bool]`):** Solo tiene dos valores posibles: `$true` (Verdadero) o `$false` (Falso). *Uso:* Interruptores, validaciones, resultados de comparaciones.
+  - **Boolean (`[bool]`):** Solo tiene dos valores posibles: `$true` (Verdadero) o `$false` (Falso). 
+
+    ```powershell
+    [bool]$servicioActivo = $true
+    [bool]$esAdmin = $false
+
+    # Resultado de una comparación
+    $esMayor = (10 -gt 5)  # Esto guarda $true automáticamente
+
+    if ($esMayor) {
+        Write-Host "La condición se cumple."
+    }
+    ```
 
 - **Tipos temporales**
-  - **DateTime (`[datetime]`):** almacena una fecha y hora específicas. *Ejemplo:* `Get-Date` devuelve un objeto de este tipo. Permite extraer `.Year`, `.Hour`, o hacer cálculos como `.AddDays(5)`.
+
+  - **DateTime (`[datetime]`):** almacena una fecha y hora específicas. Por ejemplo,  `Get-Date` devuelve un objeto de este tipo. Permite extraer `.Year`, `.Hour`, o hacer cálculos como `.AddDays(5)`.
+
+    ```powershell
+    $hoy = Get-Date
+
+    # Extraer partes
+    Write-Host "Estamos en el año: $($hoy.Year)"
+    Write-Host "Día de la semana: $($hoy.DayOfWeek)"
+
+    # Manipular fechas (Futuro/Pasado)
+    $vencimiento = $hoy.AddDays(30)
+    Write-Host "La licencia vence el: $vencimiento"
+    ```
+
   - **TimeSpan (`[timespan]`):** representa un **intervalo** de tiempo (duración), no una fecha específica. *Ejemplo:* La diferencia entre dos fechas (`$fechaFin - $fechaInicio`) devuelve un `TimeSpan` (ej. "3 días y 4 horas").
+
+    ```powershell
+    $inicio = Get-Date
+    Start-Sleep -Seconds 2 # Esperamos 2 segundos
+    $fin = Get-Date
+
+    # Calculamos la diferencia
+    [TimeSpan]$duracion = $fin - $inicio
+
+    Write-Host "El script tardó: $($duracion.TotalSeconds) segundos"
+    ```
 
 - **Tipos de colección** (agrupaciones)
 
   - **Array (`[array]` o `Object[]`):** una lista de tamaño fijo.
+
+    ```powershell
+    $colores = @("Rojo", "Verde", "Azul")
+
+    Write-Host "El primer color es: $($colores[0])"
+    ```
+
   - **Hashtable (`[hashtable]` o `@{}`):** pares de Clave-Valor desordenados.
+
+    ```powershell
+    $config = @{
+        Usuario = "Admin"
+        Nivel   = 5
+        Activo  = $true
+    }
+
+    Write-Host "El nivel del usuario es: $($config['Nivel'])"
+    ```
+
   - **PSCustomObject (`[PSCustomObject]`):** objetos personalizados con propiedades nombradas (como filas de una base de datos).
+
+    ```powershell
+    $servidor = [PSCustomObject]@{
+        Nombre = "SRV-01"
+        IP     = "192.168.1.10"
+        Estado = "Online"
+    }
+
+    # Acceso limpio por propiedades
+    Write-Host "Conectando a $($servidor.Nombre) en la IP $($servidor.IP)"
+    ```
 
 - **Tipos especiales**
 
   - **Void (`[void]`):** representa "nada" o "vacío". Se usa mucho para **suprimir la salida** de un comando en la consola. *Ejemplo:* `[void]$lista.Add("Item")` evita que aparezca el índice en pantalla.
+
+    ```powershell
+    $lista = New-Object System.Collections.ArrayList
+
+    # Sin [void], esto imprimiría "0" (el índice) en la pantalla
+    [void]$lista.Add("Dato 1") 
+
+    # Otra forma común de hacer void es redirigir a $null
+    $lista.Add("Dato 2") | Out-Null
+    ```
+
   - **Null (`$null`):** representa la ausencia de valor. Es vital para comprobar si una variable está vacía antes de usarla.
 
+    ```powershell
+    $variableVacia = $null
 
-En PowerShell, a veces las variables cambian de tipo dinámicamente. Para saber qué es una variable en cualquier momento, usa el método `.GetType()`.
+    if ($variableVacia -eq $null) {
+        Write-Host "Cuidado, la variable está vacía."
+    }
 
+    # Error común: Intentar hacer algo con $null da error
+    # $variableVacia.ToUpper() <--- Error: No puedes llamar a un método en una expresión Null
+    ```
 
-```powershell
-# 1. Definimos variables variadas
-$texto = "PowerShell"
-$numero = 100
-$decimalPreciso = 100.50d  # La 'd' fuerza a decimal
-$esVerdad = $true
-$fecha = Get-Date
-
-# 2. Comprobamos sus tipos
-Write-Host "Tipo de 'texto':          $($texto.GetType().Name)"
-Write-Host "Tipo de 'numero':         $($numero.GetType().Name)"
-Write-Host "Tipo de 'decimalPreciso': $($decimalPreciso.GetType().Name)"
-Write-Host "Tipo de 'esVerdad':       $($esVerdad.GetType().Name)"
-Write-Host "Tipo de 'fecha':          $($fecha.GetType().Name)"
-
-# Salida:
-# Tipo de 'texto':          String
-# Tipo de 'numero':         Int32
-# Tipo de 'decimalPreciso': Decimal
-# Tipo de 'esVerdad':       Boolean
-# Tipo de 'fecha':          DateTime
-```
-
-
-```powershell
-# --- Tipado dinámico (PowerShell decide) ---
-$edad = "30"          # PowerShell cree que esto es texto (String)
-$numero = 30          # PowerShell sabe que esto es número (Int32)
-
-# --- Tipado estático ---
-# Esto es útil para evitar errores de lógica más adelante
-
-[string]$nombreUsuario = "Admin01"
-[int]$puertoRDP = 3389
-[bool]$esCritico = $true
-
-# ¿Cómo verificamos el tipo? Usando el método .GetType()
-Write-Host "El tipo de dato de puertoRDP es: $($puertoRDP.GetType().Name)"
-
-# Ejemplo de error de tipo forzado:
-# Si intentas ejecutar la siguiente línea, dará error porque "Hola" no es un número.
-# [int]$cantidad = "Hola"  <-- Error: Input string was not in a correct format.
-```
 
 ### 6.1.3.- Comillas Simples vs. Comillas Dobles
 

@@ -36,7 +36,7 @@
 | `PR0503`   | [GPOs](./ut05/practicas/pr0503_gpos.md)                                                 | **30/11/2025**   | `RA1`        |
 | `PR0504`   | [Directivas de seguridad, GPP y Filtros WMI](./ut05/practicas/pr0504_gpos_gpps.md)      | **04/12/2025**   | `RA1`        |
 | **UT06**   | **Lenguaje de scripting en Windows. Powershell**                                                           | 
-|            |                                                                                         | | |
+| `PR0601`   | [Introducción a Powershell](./ut06/practicas/pr0601_intro_powershell.md)                | **10/12/2025**   | `RA7`        |
 | **UT07**   | **Integración de sistemas Windows y Linux**                                                       | 
 |            |                                                                                         | | |
 
@@ -47,6 +47,7 @@
 - [UT02: Instalación y puesta en marcha de Linux Server](./ut02/index.md)
 - [UT03: Lenguajes de scripting en Linux: Bash](./ut03/index.md)
 - [UT05: Servicio de directorio en Windows Server](./ut05/index.md)
+- [UT06: Lenguaje de scripting en Windows: Powershell](./ut06/apuntes/index.md)
 
 
 
