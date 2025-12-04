@@ -8,7 +8,9 @@
 1. Declaración de variables
 2. Tipos de datos básicos
 3. Comillas simples vs comillas dobles
-4. Estructuras de datos complejas: arrays y colecciones
+4. Trabajando con cadenas
+5. Tipos numericos
+6. Estructuras de datos complejas: arrays y colecciones
 
 
 En este punto, dejamos de ser "operadores de consola" para convertirnos en "desarrolladores de scripts". Un script (`.ps1`) es un archivo de texto con instrucciones secuenciales que nos permite automatizar tareas complejas, repetitivas y propensas a error humano.
@@ -233,47 +235,242 @@ Dado que PowerShell está construido sobre **.NET Framework**, tiene una inmensa
     ```
 
 
-### 3.3.- Comillas simples vs. comillas dobles
+### 3.3.- Trabajando con cadenas
 
-Entender esto es vital para evitar errores al escribir rutas de archivos o mensajes.
+Una cadena es una secuencia de caracteres utilizada para representar texto. En PowerShell, las cadenas se definen utilizando comillas. El tipo de comilla que uses es crucial, ya que afecta cómo PowerShell interpreta el contenido.
 
-  - **Comillas Simples (`' '`):** tratan todo como **texto literal**. Lo que ves es lo que obtienes. PowerShell no procesa nada dentro.
-  - **Comillas Dobles (`" "`):** permiten la **expansión de variables**. PowerShell escanea el texto, busca el símbolo `$` e inyecta el valor de la variable.
 
-**La trampa de las propiedades (Subexpresión `$()`):**
-Cuando usas comillas dobles, PowerShell expande variables simples (`$var`), pero falla con objetos complejos (`$var.propiedad`). Para solucionar esto, usamos la subexpresión `$()`.
+#### 3.3.1.-. Tipos de comillas
+
+PowerShell utiliza dos tipos de comillas: dobles y simples.
+
+Las comillas dobles (`" "`) permiten la **expansión de variables** y la interpretación de secuencias de escape. Esto significa que PowerShell reemplazará el nombre de cualquier variable que encuentre dentro de las comillas por su valor.
 
 ```powershell
-$proceso = "notepad"
+# Expansión de variables
+$nombre = "Alicia"
+"Hola, mi nombre es $nombre." 
+# Salida: Hola, mi nombre es Alicia.
+
+# Secuencias de escape
+"Línea 1`nLínea 2" 
+# Salida:
+# Línea 1
+# Línea 2
+```
+
+Si usamos variables complejas o un miembro de un objeto dentro de una cadena, debemos encerrarlas entre paréntesis de la forma `$()`
+
+```powershell
 $fecha = Get-Date
+"Hoy es: $($fecha.DayOfWeek)"
+# Salida: Hoy es: [El día actual, ej: Thursday]
+```
 
-# 1. Comillas Simples: Todo es texto plano
-Write-Host 'El proceso es $proceso'
-# Salida: El proceso es $proceso  (No interpreta la variable)
+Las **comillas simples** (`' '`) tratan la cadena como **texto literal** (raw string). PowerShell no expande variables ni interpreta secuencias de escape dentro de ellas.
 
-# 2. Comillas Dobles: Expansión simple
-Write-Host "El proceso es $proceso"
-# Salida: El proceso es notepad
 
-# 3. El problema de las propiedades dentro de comillas
-# Queremos ver el AÑO de la fecha ($fecha.Year)
-Write-Host "Estamos en el año $fecha.Year"
-# Salida INCORRECTA: Estamos en el año 10/27/2023 10:00:00.Year
-# (PowerShell expandió $fecha, pero trató ".Year" como texto normal)
-
-# 4. SOLUCIÓN: Subexpresión $()
-Write-Host "Estamos en el año $($fecha.Year)"
-# Salida CORRECTA: Estamos en el año 2023
+```powershell
+$nombre = "Alicia"
+'Hola, mi nombre es $nombre.'
+# Salida: Hola, mi nombre es $nombre. 
 ```
 
 
-### 3.4.- Estructuras de datos complejas: arrays y colecciones
+#### 3.3.2.- Concatenación y manipulación
+
+**Concatenación**
+
+Puedes usar el operador **suma (`+`)** para unir dos o más cadenas:
+
+```powershell
+$parte1 = "Hola"
+$parte2 = "Mundo"
+$saludo = $parte1 + " " + $parte2
+# $saludo contiene: Hola Mundo
+```
+
+**Operador de Formato (`-f`)**
+
+Este es un método potente y preferido para insertar valores en una cadena, especialmente cuando hay varios parámetros.
+
+  - Utiliza `{0}`, `{1}`, etc., como marcadores de posición.
+  - Los valores se especifican después del operador `-f`.
+
+
+```powershell
+$plantilla = "El valor de X es {0} y el de Y es {1}." -f 10, 20
+# $plantilla contiene: El valor de X es 10 y el de Y es 20.
+```
+
+** Here-Strings (`@"...@"`)**
+
+Los **Here-Strings** son útiles para crear grandes bloques de texto que abarcan múltiples líneas, manteniendo el formato y las comillas internas sin necesidad de secuencias de escape.
+
+  - El bloque comienza con `@"` y termina con `@"`.
+  - Soportan la expansión de variables (como las comillas dobles).
+
+
+
+```powershell
+$nombre = "Ana"
+$informe = @"
+Estimado $nombre:
+
+Adjunto encontrará el informe
+detallado de las ventas.
+
+Atentamente,
+Contabilidad
+"@
+```
+
+#### 3.3.3.- Métodos y Operaciones Útiles
+
+Dado que una cadena en PowerShell es un objeto de tipo **System.String** (.NET), tienes acceso a numerosos métodos para manipular el texto:
+
+| Método | Propósito | Ejemplo |
+| :--- | :--- | :--- |
+| **`.Length`** | Devuelve la longitud de la cadena (número de caracteres). | `"Hola".Length` \# Salida: 4 |
+| **`.ToUpper()`** | Convierte todos los caracteres a mayúsculas. | `"abc".ToUpper()` \# Salida: ABC |
+| **`.ToLower()`** | Convierte todos los caracteres a minúsculas. | `"ABC".ToLower()` \# Salida: abc |
+| **`.Contains()`** | Verifica si una subcadena existe (Devuelve True/False). | `"PowerShell".Contains("Shell")` \# Salida: True |
+| **`.StartsWith()`** | Verifica si la cadena comienza con una subcadena. | `"Archivo.txt".StartsWith("Arch")` \# Salida: True |
+| **`.Substring()`** | Extrae una porción de la cadena (requiere índice inicial y longitud). | `"abcd".Substring(1, 2)` \# Salida: bc |
+| **`.Trim()`** | Elimina espacios en blanco al inicio y al final. | `"  texto  ".Trim()` \# Salida: texto |
+| **`.Split()`** | Divide la cadena en un array (arreglo) de subcadenas usando un delimitador. | `'A,B,C'.Split(',')` \# Salida: [A], [B], [C] |
+| **`.Replace()`** | Reemplaza todas las ocurrencias de una subcadena por otra. | `"a-b-c".Replace('-', '_')` \# Salida: a\_b\_c |
+
+
+
+#### 3.3.4.- Búsqueda y coincidencia
+
+Para búsquedas avanzadas que no sean simples comparaciones, puedes usar operadores que trabajan con **expresiones regulares**:
+
+| Operador | Propósito | Ejemplo |
+| :--- | :--- | :--- |
+| **`-like`** | Búsqueda de patrón simple (usa comodines `*` y `?`). | `"archivo.txt" -like "*.txt"` \# Salida: True |
+| **`-match`** | Búsqueda utilizando Expresiones Regulares (RegEx). | `"A1B2C" -match "\d"` \# Salida: True (Contiene un dígito) |
+| **`-replace`** | Reemplaza basado en una Expresión Regular. | `"texto 1".-replace "\d", "X"` \# Salida: texto X |
+
+
+
+
+### 3.4.- Tipos numéricos
+
+#### 3.4.1.- Tipos enteros (Integers)
+
+Los **enteros** representan números sin componentes fraccionarios o decimales. PowerShell infiere el tipo de entero automáticamente según el tamaño del número que introduces, pero puedes forzar un tipo específico usando un sufijo.
+
+| Tipo (Clase .NET) | Descripción                               | Rango Común      | Sufijo    |
+| :---------------- | :---------------------------------------- | :--------------- | :-------- |
+| **Int32**         | Entero estándar de 32 bits (por defecto). | ± 2 mil millones | (Ninguno) |
+| **Int64**         | Entero largo de 64 bits.                  | ± 9 quintillones | `L`       |
+| **Byte**          | Entero pequeño sin signo (0 a 255).       | 0 a 255          | (Ninguno) |
+
+
+    ```powershell
+    # Asignación por defecto
+    $num1 = 15
+    $num1.GetType().Name
+    # Salida: Int32
+    
+    # Forzar Int64 (Largo)
+    $num2 = 4000000000L
+    $num2.GetType().Name
+    # Salida: Int64
+
+    # Conversión explícita 
+    $num3 = [int64]42 
+    # $num3 ahora es un Int64
+    
+    # Números en hexadecimal
+    $num_hex = 0x1A # Decimal 26
+    ```
+
+
+#### 3.4.2.- Tipos flotantes
+
+Los flotantes representan números con decimales. Son esenciales para cálculos que requieren precisión fraccionaria.
+
+| Tipo (Clase .NET) | Descripción                           | Precisión (Dígitos)  | Sufijo    |
+| :---------------- | :------------------------------------ | :------------------- | :-------- |
+| **Double**        | Estándar de 64 bits (por defecto).    | \~15-16              | (Ninguno) |
+| **Single**        | Simple precisión de 32 bits.          | \~7-8                | `f`       |
+| **Decimal**       | Alta precisión, ideal para finanzas.  | \~28                 | `d`       |
+
+
+    ```powershell
+    # Asignación por defecto
+    $flotante1 = 3.14
+    $flotante1.GetType().Name
+    # Salida: Double
+
+    # Forzar decimal, alta precisión para cálculos monetarios
+    $flotante2 = 12.34d
+    $flotante2.GetType().Name
+    # Salida: Decimal
+    ```
+
+
+#### 3.4.3.- Operadores aritméticos
+
+PowerShell utiliza operadores estándar de C\# y otros lenguajes:
+
+| Operador | Descripción          | Ejemplo |
+| :------- | :------------------- | :------ |
+| `+`      | Suma                 | `10 + 5` \# Salida: 15 |
+| `-`      | Resta                | `10 - 5` \# Salida: 5 |
+| `*`      | Multiplicación       | `10 * 5` \# Salida: 50 |
+| `/`      | División             | `10 / 4` \# Salida: 2.5 |
+| `%`      | Módulo               | `10 % 3` \# Salida: 1 |
+| `++`     | Incremento (Añade 1) | `$x = 1; $x++` \# $x es 2 |
+| `--`     | Decremento (Resta 1) | `$x = 2; $x--\` \# $x es 1 |
+
+#### 3.4.4.- Conversión y redondeo
+
+Cuando operas entre diferentes tipos (ej. `Int32` y `Double`), PowerShell automáticamente promueve el resultado al tipo más "grande" o preciso (generalmente `Double`).
+
+```powershell
+# Conversión implícita (Promoción)
+$int = 10     # Int32
+$double = 5.0 # Double
+$resultado = $int / $double 
+# $resultado es 2.0 (Double)
+```
+
+La clase estática **`[Math]`** te permite realizar funciones matemáticas avanzadas y redondeo:
+
+
+    ```powershell
+    # Redondeo estándar (`Round`)
+    [Math]::Round(3.6)
+    # Salida: 4
+
+    # Redondeo hacia arriba (ceiling)
+    [Math]::Ceiling(3.1)
+    # Salida: 4
+
+    # Redondeo hacia abajo (Floot)
+    [Math]::Floor(3.9)
+    # Salida: 3
+
+    # Valor absoluto (abs)
+    [Math]::Abs(-50)
+    # Salida: 50
+    ```
+
+
+
+
+
+### 3.5.- Estructuras de datos complejas: arrays y colecciones
 
 Las variables simples guardan un dato. Las estructuras complejas guardan colecciones de datos.
 
 En PowerShell, casi todo lo que devuelve un comando puede ser tratado como una **colección**. Entender cómo guardar y manipular listas de datos es fundamental para el scripting.
 
-#### 3.4.1.- **Arrays Fijos (Standard Arrays)**
+#### 3.5.1.- **Arrays Fijos (Standard Arrays)**
 
 Es la estructura por defecto en PowerShell. Se comportan como una "caja de tamaño fijo".
 
@@ -305,7 +502,7 @@ $total = $servidores.Count
 ```
 
 
-#### 3.4.2.- **ArrayLists**
+#### 3.5.2.- **ArrayLists**
 
 El `System.Collections.ArrayList` fue la solución para listas que crecen. A diferencia del Array fijo, este reserva memoria "extra" anticipadamente, por lo que añadir datos es rápido.
 
@@ -342,7 +539,7 @@ if ($listaUsuarios.Contains("Ana")) {
 ```
 
 
-#### 3.4.3.- **Listas Genéricas `List[T]`**
+#### 3.5.3.- **Listas Genéricas `List[T]`**
 
 La alternativa a los problemas que conllevan los Arrays fijos y los ArraysList es el uso de **listas genéricas** (`System.Collections.Generic.List[T]`). Sus principales ventajas son:
 
@@ -380,7 +577,7 @@ $listaIPs.Sort()
 
 
 
-#### 3.4.4.- Iteración
+#### 3.5.4.- Iteración
 
 Tener los datos guardados no sirve de nada si no hacemos algo con ellos. Usamos **bucles** para procesar cada elemento.
 
