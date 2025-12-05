@@ -6,10 +6,10 @@ Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 Profesor:                   Víctor J. González
 Unidad de Trabajo:          UT06
 Práctica:                   PR0602. El pipeline en Powershell
-Resultados de aprendizaje:  RA
+Resultados de aprendizaje:  RA7
 ```
 
-# PR0601: El pipeline en Powershell
+# PR0602: El pipeline en Powershell
 
 Realiza las siguientes tareas que se te piden utilizando **Powershell**. Para contestar lo mejor es que hagas una captura de pantalla donde se vea el comando que has introducido y las primeras líneas de la salida de este.
 

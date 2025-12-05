@@ -70,6 +70,8 @@
 | **UT06**   | **Lenguaje de scripting en Windows. Powershell**                                                           | 
 | `6.1`      | [Introducción a Powershell](./ut06/apuntes/01_introduccion.md)                          | `RA7`        |
 | `6.2`      | [Control de la salida con pipelines](./ut06/apuntes/02_pipelining.md)                   | `RA7`        |
+| `6.3`      | [Scripting y tipos de datos](./ut06/apuntes/03_scripting.md)                            | `RA7`        |
+| `6.4`      | [Control de flujo](./ut06/apuntes/04_control_flujo.md)                                  | `RA7`        |
 |            |                                                                                         | |
 | **UT07**   | **Integración de sistemas Windows y Linux**                                               | 
 |            |                                                                                         | | |

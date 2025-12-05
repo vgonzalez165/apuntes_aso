@@ -1,16 +1,15 @@
 # UT06.- LENGUAJES DE SCRIPTING EN WINDOWS: POWERSHELL
 
-## 3.- Scripting y lógica de programación
+## 3.- Scripting y tipos de datos
 
 **Índice**
 
 <!-- no toc -->
-1. Declaración de variables
-2. Tipos de datos básicos
-3. Comillas simples vs comillas dobles
-4. Trabajando con cadenas
-5. Tipos numericos
-6. Estructuras de datos complejas: arrays y colecciones
+1. [Declaración de variables](#31--declaración-de-variables-variable)
+2. [Tipos de datos básicos](#32--tipos-de-datos-básicos)
+3. [Trabajando con cadenas](#33--trabajando-con-cadenas)
+4. [Tipos numericos](#34--tipos-numéricos)
+5. [Estructuras de datos complejas: arrays y colecciones](#35--estructuras-de-datos-complejas-arrays-y-colecciones)
 
 
 En este punto, dejamos de ser "operadores de consola" para convertirnos en "desarrolladores de scripts". Un script (`.ps1`) es un archivo de texto con instrucciones secuenciales que nos permite automatizar tareas complejas, repetitivas y propensas a error humano.
@@ -303,7 +302,7 @@ $plantilla = "El valor de X es {0} y el de Y es {1}." -f 10, 20
 # $plantilla contiene: El valor de X es 10 y el de Y es 20.
 ```
 
-** Here-Strings (`@"...@"`)**
+**Here-Strings (`@"...@"`)**
 
 Los **Here-Strings** son útiles para crear grandes bloques de texto que abarcan múltiples líneas, manteniendo el formato y las comillas internas sin necesidad de secuencias de escape.
 
