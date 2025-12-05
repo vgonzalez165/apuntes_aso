@@ -14,7 +14,7 @@
 
 ## Prácticas
 
-<div style="min-width: 900px; overflow-x: auto;">
+
 
 | Práctica   | Enlace                                                                                  | Fecha límite     | RAs          |
 | ---------- | --------------------------------------------------------------------------------------- | ---------------- | ------------ |
@@ -43,11 +43,10 @@
 | **UT07**   | **Integración de sistemas Windows y Linux**                                                       | 
 |            |                                                                                         | | |
 
-</div>
 
 ## Apuntes
 
-<div style="min-width: 900px; overflow-x: auto;">
+
 
 | Apartado   | Enlace                                                                                  | RAs          |
 | ---------- | --------------------------------------------------------------------------------------- | ------------ |
@@ -80,7 +79,7 @@
 |            |                                                                                         | |
 | **UT07**   | **Integración de sistemas Windows y Linux**                                               | 
 |            |                                                                                         | | |
-</div>
+
 
 
 
