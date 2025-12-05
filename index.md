@@ -37,17 +37,47 @@
 | `PR0504`   | [Directivas de seguridad, GPP y Filtros WMI](./ut05/practicas/pr0504_gpos_gpps.md)      | **04/12/2025**   | `RA1`        |
 | **UT06**   | **Lenguaje de scripting en Windows. Powershell**                                                           | 
 | `PR0601`   | [Introducción a Powershell](./ut06/practicas/pr0601_intro_powershell.md)                | **10/12/2025**   | `RA7`        |
+| `PR0602`   | [El pipeline en Powershell](./ut06/practicas/pr0602_powershell_pipeline.md)             | **10/12/2025**   | `RA7`        |
 | **UT07**   | **Integración de sistemas Windows y Linux**                                                       | 
 |            |                                                                                         | | |
 
 
 ## Apuntes
 
-- [UT01: Introducción y preparación del entorno](./ut01/index.md)
-- [UT02: Instalación y puesta en marcha de Linux Server](./ut02/index.md)
-- [UT03: Lenguajes de scripting en Linux: Bash](./ut03/index.md)
-- [UT05: Servicio de directorio en Windows Server](./ut05/index.md)
-- [UT06: Lenguaje de scripting en Windows: Powershell](./ut06/apuntes/index.md)
+| Apartado   | Enlace                                                                                  | RAs          |
+| ---------- | --------------------------------------------------------------------------------------- | ------------ |
+| **UT02**   |**Administración de Linux Server**                                                                          |              |
+| `2.1`      | [Usuarios y permisos](./ut02/apuntes/1_usuarios_permisos.md)                            | `RA4`        |
+| `2.2`      | [Conexión remota](./ut02/apuntes/3_conexion_remota.md)                                  | `RA4`        |
+| `2.3`      | [Gestión de procesos](./ut02/apuntes/5_procesos.md)                                     | `RA2`        |
+| `2.4`      | [Programación de tareas con `cron`](./ut02/apuntes/6_cron.md)                           | `RA3`        |
+| `2.5`      | [El directorio `/proc`](./ut02/apuntes/7_directorio_proc.md)                            | `RA3`        |
+|            |                                                                                         | |              
+| **UT03**   | **Lenguajes de scripting en Linux: Bash**                                                 |
+| `3.1`      | [Conceptos básicos de Bash Scripting](./ut03/apuntes/1_conceptos_basicos.md)            | `RA7`        |
+| `3.2`      | [Entrada y salida de datos](./ut03/apuntes/2_entrada_salida_datos.md)                   | `RA7`        |
+| `3.3`      | [Ejecución condicional](./ut03/apuntes/3_ejecucion_condicional.md)                      | `RA7`        |
+| `3.4`      | [Llaves, corchetes y paréntesis](./ut03/apuntes/4_llaves_corchetes.md)                  | `RA7`        |
+| `3.5`      | [Funciones en Bash](./ut03/apuntes/5_funciones.md)                                      | `RA7`        |
+| `3.6`      | Manipulación de cadenas                                                                 | `RA7`        |
+|            |                                                                                         | |
+| **UT04**   | **Administración de Windows Server**                                                      |
+|            |  Apuntes en Teams                                                                       | |
+|            |                                                                                         | |
+| **UT05**   | **Servicio de directorio en Windows Server**                                              | 
+|            |  Apuntes en Teams                                                                       | |
+|            |                                                                                         | |
+| **UT06**   | **Lenguaje de scripting en Windows. Powershell**                                                           | 
+| `6.1`      | [Introducción a Powershell](./ut06/apuntes/01_introduccion.md)                          | `RA7`        |
+| `6.2`      | [Control de la salida con pipelines](./ut06/apuntes/02_pipelining.md)                   | `RA7`        |
+|            |                                                                                         | |
+| **UT07**   | **Integración de sistemas Windows y Linux**                                               | 
+|            |                                                                                         | | |
+
+
+
+
+
 
 
 
