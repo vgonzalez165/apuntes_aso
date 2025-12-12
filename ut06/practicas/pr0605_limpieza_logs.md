@@ -9,7 +9,7 @@ No puedes cambiar cómo el servidor genera los logs. Tu única opción es crear 
 
 ### 2\. La Entrada (Raw Data)
 
-El alumno debe copiar y pegar este bloque de texto en su script dentro de una variable (Heredoc) o leerlo desde un archivo `.txt`.
+Debes copiar y pegar este bloque de texto en su script dentro de una variable (Heredoc) o leerlo desde un archivo `.txt`.
 
 ```powershell
 $logCrudo = @"
@@ -20,17 +20,17 @@ $logCrudo = @"
 "@
 ```
 
-> **Nota para el alumno:** Observa bien los datos. Hay inconsistencias deliberadas:
->
->   * Las fechas tienen formatos distintos (`/`, `-`, `_`).
->   * Los delimitadores principales son `::`, pero hay espacios variables.
->   * Los usuarios a veces están en mayúsculas y otras en minúsculas.
+Observa bien los datos. Hay inconsistencias deliberadas:
+
+- Las fechas tienen formatos distintos (`/`, `-`, `_`).
+- Los delimitadores principales son `::`, pero hay espacios variables.
+- Los usuarios a veces están en mayúsculas y otras en minúsculas.
 
 ### 3\. Los Requisitos (La Misión)
 
-Tu script debe procesar `$logCrudo` y cumplir **estrictamente** con los siguientes puntos. No se te dice qué comandos usar, solo qué resultado obtener.
+Tu script debe procesar `$logCrudo` y cumplir **estrictamente** con los siguientes puntos. 
 
-1.  **Normalización de Fechas:** Todas las fechas deben salir en formato estándar ISO `yyyy-MM-dd HH:mm`.
+1.  **Normalización de Fechas:** todas las fechas deben salir en formato estándar ISO `yyyy-MM-dd HH:mm`.
 2.  **Limpieza de Usuarios:**
       * Deben estar todos en **minúsculas**.
       * Si el usuario es "ROOT", debe ser renombrado automáticamente a "administrator" por política de seguridad.
@@ -57,12 +57,11 @@ Al abrir el CSV generado, debería verse algo así (el orden de columnas puede v
 
 *Si te atascas, investiga sobre estos conceptos (pero tú decides cuál usar):*
 
-  * `Wait-Debugger` (para ver qué pasa línea a línea).
-  * El método `.Split("separador")` (Ojo: ¿puedes usar múltiples caracteres como separador?).
-  * Expresiones Regulares (`[regex]`, `-match`, `-replace`) -\> *Muy recomendado para usuarios avanzados*.
-  * `[datetime]::ParseExact()` o `Get-Date` para arreglar las fechas locas.
-  * `Switch` o `if/elseif` para la lógica de renombramiento de usuarios.
-  * `[PSCustomObject]@{}` para crear la tabla final.
+  - `Wait-Debugger` (para ver qué pasa línea a línea).
+  - El método `.Split("separador")` (Ojo: ¿puedes usar múltiples caracteres como separador?).
+  - `[datetime]::ParseExact()` o `Get-Date` para arreglar las fechas locas.
+  - `Switch` o `if/elseif` para la lógica de renombramiento de usuarios.
+  - `[PSCustomObject]@{}` para crear la tabla final.
 
 -----
 
