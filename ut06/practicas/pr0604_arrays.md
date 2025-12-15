@@ -15,8 +15,6 @@ Resultados de aprendizaje:  RA7
 
 ## Bloque I: Arrays fijos
 
-
-
 **1. Reconfiguración de DNS y Verificación**
 
 Como administrador, tienes un script que carga los servidores DNS de una sucursal en un array fijo. Se ha detectado que el servidor secundario está caído y la configuración actual es errónea.
@@ -72,7 +70,7 @@ Tu script de firewall recibe IPs sospechosas y debe decidir si bloquearlas o no.
     4.  Muestra la lista final ordenada alfabéticamente
 
 
-#### Bloque III: Listas genéricas 
+## Bloque III: Listas genéricas 
 
 
 **5. Hardening de puertos de Firewall (List[int])**
