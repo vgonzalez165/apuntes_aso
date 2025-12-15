@@ -596,3 +596,71 @@ $ciudades | ForEach-Object {
     Write-Host "La ciudad $_ tiene $($_.Length) letras"
 }
 ```
+
+#### 3.5.5.-Hash Tables
+
+Los **hash tables** son estructuras de datos que almacena información en pares **Clave-Valor** (*Key-Value*).
+
+  - A diferencia de un Array (que usa índices numéricos `0, 1, 2...`), aquí tú defines el índice (la clave).
+  - Son increíblemente rápidas para buscar datos.
+
+Para crearlas se utiliza el símbolo de arroba y llaves `@{ }`. Las parejas se separan por punto y coma `;` si se declaran en la misma línea.
+
+```powershell
+# Crear una tabla vacía
+$config = @{}
+
+# Crear una tabla con datos
+$usuario = @{
+    Nombre = "Carlos"
+    Edad   = 30
+    Rol    = "Admin"
+}
+```
+
+Podemos acceder a una tabla hash de las siguiente formas:
+
+| Acción                | Sintaxis                       | Ejemplo |
+| :-------------------- | :----------------------------- | :--- |
+| **Leer valor**        | `$var.Clave` o `$var['Clave']` | `$usuario.Nombre` (Devuelve "Carlos") |
+| **Añadir/Modificar**  | `$var.Clave = Valor`           | `$usuario.Email = "carlos@empresa.com"` |
+| **Borrar**            | `$var.Remove('Clave')`         | `$usuario.Remove('Edad')` |
+| **Limpiar todo**      | `$var.Clear()`                 | `$usuario.Clear()` |
+
+
+Para iterar sobre una tabla, solemos recorrer las claves (`.Keys`) o los valores (`.Values`).
+
+```powershell
+# Recorrer por claves
+foreach ($clave in $usuario.Keys) {
+    Write-Host "$clave : $($usuario[$clave])"
+}
+```
+
+Una cuestión importante es que las Hash Tables no se exportan bien a CSV. Para reportes, hay que convertir la Hash Table en un Objeto.
+
+```powershell
+# Convertir Hash Table a Objeto
+$objeto = [PSCustomObject]$usuario
+
+# Ahora sí puedes exportar
+$objeto | Export-Csv "datos.csv"
+```
+
+Una característica muy interesante de las tablas hash es el denominado **splatting**, que consiste en pasar todos los parámetros de un comando encapsulados en una tabla hash, haciendo así que los scripts largos sean mucho más legibles.
+
+```powershell
+# En lugar de escribir la línea:
+# New-ADUser -Name "Pepe" -Path "OU=Ventas..." -Department "IT" -Enabled $true
+
+# Usamos una Hash Table:
+$parametros = @{
+    Name       = "Pepe"
+    Path       = "OU=Ventas,DC=empresa,DC=local"
+    Department = "IT"
+    Enabled    = $true
+}
+
+# Ejecutamos el comando usando @ en vez de $
+New-ADUser @parametros
+```
