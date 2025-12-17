@@ -41,7 +41,7 @@
 | `PR0601`   | [Introducción a Powershell](./ut06/practicas/pr0601_intro_powershell.md)                | **10/12/2025**   | `RA7`        |
 | `PR0602`   | [El pipeline en Powershell](./ut06/practicas/pr0602_powershell_pipeline.md)             | **10/12/2025**   | `RA7`        |
 | `PR0603`   | [Strings en Powershell](./ut06/practicas/pr0603_strings.md)                             | **16/12/2025**   | `RA7` |
-| `PR0604`   | [Manipulación de colecciones en Powershell](./ut06/practicas/pr0604_arrays.md)          | **18/12/2025**   | `RA7` |
+| `PR0604`   | [Manipulación de colecciones en Powershell](./ut06/practicas/pr0604_arrays.md)          | **19/12/2025**   | `RA7` |
 | **UT07**   | **Integración de sistemas Windows y Linux**                                                       | 
 |            |                                                                                         | | |
 
