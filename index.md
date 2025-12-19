@@ -42,6 +42,7 @@
 | `PR0602`   | [El pipeline en Powershell](./ut06/practicas/pr0602_powershell_pipeline.md)             | **10/12/2025**   | `RA7`        |
 | `PR0603`   | [Strings en Powershell](./ut06/practicas/pr0603_strings.md)                             | **16/12/2025**   | `RA7` |
 | `PR0604`   | [Manipulación de colecciones en Powershell](./ut06/practicas/pr0604_arrays.md)          | **19/12/2025**   | `RA7` |
+| `PR0605`   | [Limpieza de logs](./ut06/practicas/pr0605_limpieza_logs.md)                            | **04/01/2026**   | `RA7` |
 | **UT07**   | **Integración de sistemas Windows y Linux**                                                       | 
 |            |                                                                                         | | |
 
