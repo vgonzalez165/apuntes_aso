@@ -1,0 +1,45 @@
+```
+---------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS Y REDES ----------------
+---------------------------------------------------------------------------------
+
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT06
+Práctica:                   PR0606. Limpieza de logs (II)
+Resultados de aprendizaje:  RA7
+```
+
+
+### 1.- Objetivo
+
+Eres el responsable de infraestructura de una plataforma de **E-Commerce**. Un sistema de inventario de hace 10 años está registrando los movimientos de stock en un archivo de texto con un formato inconsistente. Necesitas procesar estos datos para generar un informe de **discrepancias críticas** en formato CSV que el equipo de almacén pueda importar en Excel.
+
+### 2.- Datos de entrada
+
+Copia este bloque en tu script. El log contiene movimientos de almacén con errores de formato, variaciones en los nombres de productos y diferentes sistemas de medida.
+
+```powershell
+$movimientosCrudos = @"
+[LOG-OK] SKU:A199 :: 2024.01.10_08:00 :: Item:Smartphone_X :: Qty:50 :: Status:In_Stock
+[LOG-ALERT] SKU:B250 :: 10-01-2024 09:15 :: Item:LAPTOP-PRO :: Qty:-5 :: Status:Damaged
+[LOG-OK] SKU:C312 :: 2024/01/10_10:30 :: Item:tablet_air :: Qty:120 :: Status:In_Stock
+[LOG-CRIT] SKU:D400 :: 11/01/2024_11:45 :: Item:UNKNOWN_ITEM :: Qty:0 :: Status:Out_Of_Order
+"@
+
+```
+
+### 3.- Requisitos
+
+1. **Filtrado de seguridad:** ignora todos los registros que tengan el nivel `[LOG-OK]`. Solo procesa `ALERT` y `CRIT`.
+2. **Normalización de nombres:**
+- Todos los nombres de `Item` deben estar en **MAYÚSCULAS**.
+- Si el item es "UNKNOWN_ITEM", debe renombrarse automáticamente a **"PENDING_REVIEW"**.
+
+
+3. **Normalización de fechas:** todas las fechas (sin importar si usan puntos, guiones o barras) deben transformarse al formato estándar **dd/MM/yyyy HH:mm**.
+4. **Cálculo de prioridad:**
+- Si el status es *Damaged*, añade una columna llamada `ActionRequired` con el valor *Repair*.
+- Si el status es *Out_Of_Order*, el valor debe ser *Replace*.
+
+5. **Salida:** genera una lista de `[PSCustomObject]` y expórtala a un archivo llamado `reporte_inventario.csv`.
+
