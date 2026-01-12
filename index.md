@@ -46,6 +46,7 @@
 | `PR0606`   | [Limpieza de logs (II)](./ut06/practicas/pr0606._logs_stock.md)                         | **16/01/2026**   | `RA7`        |
 | `PR0607`   | [Limpieza de datos de usuarios](./ut06/practicas/pr0607.md)                             | **16/01/2026**   | `RA7`        |
 | `PR0608`   | [Comparación de listas](./ut06/practicas/pr0608_comparacion_listas.md)                  | **19/01/2026**   | `RA7`        |
+| `PR0609`   | [Análisis de carga del procesador](./ut06/practicas/pr0609.md)                          | **19/01/2026**   | `RA7`        |
 | **UT07**   | **Integración de sistemas Windows y Linux**                                                       | 
 |            |                                                                                         | | |
 
