@@ -31,7 +31,7 @@
 | `PR0302`   | [Ejercicios con el comando `case`](./ut03/practicas/pr0302_case.md)                     | Opcional         |              |
 | `PR0304`   | [Ejercicios de entrada y salida](./ut03/practicas/pr0304_entrada_salida.md)             | Opcional         |              |
 | **UT04**   | **Administración de Windows Server**                                                                       |
-|            |                                                                                         |                  |              |
+| `PR0401`   | [Administración remota en Windows](./ut04/practicas/pr0401_administracion_remota)       | **28/01/2026**   | `RA4`        |
 | **UT05**   | **Servicio de directorio en Windows Server**                                                               | 
 | `PR0501`   | [Implantación del dominio](./ut05/practicas/pr0501_creacion_dominio.md)                 | **26/11/2025**   | `RA1`        |
 | `PR0502`   | [Carpetas personales y compartidas](./ut05/practicas/pr0502_carpetas_personales.md)     | **26/11/2025**   | `RA1`        |
@@ -46,7 +46,7 @@
 | `PR0606`   | [Limpieza de logs (II)](./ut06/practicas/pr0606._logs_stock.md)                         | **16/01/2026**   | `RA7`        |
 | `PR0607`   | [Limpieza de datos de usuarios](./ut06/practicas/pr0607.md)                             | **16/01/2026**   | `RA7`        |
 | `PR0608`   | [Comparación de listas](./ut06/practicas/pr0608_comparacion_listas.md)                  | **19/01/2026**   | `RA7`        |
-| `PR0609`   | [Análisis de carga del procesador](./ut06/practicas/pr0609.md)                          |   | `RA7`        |
+| `PR0609`   | [Análisis de carga del procesador](./ut06/practicas/pr0609.md)                          | **28/01/2026**   | `RA7`        |
 | **UT07**   | **Integración de sistemas Windows y Linux**                                                       | 
 |            |                                                                                         | | |
 
