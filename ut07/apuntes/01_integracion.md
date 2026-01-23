@@ -46,11 +46,11 @@ Los parámetros indicados son:
 - `comment`: texto que se mostrará cuando el cliente consulte al servidor por los recursos compartidos que tiene.
 - `path`: ruta local de la carpeta que compartimos.
 - `browsable`: indica que la carpeta se mostrará cuando el cliente navegue por los recursos de red.
-- `writable` | `writeable` | `read only`: son opciones equivalentes para indicar que la carpeta es de lectura y escritura.
+- `writable` - `writeable` - `read only`: son opciones equivalentes para indicar que la carpeta es de lectura y escritura.
 - `guest ok`: un valor de yes en este parámetro indica que no se pedirá contraseña al conectarse al recurso compartido.
 - `guest only`: indica que únicamente se permitirán conexiones de usuarios sin contraseña.
-- `create mode` | `create mask`: indica los permisos que tendrán los ficheros que se creen desde el cliente en la carpeta compartida.
-- `directory mode` | `directory mask`: equivalente al anterior, pero para el caso de los directorios creados.
+- `create mode` - `create mask`: indica los permisos que tendrán los ficheros que se creen desde el cliente en la carpeta compartida.
+- `directory mode` - `directory mask`: equivalente al anterior, pero para el caso de los directorios creados.
 - `foce user`: obliga a que todas las conexiones se realicen en el nombre del usuario que se indique, independiente del usuario que realice la misma.
 
 Para asegurarnos de no haber cometido ningún error en la edición del fichero de configuración, podemos recurrir al comando `testparm`, que verifica el fichero `/etc/samba/smb.conf` y nos avisa de todos los problemas sintácticos que pueda haber en el mismo.
