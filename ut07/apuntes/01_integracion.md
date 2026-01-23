@@ -1,4 +1,4 @@
-# UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
+# UT07: INTEGRACIÓN DE SISTEMAS WINDOWS Y LINUX
 
 
 ## 1.- Compartición de carpetas con Samba
