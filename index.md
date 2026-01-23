@@ -85,7 +85,7 @@
 | `6.4`      | [Control de flujo](./ut06/apuntes/04_control_flujo.md)                                  | `RA7`        |
 |            |                                                                                         | |
 | **UT07**   | **Integración de sistemas Windows y Linux**                                               | 
-|            |                                                                                         | | |
+| `7.1`      | [Carpetas compartidas con Samba](./ut07/apuntes/01_integracion.md)                      | `RA6`        |
 
 
 
