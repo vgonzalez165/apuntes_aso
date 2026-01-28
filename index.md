@@ -48,7 +48,7 @@
 | `PR0608`   | [Comparación de listas](./ut06/practicas/pr0608_comparacion_listas.md)                  | **19/01/2026**   | `RA7`        |
 | `PR0609`   | [Análisis de carga del procesador](./ut06/practicas/pr0609.md)                          | **28/01/2026**   | `RA7`        |
 | **UT07**   | **Integración de sistemas Windows y Linux**                                                       | 
-|            |                                                                                         | | |
+| `PR0701`   | [Compartición de archivos con Samba](./ut07/pr0701.md)                               | **10/02/2026**   | `RA6`        |
 
 
 ## Apuntes
