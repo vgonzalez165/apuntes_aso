@@ -10,10 +10,15 @@
 -->
 
 
+## Proyecto
+
+
+| Práctica   | Enlace                                                                                  | Fecha límite     | RAs          |
+| ---------- | --------------------------------------------------------------------------------------- | ---------------- | ------------ |
+| `Proyecto` | [Proyecto ASO Curso 2025-26](./proyectos/proyecto_ev2_v2.md)                            |  **20/02/2026**  | `RAs`        |
 
 
 ## Prácticas
-
 
 
 | Práctica   | Enlace                                                                                  | Fecha límite     | RAs          |
