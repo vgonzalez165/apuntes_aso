@@ -62,6 +62,8 @@
 
 | Apartado   | Enlace                                                                                  | RAs          |
 | ---------- | --------------------------------------------------------------------------------------- | ------------ |
+| **UT01**   |**Preparación del entorno**                                                              |              |
+| `1.1`      | [xxxxxxxxxx](.)                            | `RA4`        |
 | **UT02**   |**Administración de Linux Server**                                                                          |              |
 | `2.1`      | [Usuarios y permisos](./ut02/apuntes/1_usuarios_permisos.md)                            | `RA4`        |
 | `2.2`      | [Conexión remota](./ut02/apuntes/3_conexion_remota.md)                                  | `RA4`        |
