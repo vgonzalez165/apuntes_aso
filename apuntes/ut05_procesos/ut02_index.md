@@ -19,7 +19,7 @@ Resultados de aprendizaje:  RA2
 
 | Apartado | Título                        | Descripción | Enlace |
 | :------- | :---------------------------  | :---------- | :----- |
-| **01**   | **Concepto de proceso, subproceso e hilo**    | xxx | [Ver contenidos →](./01_introduccion_procesos.md) |
+| **01**   | **Conceptos básicos de procesos**             | xxx | [Ver contenidos →](./01_introduccion_procesos.md) |
 | **02**   | **Gestión de procesos en Linux**              | xxx | [Ver contenidos →](./02_procesos_linux.md) |
 | **03**   | **Gestión de procesos en Windows**            | xxx | [Ver contenidos →](./03_procesos_windows.md) |
 

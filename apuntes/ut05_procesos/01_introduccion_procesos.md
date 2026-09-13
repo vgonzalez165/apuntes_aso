@@ -5,12 +5,12 @@
 Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 Profesor:                   Víctor J. González
 Unidad de Trabajo:          UT02. Gestión y monitorización de procesos
-Apartado:                   Introducción a los procesos
+Apartado:                   1. Introducción a los procesos
 Resultados de aprendizaje:  -
 ```
 
 
-## 5.- Gestión de procesos en Linux
+## 1.- Gestión de procesos en Linux
 
 ### Índice
 
@@ -21,7 +21,7 @@ Resultados de aprendizaje:  -
 - [Envío de señales entre procesos](#55--envío-de-señales-entre-procesos-esto-no) **NO ENTRA**
 
 
-### 5.1.- Introducción
+### 1.1.- Introducción
 
 Todos los ordenadores modernos pueden hacer varias cosas al mismo tiempo. Ahora bien, en términos estrictos la CPU únicamente pueden ejecutar un programa en un instante dado. Para
 dar la sensación de simultaneidad en la ejecución lo que se hace es alternar la ejecución de varios programas muy rápidamente, lo que se conoce como pseudoparalelismo, en contraste con el verdadero paralelismo hardware de los sistemas multiprocesador.
@@ -29,7 +29,7 @@ dar la sensación de simultaneidad en la ejecución lo que se hace es alternar l
 En estos sistemas todo el software de la computadora se organiza en varios **procesos secuenciales**, o simplemente procesos. Un proceso no es más que un **programa en ejecución**, e incluye los valores que tienen el contador de programa, los registros y las variables. En lo conceptual cada proceso tiene su propia CPU virtual, aunque en la realidad la verdadera CPU cambia continuamente de un proceso a otro. Esta rápida conmutación se llama **multiprogramación**
 
 
-#### 5.1.1.- Creación de procesos
+#### 1.1.1.- Creación de procesos
 
 En los sistemas operativos normalmente hace falta un mecanismo para crear y terminas procesos según se necesite durante la operación.
 
@@ -40,7 +40,7 @@ Hay cuatro sucesos principales que causan la creación de procesos:
 - **Solicitud de un usuario para crear un proceso**: un usuario puede crear un proceso desde la línea de comandos del sistema o a través del entorno de ventanas.
 - **Como parte de un trabajo por lotes**: esta situación solo se da en los sistemas por lotes de los mainframes grandes. En ellos los usuarios pueden enviar trabajos por lotes al sistema. Cuando el sistema operativo decide que tiene los recursos suficientes para ejecutar otro trabajo, crea un proceso y ejecuta en él el siguiente trabajo de la cola de entrada.
 
-#### 5.1.2.- Terminación de procesos
+#### 1.1.2.- Terminación de procesos
 
 Pero los procesos no están indefinidamente en la memoria, sino que tarde o temprano han de finalizar, debido principalmente a uno de los siguientes motivos:
 
@@ -50,7 +50,7 @@ Pero los procesos no están indefinidamente en la memoria, sino que tarde o temp
 - **Terminado por otro proceso**: en este caso otro proceso (que tiene los permisos necesarios) pide al sistema operativo que termine con el proceso. En UNIX la llamada es `kill`.
 
 
-#### 5.1.3.- Estados de los procesos
+#### 1.1.3.- Estados de los procesos
 
 A lo largo de su ciclo de vida un proceso puede pasar por varios estados entre los que va cambiando como respuesta a determinados eventos. Estos estados son:
 
@@ -65,7 +65,7 @@ A lo largo de su ciclo de vida un proceso puede pasar por varios estados entre l
 
 
 
-### 5.2.- Procesos automáticos e interactivos
+### 1.2.- Procesos automáticos e interactivos
 
 Una clasificación de los procesos que hay en Linux puede ser la que los divide en procesos automáticos e interactivos.
 
@@ -91,7 +91,7 @@ systemd─┬─ModemManager───2*[{ModemManager}]
 ```
 
 
-### 5.3.- Procesos en primer y segundo plano
+### 1.3.- Procesos en primer y segundo plano
 
 Los procesos interactivos se pueden clasificar como procesos en primer y en segundo plano. Los procesos en **primer plano** interactúan directamente con el usuario tomando el control de la terminal. Por el contrario, los procesos en **segundo plano**, aunque también son procesos hijos del Shell, están desvinculados de este en el sentido de que no envían ni la salida estándar ni la de errores al Shell.
 

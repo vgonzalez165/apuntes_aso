@@ -5,11 +5,11 @@
 Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 Profesor:                   Víctor J. González
 Unidad de Trabajo:          UT01
-Título:                     Preparación del entorno
+Título:                     Introducción y preparación del entorno
 Resultados de aprendizaje:  -
 ```
 
-# UT01: Paradigmas Distribuidos
+# UT01: Introducción y preparación del entorno
 
 ## Resultados de aprendizaje asociados
 
