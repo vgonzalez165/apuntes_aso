@@ -19,17 +19,17 @@
 | `PR0201`   | [Administración remota en Windows](./practicas/ut02/pr0201_adm_remota_windows.md)               | **--/--/----**   | `RA4`   |
 | `PR0202`   | [Conexión SSH](./practicas/ut02/PR0202_ssh.md)                                                  | **--/--/----**   | `RA4`   |
 |            |                                                                                                 |                  |         |
-| **UT03**   |**Scripting en Bash**                                                                            |                  |         |
+| **UT03**   |**Scripting en Bash**                                                                            |                  | `RA7`   |
 |            |                                                                                                 |                  |         |
-| **UT04**   |**Scripting en Powershell**                                                                      |                  |         |
+| **UT04**   |**Scripting en Powershell**                                                                      |                  | `RA7`   |
 |            |                                                                                                 |                  |         |
-| **UT05**   |**Administración de procesos**                                                                   |                  |         |
+| **UT05**   |**Administración de procesos**                                                                   |                  | `RA2`   |
 |            |                                                                                                 |                  |         |
-| **UT06**   |**Gestión de tareas**                                                                            |                  |         |
+| **UT06**   |**Gestión de tareas**                                                                            |                  | `RA3`   |
 |            |                                                                                                 |                  |         |
-| **UT07**   |**Active Directory**                                                                             |                  |         |
+| **UT07**   |**Active Directory**                                                                             |                  | `RA1`   |
 |            |                                                                                                 |                  |         |
-| **UT08**   |**Integración de sistemas heterogéneos**                                                         |                  |         |
+| **UT08**   |**Integración de sistemas heterogéneos**                                                         |                  | `RA6`   |
 |            |                                                                                                 |                  |         |
 |            |**Proyecto**                                                                                     |                  |         |
 |            | [Proyecto ASO Curso 2026-27(Pendiente)]()                                                       |                  | `-`     |
