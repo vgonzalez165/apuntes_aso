@@ -1,47 +1,47 @@
-# ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+# ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 
+# Relación de contenidos y prácticas del módulo
 
-<!-- 
-## Proyectos
-
-- [Proyecto de la 1ª evaluación](./proyectos/proyecto_ev1.md)
-- [Proyecto de la 2ª evaluación](./proyectos/proyecto_ev2.md) 
-- 
--->
-
-
-## Proyecto
-
-
-| Práctica   | Enlace                                                                                  | Fecha límite     | RAs          |
-| ---------- | --------------------------------------------------------------------------------------- | ---------------- | ------------ |
-| `Proyecto` | [Proyecto ASO Curso 2026-27 (Pendiente de publicar)]()                            |  **xx/xx/xxxx**  | `RAs`        |
-
-
-## Prácticas
-
-
-| Práctica   | Enlace                                                                                  | Fecha límite     | RAs          |
-| ---------- | --------------------------------------------------------------------------------------- | ---------------- | ------------ |
-| **UT02**   |**Administración de Linux Server**                                                                          |              |
-| `PR0201`   | [Usuarios y permisos](.ut02//practicas/pr0201_usuarios_permisos.md)                     |  **24/10/2025**  | `RA4`        |
-
-
-
-## Apuntes
-
-
-| UT       | Título                                                                                    |           |
-| -------- | ----------------------------------------------------------------------------------------- | --------- | 
-| **UT01** | [**Introducción y preparación del entorno**](./apuntes/ut01_introduccion/ut01_index.md)                           | `-`     |
-| **UT02** | [**Administración remota del sistema**](./apuntes/ut02_administracion_remota/ut02_index.md)                       | `RA4`     |
-
+|            | Título                                                                                          | Fecha límite     | RAs     |
+| ---------- | ----------------------------------------------------------------------------------------------  | ---------------- | ------- |
+| **UT01**   |**Introducción. Preparación del entorno**                                                                           |         |
+| 1.1        | [¿Qué es un administrador de sistemas?](./apuntes/ut01_introduccion/01_que_es.md)               |                  | Todos   |
+| 1.2        | [Preparación del entorno](./apuntes/ut01_introduccion/02_preparacion.md)                        |                  | Todos   |
+| 1.3        | [Git](./apuntes/ut01_introduccion/03_git.md)                                                    |                  | Todos   |
+|            |                                                                                                 |                  |         |
+| `PR0101`   | [Repositorio de prácticas](./practicas/ut01/pr0101.md)                                          | **20/09/2026**   | Todos   |
+|            |                                                                                                 |                  |         |
+| **UT02**   |**Administración remota del sistema**                                                            |                  |         |
+| 2.1        | [Instalación de Windows Server Core](./apuntes/ut02_adm_remota/01_instalacion_modo_core.md)     |                  | `RA4`   |
+| 2.1        | [Administración remota de sistemas Windows](./apuntes/ut02_adm_remota/02_adm_remota_Windows.md) |                  | `RA4`   |
+| 2.1        | [Administración remota de sistemas Linux](./apuntes/ut02_adm_remota/03_adm_remota_Linux.md)     |                  | `RA4`   |
+|            |                                                                                                 |                  |         |
+| `PR0201`   | [Administración remota en Windows](./practicas/ut02/pr0201_adm_remota_windows.md)               | **--/--/----**   | `RA4`   |
+| `PR0202`   | [Conexión SSH](./practicas/ut02/PR0202_ssh.md)                                                  | **--/--/----**   | `RA4`   |
+|            |                                                                                                 |                  |         |
+| **UT03**   |**Scripting en Bash**                                                                            |                  |         |
+|            |                                                                                                 |                  |         |
+| **UT04**   |**Scripting en Powershell**                                                                      |                  |         |
+|            |                                                                                                 |                  |         |
+| **UT05**   |**Administración de procesos**                                                                   |                  |         |
+|            |                                                                                                 |                  |         |
+| **UT06**   |**Gestión de tareas**                                                                            |                  |         |
+|            |                                                                                                 |                  |         |
+| **UT07**   |**Active Directory**                                                                             |                  |         |
+|            |                                                                                                 |                  |         |
+| **UT08**   |**Integración de sistemas heterogéneos**                                                         |                  |         |
+|            |                                                                                                 |                  |         |
+|            |**Proyecto**                                                                                     |                  |         |
+|            | [Proyecto ASO Curso 2026-27(Pendiente)]()                                                       |                  | `-`     |
 
 
 
-| Apartado   | Enlace                                                                                  | RAs          |
-| ---------- | --------------------------------------------------------------------------------------- | ------------ |
-| **UT01**   |**Preparación del entorno**                                                              |              |
-| `1.1`      | [xxxxxxxxxx](.)                            | `RA4`        |
-| **UT02**   |**Administración de Linux Server**                                                                          |              |
-| `2.1`      | [Usuarios y permisos](./ut02/apuntes/1_usuarios_permisos.md)                            | `RA4`        |
+## Resultados de aprendizaje del módulo
+
+- `RA1`. Administra el servicio de directorio interpretando especificaciones e integrándolo en una red.
+- `RA2`. Administra procesos del sistema describiéndolos y aplicando criterios de seguridad y eficiencia.
+- `RA3`. Gestiona la automatización de tareas del sistema, aplicando criterios de eficiencia y utilizando comandos y herramientas gráficas.
+- `RA4`. Administra de forma remota el sistema operativo en red valorando su importancia y aplicando criterios de seguridad.
+- `RA5`. Administra servidores de impresión describiendo sus funciones e integrándolos en una red
+- `RA6`. Integra sistemas operativos libres y propietarios, justificando y garantizando su interoperabilidad.
+- `RA7`. Utiliza lenguajes de guiones en sistemas operativos, describiendo su aplicación y administrando servicios del sistema operativo
