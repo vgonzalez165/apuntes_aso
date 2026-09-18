@@ -16,7 +16,7 @@
 |          | [Administración remota de sistemas Windows](./apuntes/ut02_adm_remota/02_adm_remota_Windows.md)               |                | `RA3` |
 |          | [Administración remota de sistemas Linux](./apuntes/ut02_adm_remota/03_adm_remota_Linux.md)                   |                | `RA3` |
 |          |                                                                                                               |                |       |
-|          |`PR0201` [Administración remota en Windows](./practicas/ut02/pr0201_adm_remota_windows.md)                     | **--/--/----** | `RA3` |
+|          |`PR0201` [Administración remota en Windows](./practicas/ut02/pr0201_administracion_remota_windows.md)                     | **--/--/----** | `RA3` |
 |          |`PR0202` [Conexión SSH](./practicas/ut02/PR0202_ssh.md)                                                        | **--/--/----** | `RA3` |
 |            |                                                                                                             |                |       |
 | **UT03**   |**SCRIPTING EN BASH**                                                                                        |                | `RA1` |
