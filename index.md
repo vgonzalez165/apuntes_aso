@@ -33,16 +33,7 @@
 |            |                                                                                                             |                |       |
 |            |**PROYECTO**                                                                                                 |                |       |
 |            | [Proyecto BDA Curso 2026-27(Pendiente)]()                                                                   |                | `-`   |
-
-
-
-## Resultados de aprendizaje del módulo
-
-- `RA1`. Administra el servicio de directorio interpretando especificaciones e integrándolo en una red.
-- `RA2`. Administra procesos del sistema describiéndolos y aplicando criterios de seguridad y eficiencia.
-- `RA3`. Gestiona la automatización de tareas del sistema, aplicando criterios de eficiencia y utilizando comandos y herramientas gráficas.
-- `RA4`. Administra de forma remota el sistema operativo en red valorando su importancia y aplicando criterios de seguridad.
-- `RA5`. Administra servidores de impresión describiendo sus funciones e integrándolos en una red
-- `RA6`. Integra sistemas operativos libres y propietarios, justificando y garantizando su interoperabilidad.
-- `RA7`. Utiliza lenguajes de guiones en sistemas operativos, describiendo su aplicación y administrando servicios del sistema operativo
+|            |                                                                                                             |                |       |
+|            | **RESULTADOS DE APRENDIZAJE DEL MÓDULO**                                                                    |                |       |
+|            | `RA1`. Administra el servicio de directorio interpretando especificaciones e integrándolo en una red. <br> `RA2`. Administra procesos del sistema describiéndolos y aplicando criterios de seguridad y eficiencia. <br> `RA3`. Gestiona la automatización de tareas del sistema, aplicando criterios de eficiencia y utilizando comandos y herramientas gráficas.<br>`RA4`. Administra de forma remota el sistema operativo en red valorando su importancia y aplicando criterios de seguridad.<br>`RA5`. Administra servidores de impresión describiendo sus funciones e integrándolos en una red.<br>`RA6`. Integra sistemas operativos libres y propietarios, justificando y garantizando su interoperabilidad.<br>`RA7`. Utiliza lenguajes de guiones en sistemas operativos, describiendo su aplicación y administrando servicios del sistema operativo | | 
 
