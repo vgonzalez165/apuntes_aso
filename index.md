@@ -11,25 +11,25 @@
 |          |                                                                                                               |                |       |
 |          | `PR0101`   [Repositorio de prácticas](./practicas/ut01/pr0101.md)                                             | **20/09/2026** | Todos |
 |          |                                                                                                               |                |       |
-| **UT02** | **ADMINISTRACIÓN REMOTA DEL SISTEMA**                                                                         |                | `RA3` |
-|          | [Instalación de Windows Server Core](./apuntes/ut02_adm_remota/01_instalacion_modo_core.md)                   |                | `RA3` |
-|          | [Administración remota de sistemas Windows](./apuntes/ut02_adm_remota/02_adm_remota_Windows.md)               |                | `RA3` |
-|          | [Administración remota de sistemas Linux](./apuntes/ut02_adm_remota/03_adm_remota_Linux.md)                   |                | `RA3` |
+| **UT02** | **ADMINISTRACIÓN REMOTA DEL SISTEMA**                                                                         |                | `RA4` |
+|          | [Instalación de Windows Server Core](./apuntes/ut02_adm_remota/01_instalacion_modo_core.md)                   |                | `RA4` |
+|          | [Administración remota de sistemas Windows](./apuntes/ut02_adm_remota/02_adm_remota_Windows.md)               |                | `RA4` |
+|          | [Administración remota de sistemas Linux](./apuntes/ut02_adm_remota/03_adm_remota_Linux.md)                   |                | `RA4` |
 |          |                                                                                                               |                |       |
-|          |`PR0201` [Administración remota en Windows](./practicas/ut02/pr0201_administracion_remota_windows.md)                     | **--/--/----** | `RA3` |
-|          |`PR0202` [Conexión SSH](./practicas/ut02/PR0202_ssh.md)                                                        | **--/--/----** | `RA3` |
+|          |`PR0201` [Administración remota en Windows](./practicas/ut02/pr0201_administracion_remota_windows.md)          | **04/09/2026** | `RA4` |
+|          |`PR0202` [Conexión SSH](./practicas/ut02/PR0202_ssh.md)                                                        | **07/09/2026** | `RA4` |
 |            |                                                                                                             |                |       |
-| **UT03**   |**SCRIPTING EN BASH**                                                                                        |                | `RA1` |
+| **UT03**   |**SCRIPTING EN BASH**                                                                                        |                | `RA7` |
 |            |                                                                                                             |                |       |
-| **UT04**   |**SCRIPTING EN POWERSHELL**                                                                                  |                | `RA1` |
+| **UT04**   |**SCRIPTING EN POWERSHELL**                                                                                  |                | `RA7` |
 |            |                                                                                                             |                |       |
-| **UT05**   |**ADMINISTRACIÓN DE PROCESOS**                                                                               |                | `RA1` |
+| **UT05**   |**ADMINISTRACIÓN DE PROCESOS**                                                                               |                | `RA2` |
 |            |                                                                                                             |                |       |
-| **UT06**   |**GESTIÓN DE TAREAS**                                                                                        |                | `RA1` |
+| **UT06**   |**GESTIÓN DE TAREAS**                                                                                        |                | `RA3` |
 |            |                                                                                                             |                |       |
-| **UT07**   |**ACTIVE DIRECTORY**                                                                                         |                | `RA4` |
+| **UT07**   |**ACTIVE DIRECTORY**                                                                                         |                | `RA1` |
 |            |                                                                                                             |                |       |
-| **UT08**   |**INTEGRACIÓN DE SISTEMAS HETEROGÉNEOS**                                                                     |                | `RA5` |
+| **UT08**   |**INTEGRACIÓN DE SISTEMAS HETEROGÉNEOS**                                                                     |                | `RA6` |
 |            |                                                                                                             |                |       |
 |            |**PROYECTO**                                                                                                 |                |       |
 |            | [Proyecto BDA Curso 2026-27(Pendiente)]()                                                                   |                | `-`   |
