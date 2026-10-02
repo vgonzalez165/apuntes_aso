@@ -20,6 +20,10 @@
 |          |`PR0202` [Conexión SSH](./practicas/ut02/PR0202_ssh.md)                                                        | **07/09/2026** | `RA4` |
 |            |                                                                                                             |                |       |
 | **UT03**   |**SCRIPTING EN BASH**                                                                                        |                | `RA7` |
+|          | [Primeros pasos con Bash](./apuntes/ut03_scripting_bash/1_conceptos_basicos.md)                               |                | `RA7` |
+|          | [Entrada y salida de datos](./apuntes/ut03_scripting_bash/2_entrada_salida_datos.md)                          |                | `RA7` |
+|          | [Operaciones aritméticas y de cadenas](./apuntes/ut03_scripting_bash/3_operaciones_aritmeticas_cadenas.md)    |                | `RA7` |
+|          | [Ejecución condicional](./apuntes/ut03_scripting_bash/4_ejecucion_condicional.md)                             |                | `RA7` |
 |            |                                                                                                             |                |       |
 | **UT04**   |**SCRIPTING EN POWERSHELL**                                                                                  |                | `RA7` |
 |            |                                                                                                             |                |       |
