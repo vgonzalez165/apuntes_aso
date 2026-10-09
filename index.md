@@ -1,3 +1,8 @@
+---
+layout: default
+title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
+---
+
 # ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 
 # Relación de contenidos y prácticas del módulo
