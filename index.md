@@ -7,30 +7,32 @@ title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 
 # Relación de contenidos y prácticas del módulo
  
-|          | Título                                                                                                        | Fecha límite   | RAs   |
-| -------- | ------------------------------------------------------------------------------------------------------------- | -------------- | ----- |
-| **UT01** | **INTRODUCCIÓN Y PREPARACIÓN DEL ENTORNO**                                                                    |                
-|          | 1.1 [¿Qué es un administrador de sistemas?](./apuntes/ut01_introduccion/01_que_es.md)                         |                | Todos |
-|          | 1.2 [Preparación del entorno](./apuntes/ut01_introduccion/02_preparacion.md)                                  |                | Todos |
-|          | 1.3 [Git](./apuntes/ut01_introduccion/03_git.md)                                                              |                | Todos |
-|          |                                                                                                               |                |       |
-|          | `PR0101`   [Repositorio de prácticas](./practicas/ut01/pr0101.md)                                             | **20/09/2026** | Todos |
-|          |                                                                                                               |                |       |
-| **UT02** | **ADMINISTRACIÓN REMOTA DEL SISTEMA**                                                                         |                | `RA4` |
-|          | [Instalación de Windows Server Core](./apuntes/ut02_adm_remota/01_instalacion_modo_core.md)                   |                | `RA4` |
-|          | [Administración remota de sistemas Windows](./apuntes/ut02_adm_remota/02_adm_remota_Windows.md)               |                | `RA4` |
-|          | [Administración remota de sistemas Linux](./apuntes/ut02_adm_remota/03_adm_remota_Linux.md)                   |                | `RA4` |
-|          |                                                                                                               |                |       |
-|          |`PR0201` [Administración remota en Windows](./practicas/ut02/pr0201_administracion_remota_windows.md)          | **04/09/2026** | `RA4` |
-|          |`PR0202` [Conexión SSH](./practicas/ut02/PR0202_ssh.md)                                                        | **07/10/2026** | `RA4` |
-|            |                                                                                                             |                |       |
-| **UT03**   |**SCRIPTING EN BASH**                                                                                        |                | `RA7` |
-|          | [Primeros pasos con Bash](./apuntes/ut03_scripting_bash/1_conceptos_basicos.md)                               |                | `RA7` |
-|          | [Entrada y salida de datos](./apuntes/ut03_scripting_bash/2_entrada_salida_datos.md)                          |                | `RA7` |
-|          | [Operaciones aritméticas y de cadenas](./apuntes/ut03_scripting_bash/3_operaciones_aritmeticas_cadenas.md)    |                | `RA7` |
-|          | [Ejecución condicional](./apuntes/ut03_scripting_bash/4_ejecucion_condicional.md)                             |                | `RA7` |
-|          |                                                                                                               |                |       |
-|          |`PR0301` [Primeros scripts en Bash](./practicas/ut03/pr0301.md)          | **15/10/2026** | `RA7` |
+|          | Título                                                                                                     | Fecha límite   | RAs   |
+| -------- | ---------------------------------------------------------------------------------------------------------- | -------------- | ----- |
+| **UT01** | **INTRODUCCIÓN Y PREPARACIÓN DEL ENTORNO**                                                                 |                |       |
+|          | 1.1 [¿Qué es un administrador de sistemas?](./apuntes/ut01_introduccion/01_que_es.md)                      |                | Todos |
+|          | 1.2 [Preparación del entorno](./apuntes/ut01_introduccion/02_preparacion.md)                               |                | Todos |
+|          | 1.3 [Git](./apuntes/ut01_introduccion/03_git.md)                                                           |                | Todos |
+|          |                                                                                                            |                |       |
+|          | `PR0101`   [Repositorio de prácticas](./practicas/ut01/pr0101.md)                                          | **20/09/2026** | Todos |
+|          |                                                                                                            |                |       |
+| **UT02** | **ADMINISTRACIÓN REMOTA DEL SISTEMA**                                                                      |                | `RA4` |
+|          | [Instalación de Windows Server Core](./apuntes/ut02_adm_remota/01_instalacion_modo_core.md)                |                | `RA4` |
+|          | [Administración remota de sistemas Windows](./apuntes/ut02_adm_remota/02_adm_remota_Windows.md)            |                | `RA4` |
+|          | [Administración remota de sistemas Linux](./apuntes/ut02_adm_remota/03_adm_remota_Linux.md)                |                | `RA4` |
+|          |                                                                                                            |                |       |
+|          | `PR0201` [Administración remota en Windows](./practicas/ut02/pr0201_administracion_remota_windows.md)      | **04/09/2026** | `RA4` |
+|          | `PR0202` [Conexión SSH](./practicas/ut02/PR0202_ssh.md)                                                    | **07/10/2026** | `RA4` |
+|          |                                                                                                            |                |       |
+| **UT03** | **SCRIPTING EN BASH**                                                                                      |                | `RA7` |
+|          | [Primeros pasos con Bash](./apuntes/ut03_scripting_bash/1_conceptos_basicos.md)                            |                | `RA7` |
+|          | [Entrada y salida de datos](./apuntes/ut03_scripting_bash/2_entrada_salida_datos.md)                       |                | `RA7` |
+|          | [Operaciones aritméticas y de cadenas](./apuntes/ut03_scripting_bash/3_operaciones_aritmeticas_cadenas.md) |                | `RA7` |
+|          | [Ejecución condicional](./apuntes/ut03_scripting_bash/4_ejecucion_condicional.md)                          |                | `RA7` |
+|          |                                                                                                            |                |       |
+|          | `PR0301` [Primeros scripts en Bash](./practicas/ut03/pr0301.md)                                            | **15/10/2026** | `RA7` |
+|          | `PR0302` [Condicional `if`](./practicas/ut03/pr0302.md)                                                    | **23/10/2026** | `RA7` |
+
 |            |                                                                                                             |                |       |
 | **UT04**   |**SCRIPTING EN POWERSHELL**                                                                                  |                | `RA7` |
 |            |                                                                                                             |                |       |
