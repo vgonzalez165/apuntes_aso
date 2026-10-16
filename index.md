@@ -32,20 +32,20 @@ title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 |          |                                                                                                            |                |       |
 |          | `PR0301` [Primeros scripts en Bash](./practicas/ut03/pr0301.md)                                            | **15/10/2026** | `RA7` |
 |          | `PR0302` [Condicional `if`](./practicas/ut03/pr0302.md)                                                    | **23/10/2026** | `RA7` |
-
-|            |                                                                                                             |                |       |
-| **UT04**   |**SCRIPTING EN POWERSHELL**                                                                                  |                | `RA7` |
-|            |                                                                                                             |                |       |
-| **UT05**   |**ADMINISTRACIÓN DE PROCESOS**                                                                               |                | `RA2` |
-|            |                                                                                                             |                |       |
-| **UT06**   |**GESTIÓN DE TAREAS**                                                                                        |                | `RA3` |
-|            |                                                                                                             |                |       |
-| **UT07**   |**ACTIVE DIRECTORY**                                                                                         |                | `RA1` |
-|            |                                                                                                             |                |       |
-| **UT08**   |**INTEGRACIÓN DE SISTEMAS HETEROGÉNEOS**                                                                     |                | `RA6` |
-|            |                                                                                                             |                |       |
-|            |**PROYECTO**                                                                                                 |                |       |
-|            | [Proyecto BDA Curso 2026-27(Pendiente)]()                                                                   |                | `-`   |
+|          | `PR0303` [Parámetros en Bash](./practicas/ut03/pr0303.md)                                                  | **-** | `RA7` |
+|          |                                                                                                            |                |       |
+| **UT04** | **SCRIPTING EN POWERSHELL**                                                                                |                | `RA7` |
+|          |                                                                                                            |                |       |
+| **UT05** | **ADMINISTRACIÓN DE PROCESOS**                                                                             |                | `RA2` |
+|          |                                                                                                            |                |       |
+| **UT06** | **GESTIÓN DE TAREAS**                                                                                      |                | `RA3` |
+|          |                                                                                                            |                |       |
+| **UT07** | **ACTIVE DIRECTORY**                                                                                       |                | `RA1` |
+|          |                                                                                                            |                |       |
+| **UT08** | **INTEGRACIÓN DE SISTEMAS HETEROGÉNEOS**                                                                   |                | `RA6` |
+|          |                                                                                                            |                |       |
+|          | **PROYECTO**                                                                                               |                |       |
+|          | [Proyecto BDA Curso 2026-27(Pendiente)]()                                                                  |                | `-`   |
 
 
 ## Resultados de aprendizaje del módulo
