@@ -32,7 +32,8 @@ title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 |          |                                                                                                            |                |       |
 |          | `PR0301` [Primeros scripts en Bash](./practicas/ut03/pr0301.md)                                            | **15/10/2026** | `RA7` |
 |          | `PR0302` [Condicional `if`](./practicas/ut03/pr0302.md)                                                    | **23/10/2026** | `RA7` |
-|          | `PR0303` [Parámetros en Bash](./practicas/ut03/pr0303.md)                                                  | **-** | `RA7` |
+|          | `PR0303` [Parámetros en Bash](./practicas/ut03/pr0303.md)                                                  | **25/10/2026** | `RA7` |
+|          | `PR0304` [El comando `case`](./practicas/ut03/pr0304.md)                                                   | **-**          | `RA7` |
 |          |                                                                                                            |                |       |
 | **UT04** | **SCRIPTING EN POWERSHELL**                                                                                |                | `RA7` |
 |          |                                                                                                            |                |       |
