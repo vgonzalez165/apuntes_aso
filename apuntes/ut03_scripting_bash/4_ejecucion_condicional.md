@@ -1,10 +1,19 @@
+```
+----------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED ----------------
+---------------------------------------------------------------------------------
+
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT03. Scripting en Bash
+Apartado:                   Ejecución condicional en Bash
+Resultados de aprendizaje:  RA7
+```
+
 # UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
 
-
-## 3.- Ejecución condicional
+## 3.- Ejecución condicional en Bash
 
 ### 3.1.- Bifurcación condicional
-
 
 El comando estructurado más sencillo de que disponemos es el comando `if-then`. La sintaxis de este comando es la siguiente:
 
@@ -538,3 +547,7 @@ Algunas cosas a tener en cuenta del código anterior:
 - En el comando `read` indicamos las variables en que se volcarán los datos de cada línea del fichero en cada iteración.
 - Si indicamos menos variables que campos tiene cada línea, almacenará varios campos en la última variable como una lista.
 - Observa cómo utilizamos el redireccionamiento de entrada para enviar el contenido del fichero `/etc/passwd` al comando `while`
+
+---
+
+[Volver al índice](./../../index.md)

@@ -1,5 +1,15 @@
-# UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
+```
+----------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED ----------------
+---------------------------------------------------------------------------------
 
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT03. Scripting en Bash
+Apartado:                   Funciones en Bash
+Resultados de aprendizaje:  RA7
+```
+
+# UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
 
 ## 5.- Funciones en Bash
 
@@ -140,3 +150,8 @@ echo "El contador global es: $contador"
 - **Comentarios**: Documenta funciones complejas con comentarios que expliquen su propósito y los parámetros que reciben.
 
 - **Evita funciones demasiado largas**: Divide las funciones grandes en funciones más pequeñas y específicas. Esto mejora la legibilidad y el mantenimiento del script.
+
+
+---
+
+[Volver al índice](./../../index.md)

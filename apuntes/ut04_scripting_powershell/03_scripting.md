@@ -1,4 +1,15 @@
-# UT06.- LENGUAJES DE SCRIPTING EN WINDOWS: POWERSHELL
+```
+----------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED ----------------
+---------------------------------------------------------------------------------
+
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT04. Scripting con Powershell
+Apartado:                   Scripting y tipos de datos
+Resultados de aprendizaje:  RA7
+```
+
+# UT04.- LENGUAJES DE SCRIPTING EN WINDOWS: POWERSHELL
 
 ## 3.- Scripting y tipos de datos
 
@@ -664,3 +675,8 @@ $parametros = @{
 # Ejecutamos el comando usando @ en vez de $
 New-ADUser @parametros
 ```
+
+
+---
+
+[Volver al índice](./../../index.md)

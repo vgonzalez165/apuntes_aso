@@ -33,9 +33,15 @@ title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 |          | `PR0301` [Primeros scripts en Bash](./practicas/ut03/pr0301.md)                                            | **15/10/2026** | `RA7` |
 |          | `PR0302` [Condicional `if`](./practicas/ut03/pr0302.md)                                                    | **23/10/2026** | `RA7` |
 |          | `PR0303` [Parámetros en Bash](./practicas/ut03/pr0303.md)                                                  | **25/10/2026** | `RA7` |
-|          | `PR0304` [El comando `case`](./practicas/ut03/pr0304.md)                                                   | **-**          | `RA7` |
+|          | `PR0304` [El comando `case`](./practicas/ut03/pr0304.md)                                                   | **30/10/2026** | `RA7` |
 |          |                                                                                                            |                |       |
 | **UT04** | **SCRIPTING EN POWERSHELL**                                                                                |                | `RA7` |
+|          | [Introducción a Powershell](./apuntes/ut04_scripting_powershell/01_introduccion.md)                        |                | `RA7` |
+|          | [Control de la salida con pipelines](./apuntes/ut04_scripting_powershell/02_pipelining.md)                 |                | `RA7` |
+|          | [Scripting en Powershell y tipos de datos](./apuntes/ut04_scripting_powershell/03_scripting.md)            |                | `RA7` |
+|          | [Control de flujo](./apuntes/ut04_scripting_powershell/04_control_flujo.md)                                |                | `RA7` |
+|          | []()                                                                                                       |                | `RA7` |
+|          | []()                                                                                                       |                | `RA7` |
 |          |                                                                                                            |                |       |
 | **UT05** | **ADMINISTRACIÓN DE PROCESOS**                                                                             |                | `RA2` |
 |          |                                                                                                            |                |       |

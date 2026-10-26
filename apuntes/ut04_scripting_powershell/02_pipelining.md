@@ -1,14 +1,26 @@
-# UT06.- LENGUAJES DE SCRIPTING EN WINDOWS: POWERSHELL
+```
+----------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED ----------------
+---------------------------------------------------------------------------------
+
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT04. Scripting con Powershell
+Apartado:                   Control de la salida con pipelines
+Resultados de aprendizaje:  RA7
+```
+
+# UT04.- LENGUAJES DE SCRIPTING EN WINDOWS: POWERSHELL
 
 ## 2.- Control de la salida con pipelines
 
 **Índice**
 
 <!-- no toc -->
-1. [La canlización o pipeline](#21--la-canalización-o-pipeline)
-2. [Objetos en PowerShell](#22--objetos-en-powershell)
+1. [La canalización o pipeline](#21--la-canalización-o-pipeline)
+2. [Objetos en Powershell](#22--objetos-en-powershell)
 3. [Comandos para la manipulación de objetos](#23--comandos-para-la-manipulación-de-objetos)
 4. [Aplicando formato a la salida](#24--aplicando-formato-a-la-salida)
+
 
 
 ### 2.1.- La canalización o pipeline
@@ -347,7 +359,6 @@ Un parámetro útil con `Format-Table` es `-AutoSize`, que adapta el tamaño de 
 Por último, `Format-List` muestra la salida del comando como una lista de propiedades, indicando cada una de estas propiedades en una línea diferente.
 
 
-
 ---
 
-[Volver al índice](./)
+[Volver al índice](./../../index.md)

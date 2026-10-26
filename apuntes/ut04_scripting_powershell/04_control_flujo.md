@@ -1,12 +1,26 @@
-# UT06.- LENGUAJES DE SCRIPTING EN WINDOWS: POWERSHELL
+```
+----------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED ----------------
+---------------------------------------------------------------------------------
+
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT04. Scripting con Powershell
+Apartado:                   Control de flujo
+Resultados de aprendizaje:  RA7
+```
+
+
+# UT04.- LENGUAJES DE SCRIPTING EN WINDOWS: POWERSHELL
 
 ## 4.- Control de flujo
 
 **Índice**
 
 <!-- no toc -->
-1. [Declaración de variables](#31--declaración-de-variables-variable)
-
+1. [Operadores de comparación](#41-operadores-de-comparación)
+2. [Condicionales](#42--condicionales-tomando-decisiones)
+3. [Bucles](#43--bucles)
+4. [Control de flujo dentro de bucles](#44--control-de-flujo-dentro-de-bucles)
 
 
 ### 4.1. Operadores de comparación 
@@ -174,3 +188,7 @@ foreach ($user in $usuarios) {
 }
 ```
 
+
+---
+
+[Volver al índice](./../../index.md)

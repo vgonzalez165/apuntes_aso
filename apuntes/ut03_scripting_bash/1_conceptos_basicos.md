@@ -1,5 +1,15 @@
-# UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
+```
+----------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED ----------------
+---------------------------------------------------------------------------------
 
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT03. Scripting en Bash
+Apartado:                   Conceptos básicos de creación de scripts
+Resultados de aprendizaje:  RA7
+```
+
+# UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
 
 ## 1.- Conceptos básicos de la creación de scripts
 
@@ -245,3 +255,6 @@ exit 5
 
 ### 1.5.- Operaciones aritméticas en Bash
 
+---
+
+[Volver al índice](./../../index.md)

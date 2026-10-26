@@ -1,12 +1,23 @@
-# UT06.- LENGUAJES DE SCRIPTING EN WINDOWS: POWERSHELL
+```
+----------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED ----------------
+---------------------------------------------------------------------------------
+
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT04. Scripting con Powershell
+Apartado:                   Introducción a Powershell
+Resultados de aprendizaje:  RA7
+```
+
+# UT04.- LENGUAJES DE SCRIPTING EN WINDOWS: POWERSHELL
 
 ## 1.- Introducción a PowerShell
 
 **Índice**
 
 <!-- no toc -->
-1. [Conceptos importantes de Windows Powershell](#1--introducción-a-powershell)
-2. [Conociendo los *cmdlets*. Nomenclatura](#12--conociendo-los-cmdlets-nomenclatura)
+1. [Conceptos importantes de Powershell](#11--conceptos-importantes-de-windows-powershell)
+2. [Conociendo los cmdlets. Nomenclatura](#12--conociendo-los-cmdlets-nomenclatura)
 3. [Obtención de ayuda](#13--obtención-de-ayuda)
 4. [Ayudas al escribir los comandos](#14--ayudas-al-escribir-los-comandos)
 
@@ -23,17 +34,16 @@ El diseño de Windows PowerShell integra conceptos de muchos entornos distintos.
 
 En el año 2018 Microsoft anunció una nueva edición de Powershell que denominó **Powershell Core** de forma que en la actualidad coexisten ambas ediciones. La diferencia más reseñable es que, mientras que Powershell es exclusivo de Windows, Powershell Core puede ser instalado en otros sistemas, como Mac OS X o Linux, lo que permite crear scripts compatibles para múltiples plataformas.
 
-|               | Powershell        | Powershell Core   |
-|---------------|-------------------|-------------------|
-| Versiones     | 1.0 a 5.1         | 6.0 a 7.1         |
-| Plataforma    | Solo Windows      | Windows, MAC OS y Linux |
-| Dependencia   | .NET Framework    | .NET Core         |
-| Comando       | powershell.exe    | pwsh.exe          |
-| Políticas de actualización    | Solo correcciones de errores críticos | Todas las actualizaciones |
+|                            | **Powershell**                        | **Powershell Core**       |
+| -------------------------- | ------------------------------------- | ------------------------- |
+| Versiones                  | 1.0 a 5.1                             | 6.0 a 7.1                 |
+| Plataforma                 | Solo Windows                          | Windows, MAC OS y Linux   |
+| Dependencia                | .NET Framework                        | .NET Core                 |
+| Comando                    | powershell.exe                        | pwsh.exe                  |
+| Políticas de actualización | Solo correcciones de errores críticos | Todas las actualizaciones |
 
 
 ### 1.2.- Conociendo los *cmdlets*. Nomenclatura
-
 
 Los cmdlets utilizan un sistema de nombres con la estructura **“verbo-sustantivo”**: el nombre de cada cmdlets consta de un verbo estándar y un sustantivo concreto. Los verbos expresan acciones concretas mientras que los sustantivos describen siempre a qué se aplica un comando. La idea detrás de esto es crear un entorno autodescriptivo y uniforme de forma que los comandos sean más fáciles de recordar para los usuarios y que les permita hacerse una idea de su objetivo a partir de su nombre. Por ejemplo, el comando `Stop-Computer` se puede identificar fácilmente como el comando que sirve para apagar el ordenador.
 
@@ -174,4 +184,4 @@ PS C:\> Import-CSV -Path ‘C:\history.csv’ | Add-History
 
 ---
 
-[Volver al índice](./)
+[Volver al índice](./../../index.md)

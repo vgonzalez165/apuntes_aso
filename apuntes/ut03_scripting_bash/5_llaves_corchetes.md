@@ -1,5 +1,15 @@
-# UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
+```
+----------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED ----------------
+---------------------------------------------------------------------------------
 
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT03. Scripting en Bash
+Apartado:                   Llaves, corchetes y paréntesis
+Resultados de aprendizaje:  RA7
+```
+
+# UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
 
 ## 4.- Llaves, corchetes y paréntesis
 
@@ -147,3 +157,8 @@ echo ${url:7:10}           # => google.com
 
 
 **Fuente**: [https://dev.to/rpalo/bash-brackets-quick-reference-4eh6](https://dev.to/rpalo/bash-brackets-quick-reference-4eh6)
+
+
+---
+
+[Volver al índice](./../../index.md)

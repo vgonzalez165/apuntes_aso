@@ -1,5 +1,15 @@
-# UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
+```
+----------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED ----------------
+---------------------------------------------------------------------------------
 
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT03. Scripting en Bash
+Apartado:                   Entrada y salida de datos
+Resultados de aprendizaje:  RA7
+```
+
+# UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
 
 ## 2.- Entrada y salida de datos
 
@@ -135,7 +145,9 @@ read –n1 –p “Desea continuar? (S/N)”`
 
 
 
+---
 
+[Volver al índice](./../../index.md)
 
 
 

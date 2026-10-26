@@ -1,7 +1,17 @@
+```
+----------------- ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED ----------------
+---------------------------------------------------------------------------------
+
+Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
+Profesor:                   Víctor J. González
+Unidad de Trabajo:          UT03. Scripting en Bash
+Apartado:                   Operaciones aritméticas y manipulación de cadenas
+Resultados de aprendizaje:  RA7
+```
+
 # UT03: LENGUAJES DE SCRIPTING EN LINUX: BASH
 
-
-## 3.- Operaciones aritméticas y de cadenas
+## 3.- Operaciones aritméticas y manipulación de cadenas
 
 Bash permite realizar operaciones aritméticas y manipular cadenas de texto de forma sencilla, pero debido a que Bash es un lenguaje de scripting más orientado a la gestión de comandos, su soporte para operaciones aritméticas y cadenas es limitado en comparación con lenguajes de programación completos. A continuación, se explica cómo realizar cálculos y trabajar con cadenas de texto en Bash.
 
@@ -146,3 +156,7 @@ else
     echo "Las cadenas son diferentes"
 fi
 ```
+
+---
+
+[Volver al índice](./../../index.md)
