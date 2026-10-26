@@ -81,7 +81,7 @@ Dado que PowerShell está construido sobre **.NET Framework**, tiene una inmensa
 
     # Podemos manipular el texto fácilmente
     Write-Host $mensaje.ToUpper()   # Convierte a mayúsculas
-    Write-Host $mensaje.Length      # Cuenta los caracteres (31)
+    Write-Host $mensaje.Length      # Cuenta los caracteres (23)
     ```
 
   - **Char (`[char]`):** almacena un **único** carácter. Es útil cuando recorres texto letra por letra.
@@ -313,7 +313,7 @@ $plantilla = "El valor de X es {0} y el de Y es {1}." -f 10, 20
 # $plantilla contiene: El valor de X es 10 y el de Y es 20.
 ```
 
-**Here-Strings (`@"...@"`)**
+**Here-Strings (`@"..."@`)**
 
 Los **Here-Strings** son útiles para crear grandes bloques de texto que abarcan múltiples líneas, manteniendo el formato y las comillas internas sin necesidad de secuencias de escape.
 
@@ -357,11 +357,11 @@ Dado que una cadena en PowerShell es un objeto de tipo **System.String** (.NET),
 
 Para búsquedas avanzadas que no sean simples comparaciones, puedes usar operadores que trabajan con **expresiones regulares**:
 
-| Operador | Propósito | Ejemplo |
-| :--- | :--- | :--- |
-| **`-like`** | Búsqueda de patrón simple (usa comodines `*` y `?`). | `"archivo.txt" -like "*.txt"` \# Salida: True |
-| **`-match`** | Búsqueda utilizando Expresiones Regulares (RegEx). | `"A1B2C" -match "\d"` \# Salida: True (Contiene un dígito) |
-| **`-replace`** | Reemplaza basado en una Expresión Regular. | `"texto 1".-replace "\d", "X"` \# Salida: texto X |
+| Operador       | Propósito                                            | Ejemplo                                                    |
+| :------------- | :--------------------------------------------------- | :--------------------------------------------------------- |
+| **`-like`**    | Búsqueda de patrón simple (usa comodines `*` y `?`). | `"archivo.txt" -like "*.txt"` \# Salida: True              |
+| **`-match`**   | Búsqueda utilizando Expresiones Regulares (RegEx).   | `"A1B2C" -match "\d"` \# Salida: True (Contiene un dígito) |
+| **`-replace`** | Reemplaza basado en una Expresión Regular.           | `"texto 1" -replace "\d", "X"` \# Salida: texto X          |
 
 
 
@@ -427,14 +427,14 @@ Los flotantes representan números con decimales. Son esenciales para cálculos 
 
 PowerShell utiliza operadores estándar de C\# y otros lenguajes:
 
-| Operador | Descripción          | Ejemplo |
-| :------- | :------------------- | :------ |
-| `+`      | Suma                 | `10 + 5` \# Salida: 15 |
-| `-`      | Resta                | `10 - 5` \# Salida: 5 |
-| `*`      | Multiplicación       | `10 * 5` \# Salida: 50 |
-| `/`      | División             | `10 / 4` \# Salida: 2.5 |
-| `%`      | Módulo               | `10 % 3` \# Salida: 1 |
-| `++`     | Incremento (Añade 1) | `$x = 1; $x++` \# $x es 2 |
+| Operador | Descripción          | Ejemplo                    |
+| :------- | :------------------- | :------------------------- |
+| `+`      | Suma                 | `10 + 5` \# Salida: 15     |
+| `-`      | Resta                | `10 - 5` \# Salida: 5      |
+| `*`      | Multiplicación       | `10 * 5` \# Salida: 50     |
+| `/`      | División             | `10 / 4` \# Salida: 2.5    |
+| `%`      | Módulo               | `10 % 3` \# Salida: 1      |
+| `++`     | Incremento (Añade 1) | `$x = 1; $x++` \# $x es 2  |
 | `--`     | Decremento (Resta 1) | `$x = 2; $x--\` \# $x es 1 |
 
 #### 3.4.4.- Conversión y redondeo
@@ -461,7 +461,7 @@ La clase estática **`[Math]`** te permite realizar funciones matemáticas avanz
     [Math]::Ceiling(3.1)
     # Salida: 4
 
-    # Redondeo hacia abajo (Floot)
+    # Redondeo hacia abajo (Floor)
     [Math]::Floor(3.9)
     # Salida: 3
 
@@ -554,7 +554,7 @@ if ($listaUsuarios.Contains("Ana")) {
 La alternativa a los problemas que conllevan los Arrays fijos y los ArraysList es el uso de **listas genéricas** (`System.Collections.Generic.List[T]`). Sus principales ventajas son:
 
 - **Seguridad de tipos**: al crear una lista genérica hay que indicar el tipo de datos que va a contener, obligando a que todos sus elementos sean de ese tipo.
-- **Sintaxis más limpia**: al no devolver el índice (como hacen los ArrayList), no es necesario silenciar la salida precediendo el comando de `[void`], lo que hace el código más limpio y legible.
+- **Sintaxis más limpia**: al no devolver el índice (como hacen los ArrayList), no es necesario silenciar la salida precediendo el comando de `[void]`, lo que hace el código más limpio y legible.
 - **Mayor rendimiento**: son mucho más eficientes en ejecución que las otras alternativas.
 
 Sus métodos más relevantes son:
