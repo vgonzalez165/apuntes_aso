@@ -41,8 +41,9 @@ title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 |          | [Scripting en Powershell y tipos de datos](./apuntes/ut04_scripting_powershell/03_scripting.md)            |                | `RA7` |
 |          | [Control de flujo](./apuntes/ut04_scripting_powershell/04_control_flujo.md)                                |                | `RA7` |
 |          |                                                                                                            |                |       |
-|          | `PR0401` [Canalización, objetos y formato en Powershell](./practicas/ut04/pr0401.md)                       | **-**          | `RA7` |
+|          | `PR0401` [Canalización, objetos y formato en Powershell](./practicas/ut04/pr0401.md)                       | **05/11/2026** | `RA7` |
 |          | `PR0402` [Variables, tipos de datos y colecciones](./practicas/ut04/pr0402.md)                             | **-**          | `RA7` |
+|          | `PR0403` []()                                                                                              | **-**          | `RA7` |
 |          |                                                                                                            |                |       |
 | **UT05** | **ADMINISTRACIÓN DE PROCESOS**                                                                             |                | `RA2` |
 |          |                                                                                                            |                |       |
