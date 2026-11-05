@@ -44,6 +44,7 @@ title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 |          | `PR0401` [Canalización, objetos y formato en Powershell](./practicas/ut04/pr0401.md)                       | **05/11/2026** | `RA7` |
 |          | `PR0402` [Variables, tipos de datos y colecciones](./practicas/ut04/pr0402.md)                             | **-**          | `RA7` |
 |          | `PR0403` [Manipulación de cadenas](./practicas/ut04/pr0403.md)                                             | **-**          | `RA7` |
+|          | `PR0404` [Limpieza de logs](./practicas/ut04/pr0404.md)                                                    | **-**          | `RA7` |
 |          |                                                                                                            |                |       |
 | **UT05** | **ADMINISTRACIÓN DE PROCESOS**                                                                             |                | `RA2` |
 |          |                                                                                                            |                |       |
