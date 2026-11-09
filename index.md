@@ -42,9 +42,11 @@ title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 |          | [Control de flujo](./apuntes/ut04_scripting_powershell/04_control_flujo.md)                                |                | `RA7` |
 |          |                                                                                                            |                |       |
 |          | `PR0401` [Canalización, objetos y formato en Powershell](./practicas/ut04/pr0401.md)                       | **05/11/2026** | `RA7` |
-|          | `PR0402` [Variables, tipos de datos y colecciones](./practicas/ut04/pr0402.md)                             | **-**          | `RA7` |
-|          | `PR0403` [Manipulación de cadenas](./practicas/ut04/pr0403.md)                                             | **-**          | `RA7` |
-|          | `PR0404` [Limpieza de logs](./practicas/ut04/pr0404.md)                                                    | **-**          | `RA7` |
+|          | `PR0402` [Variables, tipos de datos y colecciones](./practicas/ut04/pr0402.md)                             | **12/11/2026** | `RA7` |
+|          | `PR0403` [Manipulación de cadenas](./practicas/ut04/pr0403.md)                                             | **12/11/2026** | `RA7` |
+|          | `PR0404` [Limpieza de logs](./practicas/ut04/pr0404.md)                                                    | **12/11/2026** | `RA7` |
+|          | `PR0405` [Saneamiento de logs web ](./practicas/ut04/pr0405.md)                                            | **15/11/2026** | `RA7` |
+|          | `PR0406` [Normalización y saneamiento de inventario de red](./practicas/ut04/pr0406.md)                    | **-**          | `RA7` |
 |          |                                                                                                            |                |       |
 | **UT05** | **ADMINISTRACIÓN DE PROCESOS**                                                                             |                | `RA2` |
 |          |                                                                                                            |                |       |
