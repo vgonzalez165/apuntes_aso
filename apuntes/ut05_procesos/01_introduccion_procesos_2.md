@@ -4,16 +4,27 @@
 
 Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 Profesor:                   Víctor J. González
-Unidad de Trabajo:          UT05. Gestión y monitorización de procesos
+Unidad de Trabajo:          UT02. Gestión y monitorización de procesos
 Apartado:                   1. Introducción a los procesos
 Resultados de aprendizaje:  -
 ```
 
-# UT05.- GESTIÓN Y MONITORIZACIÓN DE PROCESOS
 
-## 1.- Introducción a los procesos
+## 1.- Gestión de procesos en Linux
 
-Todos los ordenadores modernos pueden hacer varias cosas al mismo tiempo. Ahora bien, en términos estrictos la CPU únicamente pueden ejecutar un programa en un instante dado. Para dar la sensación de simultaneidad en la ejecución lo que se hace es alternar la ejecución de varios programas muy rápidamente, lo que se conoce como **pseudoparalelismo**, en contraste con el verdadero paralelismo hardware de los sistemas multiprocesador.
+### Índice
+
+- [Introducción a los procesos](#51--introducción)
+- [Procesos automáticos e interactivos](#52--procesos-automáticos-e-interactivos)
+- [Procesos en primer y segundo plano](#53--procesos-en-primer-y-segundo-plano)
+- [Comandos relacionados con los procesos](#53--procesos-en-primer-y-segundo-plano)
+- [Envío de señales entre procesos](#55--envío-de-señales-entre-procesos-esto-no) **NO ENTRA**
+
+
+### 1.1.- Introducción
+
+Todos los ordenadores modernos pueden hacer varias cosas al mismo tiempo. Ahora bien, en términos estrictos la CPU únicamente pueden ejecutar un programa en un instante dado. Para
+dar la sensación de simultaneidad en la ejecución lo que se hace es alternar la ejecución de varios programas muy rápidamente, lo que se conoce como pseudoparalelismo, en contraste con el verdadero paralelismo hardware de los sistemas multiprocesador.
 
 En estos sistemas todo el software de la computadora se organiza en varios **procesos secuenciales**, o simplemente procesos. Un proceso no es más que un **programa en ejecución**, e incluye los valores que tienen el contador de programa, los registros y las variables. En lo conceptual cada proceso tiene su propia CPU virtual, aunque en la realidad la verdadera CPU cambia continuamente de un proceso a otro. Esta rápida conmutación se llama **multiprogramación**
 
@@ -51,31 +62,71 @@ A lo largo de su ciclo de vida un proceso puede pasar por varios estados entre l
 ![alt text](image.png)
 
 
+### 1.2.- Procesos en primer y segundo plano
 
-### 1.2.- Procesos automáticos e interactivos
+Dentro de los procesos interactivos iniciados por un usuario, los sistemas operativos distinguen dos modos de ejecución según quién mantiene el control de la interfaz y cómo se gestionan la entrada y la salida: **primer plano** y **segundo plano** . Esta dualidad permite aprovechar la multitarea del sistema operativo sin bloquear el trabajo del usuario mientras se ejecutan tareas de larga duración.
 
-Una clasificación de los procesos que hay en Linux puede ser la que los divide en procesos automáticos e interactivos.
+- **Procesos en primer plano:** son aquellos que mantienen el foco activo de la sesión del usuario. En una interfaz de línea de comandos (*Shell*), el proceso en primer plano recibe directamente las pulsaciones del teclado y muestra sus resultados y errores en pantalla, bloqueando el intérprete hasta que finaliza o es suspendido. En un entorno gráfico (*GUI*), equivale a la ventana activa que recibe los eventos de ratón y teclado.
+- **Procesos en segundo plano:** son procesos iniciados por el usuario que se ejecutan de forma concurrente sin bloquear la interfaz. Aunque siguen siendo procesos hijos de la sesión o de la *Shell* que los lanzó, pierden el acceso directo a la entrada estándar (no leen del teclado) para que el usuario pueda seguir introduciendo otros comandos o trabajando en otras ventanas. En entornos de consola, un proceso en segundo plano **no** desconecta automáticamente su salida estándar ni su salida de error de la terminal. Si el proceso genera mensajes, estos seguirán apareciendo en pantalla mezclándose con lo que el usuario escriba, motivo por el cual es una buena práctica redirigir su salida hacia un archivo o hacia un sumidero nulo (`/dev/null` en Unix/Linux o `$null` en PowerShell).
 
-- **Procesos automáticos**: estos son los **servicios** o **daemons** que se inician automáticamente al arrancar el servidor. El responsable de lanzar todos estos procesos es `systemd`, tal y como veremos más adelante. Los demonios son procesos que se ejecutan en **segundo plano**, es decir, no tienen ninguna salida por la salida estándar.
-- **Procesos interactivos**: son iniciados por los usuarios en *Shell*. Para iniciar un proceso interactivo, el usuario debe introducir el comando correspondiente.
-  
-Los procesos tienen una relación de parentesco donde cada proceso tiene un **proceso padre** que es el que le ha creado. Por ejemplo, un proceso interactivo iniciado en el terminal tiene como padre el proceso Bash correspondiente al terminal.
 
-Cuando un proceso finaliza, debe enviar el estado de salida al proceso padre. Esto es requisito para que el proceso pueda finalizar su ejecución. Si por algún motivo el proceso no pudiera comunicarse con el proceso padre (por ejemplo, porque este hubiera finalizado su ejecución) el proceso hijo no podrá finalizar y quedará en un estado en el que no se podrá realizar ninguna tarea de administración con él. Un proceso que se encuentre en este estado se denomina **proceso zombi**.
 
-Los conceptos de proceso padre e hijo se aplican a todos los procesos del sistema, siendo `systemd` el primer proceso de todos. Es posible ver la estructura jerárquica de los procesos utilizando el comando `pstree`.
- 
-```
-vgonzalez@ubuntu:~$ pstree
-systemd─┬─ModemManager───2*[{ModemManager}]
-        ├─accounts-daemon───2*[{accounts-daemon}]
-        ├─atd
-        ├─cron
-        ├─dbus-daemon
-        ├─irqbalance───{irqbalance}
-        ├─login───bash
-        ├─multipathd───6*[{multipathd}]
-```
+### 1.3.- Jerarquía de procesos: procesos padre e hijo
+
+En la arquitectura de los sistemas operativos, los procesos no existen de forma aislada, sino que mantienen una estricta **relación jerárquica de parentesco**. Todo proceso nuevo (**proceso hijo**) es creado por otro proceso ya existente (**proceso padre**) mediante llamadas al sistema específicas (como `fork()` y `exec()` en sistemas POSIX/Linux, o `CreateProcess()` en Windows).
+
+- **Proceso raíz (PID 1 / Sistema):** en el arranque, el núcleo lanza un primer proceso inicial del que descenderán, directa o indirectamente, todos los demás procesos del sistema:
+        - En Linux/Unix es `systemd` (o `init`) con identificador `PID 1`.
+        - En Windows es el proceso `System` (`PID 4`), que inicia el Gestor de Sesiones (`smss.exe`) y los subsistemas de usuario (`wininit.exe` para servicios y `winlogon.exe` para la sesión interactiva).
+- **Herencia en sesiones de usuario:** cuando abres una terminal y ejecutas un editor de texto, el emulador de terminal es el padre de la *Shell* (Bash o PowerShell), y esta es a su vez el padre del proceso del editor. De igual modo, en un entorno gráfico, el explorador de archivos o entorno de escritorio (`explorer.exe` en Windows, GNOME/Plasma en Linux) actúa como padre de las aplicaciones que lanzas desde el menú o escritorio.
+
+Cuando un proceso termina su ejecución, el sistema operativo libera la mayor parte de sus recursos (memoria, archivos abiertos, dispositivos), pero debe conservar su **bloque de control (PCB)** y su **código de salida** (*exit status*) en la tabla de procesos hasta que su proceso padre lea dicho estado para confirmar cómo terminó la tarea. Dependiendo de cómo ocurra esta sincronización, pueden darse dos situaciones anómalas:
+- **Proceso huérfano:** ocurre cuando el **proceso padre finaliza antes que el proceso hijo**. En lugar de quedar desatendido, el sistema operativo reasigna automáticamente al proceso hijo un nuevo padre adoptivo, generalmente el proceso raíz del sistema (`systemd` en Linux o el gestor de sesiones en Windows), garantizando así que alguien recoja su estado cuando finalmente termine.
+- **Proceso zombi:** ocurre cuando un **proceso hijo finaliza su ejecución, pero su proceso padre sigue activo y no lee su estado de salida** (por ejemplo, debido a un error de programación en el padre que omite la llamada `wait()`). El proceso hijo ya no consume CPU ni memoria de usuario, pero su entrada permanece bloqueada en la tabla de procesos ocupando un identificador (`PID`). No es posible finalizar un proceso zombi mediante señales de terminación (como `kill -9`), ya que técnicamente ya está muerto; la única forma de eliminarlo de la tabla es forzar a que su proceso padre lea el estado o finalizar al propio proceso padre para que el proceso raíz adopte al zombi y limpie su entrada.
+
+![PCB](pcb.png)
+
+Todos los sistemas operativos ofrecen herramientas nativas para visualizar este árbol de parentesco, como puede ser `pstree` en Linux o *Process Explorer* de [Sysinternals](https://learn.microsoft.com/es-es/sysinternals/) en Windows.
+
+
+![Process Explorer](process_explorer.png)
+
+
+Según el sistema operativo, hay diferentes formas de mover los procesos entre el primer y el segundo plano:
+
+| Acción                                            | Sistemas Unix / Linux / macOS (Bash, Zsh)                                 | Windows (PowerShell)                                                           |
+| ------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Iniciar directamente en segundo plano**         | Añadir `&` al final del comando:<br>                                      | Usar `Start-Job` o el operador `&` (PS 7+)                                     |
+| **Suspender el proceso en primer plano**          | Pulsar `Ctrl + Z` (envía la señal `SIGTSTP`)                              | No hay comando. Monitor de recursos (resmon.exe) o `PsSuspend` de Sysinternals |
+| **Reanudar un proceso detenido en segundo plano** | Ejecutar `bg` (o `bg %n` indicando el número de trabajo).                 | No hay comando. Monitor de recursos (resmon.exe) o `PsSuspend` de Sysinternals |
+| **Listar los trabajos de la sesión actual**       | Ejecutar `jobs` (o `jobs -l` para ver también los `PID`).                 | Ejecutar `Get-Job`.                                                            |
+| **Traer un proceso de segundo a primer plano**    | Ejecutar `fg` (o `fg %n` para recuperar el foco y la entrada de teclado). | Recuperar la salida de un trabajo con `Receive-Job -Id n -Keep`.               |
+
+
+Un aspecto crítico en cualquier sistema operativo es qué ocurre cuando el usuario cierra la terminal o finaliza su sesión gráfica:
+
+- **Dependencia de la sesión:** dado que los procesos en segundo plano lanzados desde una consola siguen siendo hijos de la *Shell*, al cerrar la terminal el sistema operativo envía una señal de cierre (`SIGHUP` en Unix/Linux/macOS o el cierre del árbol de consola en Windows) que **finaliza también todos los procesos en segundo plano** asociados a ella.
+- **Ejecución independiente de la sesión:** para que una tarea iniciada por el usuario continúe ejecutándose incluso después de cerrar la sesión o desconectarse del equipo, es necesario desvincularla del árbol de la terminal:
+  - En **Linux/macOS**, anteponiendo el comando `nohup` (por ejemplo, `nohup script.sh > salida.log 2>&1 &`), utilizando `disown` en Bash, o empleando multiplexores de terminal como `tmux` o `screen`.
+  - En **Windows**, lanzando el proceso de forma independiente mediante `Start-Process` en PowerShell o programándolo a través del **Programador de tareas** (*Task Scheduler*).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### 1.3.- Procesos en primer y segundo plano
