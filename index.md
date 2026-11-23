@@ -49,7 +49,11 @@ title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 |          | `PR0406` [Normalización y saneamiento de inventario de red](./practicas/ut04/pr0406.md)                    | **-**          | `RA7` |
 |          |                                                                                                            |                |       |
 | **UT05** | **GESTIÓN Y MONITORIZACIÓN DE PROCESOS**                                                                   |                | `RA2` |
-|          | [Introducción a los procesos](./apuntes/ut05_procesos/01_introduccion_procesos.md)                         |                | `RA7` |
+|          | [Introducción a los procesos](./apuntes/ut05_procesos/01_introduccion_procesos.md)                         |                | `RA2` |
+|          | [Procesos en Linux](./apuntes/ut05_procesos/02_procesos_linux.md)                                          |                | `RA2` |
+|          | [Procesos en Windows]()                                                                                    |                | `RA2` |
+|          |                                                                                                            |                |       |
+|          | `PR0501` [Diagnóstico y control de procesos en Linux](./practicas/ut05/pr0501.md)                          | **xx/xx/xxxx** | `RA2` |
 |          |                                                                                                            |                |       |
 | **UT06** | **GESTIÓN DE TAREAS**                                                                                      |                | `RA3` |
 |          |                                                                                                            |                |       |

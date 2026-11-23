@@ -4,13 +4,13 @@
 
 Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 Profesor:                   Víctor J. González
-Unidad de Trabajo:          UT05. Administración de procesos
-Apartado:                   2. Procesos en Linux
+Unidad de Trabajo:          UT05. Gestión y monitorización de procesos
+Apartado:                   Procesos en Linux
 Resultados de aprendizaje:  RA2
 ```
 
 
-# UT04.- ADMINISTRACIÓN DE PROCESOS
+# UT04.- GESTIÓN Y MONITORIZACIÓN DE PROCESOS
 
 ## 2.- Procesos en Linux
 
@@ -165,8 +165,4 @@ pkill -u alumno -9 python3    # Mata forzosamente todos los procesos python3 del
 killall -HUP rsyslogd         # Envía SIGHUP a todos los procesos con nombre exacto rsyslogd
 
 ```
-
-
-
-> **Recordatorio sobre procesos zombi (`Z`):** Si al ejecutar `ps aux` detectas un proceso en estado `Z`, ejecutar `kill -9 <PID_zombi>` **no tendrá ningún efecto** porque el proceso ya ha finalizado. Para limpiar esa entrada de la tabla de procesos, debes enviar una señal al proceso padre (`PPID`) para que lea su código de salida o, si el padre está bloqueado, finalizar al proceso padre (`kill -15 <PPID>`) para que `systemd` (`PID 1`) adopte al zombi y recoja su estado.
 
