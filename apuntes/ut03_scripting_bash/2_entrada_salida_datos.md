@@ -4,7 +4,7 @@
 
 Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 Profesor:                   Víctor J. González
-Unidad de Trabajo:          UT03. Scripting en Bash
+Unidad de Trabajo:          UT03. Lenguajes de scripting en Linux. Bash
 Apartado:                   Entrada y salida de datos
 Resultados de aprendizaje:  RA7
 ```

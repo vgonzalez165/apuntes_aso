@@ -48,7 +48,8 @@ title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 |          | `PR0405` [Saneamiento de logs web ](./practicas/ut04/pr0405.md)                                            | **15/11/2026** | `RA7` |
 |          | `PR0406` [Normalización y saneamiento de inventario de red](./practicas/ut04/pr0406.md)                    | **-**          | `RA7` |
 |          |                                                                                                            |                |       |
-| **UT05** | **ADMINISTRACIÓN DE PROCESOS**                                                                             |                | `RA2` |
+| **UT05** | **GESTIÓN Y MONITORIZACIÓN DE PROCESOS**                                                                   |                | `RA2` |
+|          | [Introducción a los procesos](./apuntes/ut05_procesos/01_introduccion_procesos.md)                         |                | `RA7` |
 |          |                                                                                                            |                |       |
 | **UT06** | **GESTIÓN DE TAREAS**                                                                                      |                | `RA3` |
 |          |                                                                                                            |                |       |

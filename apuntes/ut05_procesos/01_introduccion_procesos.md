@@ -4,43 +4,30 @@
 
 Módulo:                     ADMINISTRACIÓN DE SISTEMAS OPERATIVOS
 Profesor:                   Víctor J. González
-Unidad de Trabajo:          UT02. Gestión y monitorización de procesos
+Unidad de Trabajo:          UT05. Gestión y monitorización de procesos
 Apartado:                   1. Introducción a los procesos
 Resultados de aprendizaje:  -
 ```
 
+# UT05.- GESTIÓN Y MONITORIZACIÓN DE PROCESOS
 
-## 1.- Gestión de procesos en Linux
+## 1.- Introducción a los procesos
 
-### Índice
-
-- [Introducción a los procesos](#51--introducción)
-- [Procesos automáticos e interactivos](#52--procesos-automáticos-e-interactivos)
-- [Procesos en primer y segundo plano](#53--procesos-en-primer-y-segundo-plano)
-- [Comandos relacionados con los procesos](#53--procesos-en-primer-y-segundo-plano)
-- [Envío de señales entre procesos](#55--envío-de-señales-entre-procesos-esto-no) **NO ENTRA**
-
-
-### 1.1.- Introducción
-
-Todos los ordenadores modernos pueden hacer varias cosas al mismo tiempo. Ahora bien, en términos estrictos la CPU únicamente pueden ejecutar un programa en un instante dado. Para
-dar la sensación de simultaneidad en la ejecución lo que se hace es alternar la ejecución de varios programas muy rápidamente, lo que se conoce como pseudoparalelismo, en contraste con el verdadero paralelismo hardware de los sistemas multiprocesador.
+Todos los ordenadores modernos pueden hacer varias cosas al mismo tiempo. Ahora bien, en términos estrictos la CPU únicamente pueden ejecutar un programa en un instante dado. Para dar la sensación de simultaneidad en la ejecución lo que se hace es alternar la ejecución de varios programas muy rápidamente, lo que se conoce como **pseudoparalelismo**, en contraste con el verdadero paralelismo hardware de los sistemas multiprocesador.
 
 En estos sistemas todo el software de la computadora se organiza en varios **procesos secuenciales**, o simplemente procesos. Un proceso no es más que un **programa en ejecución**, e incluye los valores que tienen el contador de programa, los registros y las variables. En lo conceptual cada proceso tiene su propia CPU virtual, aunque en la realidad la verdadera CPU cambia continuamente de un proceso a otro. Esta rápida conmutación se llama **multiprogramación**
 
 
-#### 1.1.1.- Creación de procesos
+### 1.1.- Creación de procesos
 
-En los sistemas operativos normalmente hace falta un mecanismo para crear y terminas procesos según se necesite durante la operación.
-
-Hay cuatro sucesos principales que causan la creación de procesos:
+En los sistemas operativos normalmente hace falta un mecanismo para crear y terminas procesos según se necesite durante la operación. Hay cuatro sucesos principales que causan la creación de procesos:
 
 - **Inicialización del sistema**: cuando se arranca el sistema operativo se crean varios procesos. Algunos son de **primer plano**, es decir, que interactúan con el usuario, y otros son en **segundo plano**, que no están asociados con un usuario en particular, sino que tienen una función específica, por ejemplo, podría diseñarse un proceso que acepte el correo electrónico entrante, el cual quedaría inactivo esperando la entrada de algún correo. A los procesos que se ejecutan en segundo plano se les denomina **demonios** (*daemons*)
 - **Ejecución de una llamada al sistema para crear procesos por un programa en ejecución**: es normal que un proceso en ejecución emita llamadas al sistema para crear uno o más procesos que le ayuden en su labor. La creación de procesos tiene especial utilidad cuando el trabajo a realizar puede formularse con facilidad a partir de varios procesos relacionados, pero independientes, que interactúan entre sí.
 - **Solicitud de un usuario para crear un proceso**: un usuario puede crear un proceso desde la línea de comandos del sistema o a través del entorno de ventanas.
 - **Como parte de un trabajo por lotes**: esta situación solo se da en los sistemas por lotes de los mainframes grandes. En ellos los usuarios pueden enviar trabajos por lotes al sistema. Cuando el sistema operativo decide que tiene los recursos suficientes para ejecutar otro trabajo, crea un proceso y ejecuta en él el siguiente trabajo de la cola de entrada.
 
-#### 1.1.2.- Terminación de procesos
+### 1.2.- Terminación de procesos
 
 Pero los procesos no están indefinidamente en la memoria, sino que tarde o temprano han de finalizar, debido principalmente a uno de los siguientes motivos:
 
