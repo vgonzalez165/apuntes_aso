@@ -57,6 +57,7 @@ Los principales componentes de la jerarquía son:
 
 
 
+
 ## 3.2.- Herramientas gráficas de monitorización e inspección (GUI)
 
 En entornos Windows, la administración de procesos cuenta con herramientas gráficas nativas y avanzadas que ofrecen distintos niveles de profundidad diagnóstica, desde la supervisión rápida de consumo hasta el análisis forense de hilos, bibliotecas y bloqueos.
@@ -77,10 +78,11 @@ Aquí podemos ver que algunos procesos están en estado *Suspendido* (icono de h
 **Pestaña *Detalles***
 
 Equivale a la salida de `ps aux` o `top` en Linux, mostrando los ejecutables reales (`.exe`), su identificador numérico (**`PID`**), el usuario propietario, el consumo de memoria física y el estado actual (*En ejecución* o *Suspendido*). Desde el menú contextual (clic derecho) sobre cualquier proceso ofrece operaciones avanzadas:
-    - **Finalizar árbol de procesos:** detiene no solo el proceso seleccionado, sino también todos los procesos hijos que haya creado.
-    - **Establecer prioridad:** permite modificar dinámicamente la clase de prioridad de planificación (desde *Baja* hasta *Tiempo real*).
-    - **Establecer afinidad:** restringe en qué núcleos lógicos concretos de la CPU tiene permiso para ejecutarse ese proceso.
-    - **Ir a servicios:** salta directamente a la pestaña *Servicios* resaltando qué servicio o servicios están alojados dentro de ese proceso (imprescindible para inspeccionar instancias de `svchost.exe`).
+
+  - **Finalizar árbol de procesos:** detiene no solo el proceso seleccionado, sino también todos los procesos hijos que haya creado.
+  - **Establecer prioridad:** permite modificar dinámicamente la clase de prioridad de planificación (desde *Baja* hasta *Tiempo real*).
+  - **Establecer afinidad:** restringe en qué núcleos lógicos concretos de la CPU tiene permiso para ejecutarse ese proceso.
+  - **Ir a servicios:** salta directamente a la pestaña *Servicios* resaltando qué servicio o servicios están alojados dentro de ese proceso (imprescindible para inspeccionar instancias de `svchost.exe`).
 
 ![Pestaña Detalles](detalles.png)
 
@@ -107,10 +109,11 @@ Algunas tareas que podemos realizar desde el monitor de recursos son:
 
 
 A diferencia del Administrador de tareas (que agrupa por ventanas), Process Explorer muestra por defecto la **jerarquía exacta de creación (`PID` y `PPID`)** indentada en árbol y colorea cada fila según su naturaleza:
-    - **Rosa:** procesos que alojan servicios de Windows (`svchost.exe` y servicios propios).
-    - **Azul:** procesos que se ejecutan bajo la misma cuenta de usuario que el administrador actual.
-    - **Verde / Rojo (parpadeo breve):** procesos recién creados (verde) o recién finalizados (rojo) en tiempo real.
-    - **Morado:** procesos empaquetados o comprimidos (útil para detectar ejecutables sospechosos).
+
+  - **Rosa:** procesos que alojan servicios de Windows (`svchost.exe` y servicios propios).
+  - **Azul:** procesos que se ejecutan bajo la misma cuenta de usuario que el administrador actual.
+  - **Verde / Rojo (parpadeo breve):** procesos recién creados (verde) o recién finalizados (rojo) en tiempo real.
+  - **Morado:** procesos empaquetados o comprimidos (útil para detectar ejecutables sospechosos).
 
 ![Process Explorer](process_explorer_panel.png)
 
@@ -126,141 +129,138 @@ Al seleccionar un proceso en el panel superior y activar el panel inferior (`Ctr
 
 
 
+### 3.3.- Administración y automatización de procesos en Windows con PowerShell
+
+En la administración moderna de sistemas Windows (tanto en estaciones de trabajo como en entornos *Windows Server Core* sin interfaz gráfica), **PowerShell** es el estándar de referencia. A diferencia de los comandos heredados basados en texto plano, PowerShell opera mediante un **pipeline orientado a objetos .NET**: cada proceso recuperado es un objeto vivo con propiedades inspeccionables (`Id`, `CPU`, `WorkingSet`, `PriorityClass`, `Responding`) y métodos ejecutables (`.Kill()`, `.WaitForExit()`), lo que permite filtrar, ordenar, auditar y actuar sobre decenas de procesos con precisión quirúrgica.
 
 
+#### 1. Inspección y análisis de procesos: `Get-Process` y `Get-CimInstance`
 
+PowerShell ofrece dos niveles de inspección según la profundidad técnica requerida:
 
+**A) Consulta rápida de rendimiento y estado (`Get-Process`)**
 
-
-
-
-
-### 3.3.- Administración de procesos desde consola: CMD vs. PowerShell
-
-Para automatizar tareas administrativas o diagnosticar servidores sin interfaz gráfica (como *Windows Server Core*), es indispensable dominar la gestión de procesos por línea de comandos. Mientras que el símbolo del sistema clásico (**CMD**) utiliza comandos externos heredados que devuelven texto plano, **PowerShell** trabaja con **objetos .NET**, lo que permite filtrar, ordenar y canalizar propiedades exactas mediante tuberías (`|`) sin necesidad de recortar texto manualmente.
-
----
-
-#### 1. Inspección y listado de procesos (`tasklist` vs. `Get-Process`)
-
-* **En CMD (`tasklist`):**
-Muestra la lista de procesos activos en el equipo local (o en un equipo remoto mediante `/S`).
-
-```cmd
-tasklist                          :: Listado básico (Nombre, PID, Sesión, Memoria)
-tasklist /v                       :: Modo detallado (incluye Estado, Usuario, Tiempo CPU y Título de ventana)
-tasklist /svc                     :: Muestra qué servicios de Windows aloja cada proceso (clave para svchost.exe)
-tasklist /fi "MEMUSAGE gt 100000" :: Filtra procesos que consuman más de 100 MB de RAM
-
-```
-
-* **En PowerShell (`Get-Process` y consultas CIM/WMI):**
-`Get-Process` (alias `gps` o `ps`) devuelve objetos completos con propiedades de memoria, CPU, hilos e identificadores. Sin embargo, para consultar el proceso padre (`ParentProcessId`) o la ruta y argumentos exactos con los que se lanzó el programa (`CommandLine`), se recurre a la clase instrumental `Win32_Process`:
+El cmdlet `Get-Process` (alias `gps` o `ps`) consulta directamente la tabla de procesos del sistema y devuelve objetos `System.Diagnostics.Process`:
 
 ```powershell
-# Listar todos los procesos ordenados por consumo de CPU (top 10)
+# Listado general de procesos activos
+Get-Process
+
+# Top 10 procesos con mayor consumo de tiempo de CPU
 Get-Process | Sort-Object CPU -Descending | Select-Object -First 10 Id, ProcessName, CPU, WorkingSet
 
-# Consultar el árbol de parentesco (PID, PPID) y la línea de comandos exacta
+# Filtrar procesos que consumen más de 200 MB de memoria física (WorkingSet en bytes)
+Get-Process | Where-Object { $_.WorkingSet -gt 200MB } | Select-Object Id, ProcessName, @{Name="RAM_MB"; Expression={[math]::Round($_.WorkingSet / 1MB, 2)}}
+
+# Detectar aplicaciones gráficas bloqueadas que no responden a eventos de ventana
+Get-Process | Where-Object { $_.MainWindowHandle -ne 0 -and -not $_.Responding }
+```
+
+**B) Consulta profunda de jerarquía, ruta y argumentos (`Get-CimInstance`)**
+
+Por motivos de rendimiento y seguridad, `Get-Process` no expone directamente el identificador del proceso padre (`PPID`) ni la línea de comandos completa con la que se invocó un binario. Para auditar la jerarquía real (equivalente a `ps -ef` en Linux), se consulta la clase instrumental **CIM/WMI `Win32_Process**`:
+
+```powershell
+# Listar PID, PPID (proceso padre), nombre y línea de comandos exacta
 Get-CimInstance Win32_Process | Select-Object ProcessId, ParentProcessId, Name, CommandLine
 
-# Inspeccionar los hilos internos (Threads) de un proceso concreto
-(Get-Process -Name explorer).Threads | Select-Object Id, ThreadState, PriorityLevel
+# Rastrear todos los procesos hijos lanzados por una instancia concreta de PowerShell o Explorer
+Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq 4120 } | Select-Object ProcessId, Name, CommandLine
 
+# Identificar qué servicios de Windows aloja cada instancia de svchost.exe
+Get-CimInstance Win32_Service | Where-Object { $_.ProcessId -ne 0 } |
+  Select-Object ProcessId, Name, DisplayName, State | Sort-Object ProcessId
 ```
 
----
+**C) Inspección de hilos internos (`Threads`)**
 
-#### 2. Ejecución y control de prioridades (`start` vs. `Start-Process`)
-
-A diferencia de Linux (que emplea `nice` y `renice`), en Windows la prioridad de planificación se establece al iniciar el binario o modificando la propiedad `PriorityClass` del objeto proceso en tiempo de ejecución.
-
-* **En CMD (`start`):**
-Permite lanzar aplicaciones especificando su prioridad inicial (`/low`, `/belownormal`, `/normal`, `/abovenormal`, `/high`, `/realtime`) y si deben ejecutarse en la misma consola (`/B`) o esperar a que terminen (`/WAIT`):
-
-```cmd
-start /belownormal /B copia_seguridad.bat
-
-```
-
-* **En PowerShell (`Start-Process` y ajuste dinámico):**
+Cada objeto devuelto por `Get-Process` contiene una colección `Threads` que permite bajar al nivel de unidad de ejecución:
 
 ```powershell
-# Iniciar un proceso minimizado y capturar su objeto en una variable (-PassThru)
-$proc = Start-Process notepad.exe -WindowStyle Minimized -PassThru
-
-# Modificar dinámicamente su clase de prioridad (equivalente a renice)
-$proc.PriorityClass = 'BelowNormal'
-
-# Cambiar la prioridad de un proceso ya existente por su PID
-(Get-Process -Id 4512).PriorityClass = 'High'
-
+# Ver los hilos activos de un proceso concreto, su estado y prioridad base
+(Get-Process -Name explorer).Threads | Select-Object Id, ThreadState, WaitReason, PriorityLevel
 ```
 
----
 
-#### 3. Finalización de procesos (`taskkill` vs. `Stop-Process`)
+#### 2. Creación de procesos y control de planificación (`Start-Process` y `PriorityClass`)
 
-En Windows no existen las señales POSIX (`SIGTERM` / `SIGKILL`) como en Linux; en su lugar, el sistema distingue entre solicitar un cierre ordenado (enviando el mensaje gráfico `WM_CLOSE` a la ventana principal del programa) o forzar la terminación inmediata desde el *kernel* mediante la llamada `TerminateProcess()`.
+**A) Lanzamiento controlado con `Start-Process`**
 
-* **En CMD (`taskkill`):**
-Permite terminar procesos por identificador (`/PID`) o por nombre de imagen (`/IM`). El modificador `/F` fuerza el cierre inmediato y `/T` elimina también todo su árbol de procesos hijos:
-
-```cmd
-taskkill /PID 3412                   :: Solicita cierre ordenado (sin forzar)
-taskkill /IM notepad.exe /F          :: Cierra forzosamente todas las instancias del Bloc de notas
-taskkill /PID 3412 /T /F             :: Mata forzosamente el proceso 3412 y todos sus procesos hijos
-
-```
-
-* **En PowerShell (`Stop-Process`):**
-Por defecto intenta cerrar el proceso; añadiendo `-Force` ejecuta la terminación inmediata sin pedir confirmación:
+`Start-Process` (alias `saps` o `start`) permite iniciar ejecutables controlando el estilo de ventana, el directorio de trabajo, las credenciales de ejecución y la sincronización:
 
 ```powershell
-Stop-Process -Id 3412 -Force
+# Lanzar un proceso en segundo plano sin abrir ventana visible (-WindowStyle Hidden)
+Start-Process -FilePath "robocopy.exe" -ArgumentList "C:\Origen D:\Backup /MIR" -WindowStyle Hidden
+
+# Lanzar un proceso y bloquear el script hasta que finalice (-Wait), capturando su código de salida (-PassThru)
+$proceso = Start-Process -FilePath "notepad.exe" -Wait -PassThru
+Write-Output "El proceso terminó con código de salida (ExitCode): $($proceso.ExitCode)"
+
+# Ejecutar una herramienta administrativa solicitando elevación de privilegios (UAC)
+Start-Process -FilePath "pwsh.exe" -Verb RunAs
+```
+
+**B) Ajuste dinámico de prioridad y afinidad de CPU**
+
+Para modular el reparto de procesador (equivalente a `nice` y `renice` en Linux), se modifica la propiedad **`PriorityClass`** (`Idle`, `BelowNormal`, `Normal`, `AboveNormal`, `High`, `RealTime`) o la máscara binaria de núcleos **`ProcessorAffinity`**:
+
+```powershell
+# Iniciar una tarea pesada y rebajar inmediatamente su prioridad para no penalizar el sistema
+$tarea = Start-Process -FilePath "powershell.exe" -ArgumentList "-Command while($true){}" -PassThru
+$tarea.PriorityClass = 'BelowNormal'
+
+# Cambiar en caliente la prioridad de un proceso ya existente por su PID
+(Get-Process -Id 5340).PriorityClass = 'Low'
+
+# Restringir un proceso para que solo se ejecute en los dos primeros núcleos lógicos (máscara binaria 0011 = 3)
+(Get-Process -Id 5340).ProcessorAffinity = 3
+```
+
+
+#### 3. Finalización de procesos y árboles (`Stop-Process` y métodos de objeto)
+
+PowerShell permite distinguir entre un cierre ordenado a nivel de interfaz gráfica y una terminación inmediata a nivel de *kernel*:
+
+```powershell
+# 1. Solicitar cierre ordenado de la ventana principal (equivale a pulsar la 'X'; permite guardar cambios)
+(Get-Process -Name notepad).CloseMainWindow()
+
+# 2. Terminación forzosa inmediata por PID o por nombre (equivalente a kill -9 / pkill -9)
+Stop-Process -Id 5340 -Force
 Stop-Process -Name "chrome" -Force
 
-# Ejemplo de potencia de objetos: cerrar todos los procesos que no respondan
-Get-Process | Where-Object { -not $_.Responding } | Stop-Process -Force
+# 3. Terminación forzosa de un proceso y todo su árbol de procesos hijos (PowerShell 7+)
+Stop-Process -Id 5340 -Force -IncludeUserName
 
+# 4. Terminar árbol completo mediante método nativo .NET (compatible con cualquier versión)
+(Get-Process -Id 5340).Kill($true)
 ```
 
----
 
-#### 4. Ejecución en segundo plano (*Background Jobs*)
+#### 4. Ejecución concurrente en segundo plano (*Background Jobs*)
 
-Para ejecutar tareas largas sin bloquear el intérprete de comandos actual:
-
-* **En CMD:** Se utiliza `start /B comando` para lanzarlo en la misma ventana de consola sin abrir una nueva, aunque su salida seguirá mezclándose en pantalla si no se redirige (`> salida.log 2>&1`).
-* **En PowerShell:** Se utiliza el sistema de trabajos en segundo plano (*Jobs*), donde cada trabajo se ejecuta en un subproceso aislado y almacena su salida en memoria hasta que el administrador la consulta:
+Para ejecutar bloques de código o tareas de administración sin bloquear la consola interactiva, PowerShell incorpora un motor completo de trabajos en segundo plano:
 
 ```powershell
-# 1. Iniciar una tarea pesada en segundo plano (equivalente a '&' en Bash)
-Start-Job -Name "EscaneoRed" -ScriptBlock { Test-Connection 192.168.1.1 -Count 20 }
+# 1. Iniciar un trabajo en segundo plano (equivalente a '&' en Bash)
+Start-Job -Name "AuditoriaRed" -ScriptBlock {
+    Test-Connection -ComputerName 8.8.8.8 -Count 15
+}
 
-# 2. Listar los trabajos activos de la sesión (equivalente a 'jobs')
+# 2. Consultar el estado de todos los trabajos de la sesión (Running, Completed, Failed)
 Get-Job
 
-# 3. Recuperar los resultados generados sin borrarlos del búfer (-Keep)
-Receive-Job -Name "EscaneoRed" -Keep
+# 3. Esperar a que un trabajo termine antes de continuar un script
+Wait-Job -Name "AuditoriaRed"
 
-# 4. Detener y limpiar el trabajo una vez finalizado
-Stop-Job -Name "EscaneoRed"
-Remove-Job -Name "EscaneoRed"
+# 4. Leer la salida generada por el trabajo (-Keep conserva los datos en memoria para volver a leerlos)
+Receive-Job -Name "AuditoriaRed" -Keep
+
+# 5. Detener un trabajo en curso y liberar su memoria de la sesión
+Stop-Job -Name "AuditoriaRed"
+Remove-Job -Name "AuditoriaRed"
 
 ```
 
----
+**Alternativa ligera basada en hilos (`Start-ThreadJob`):** Mientras que `Start-Job` crea un proceso independiente completo (`pwsh.exe` / `powershell.exe`) por cada tarea (con mayor consumo de RAM y arranque más lento), el cmdlet **`Start-ThreadJob`** ejecuta cada tarea en un **hilo (*thread*)** dentro del mismo proceso de PowerShell, compartiendo los mismos comandos de gestión (`Get-Job`, `Receive-Job`, `Stop-Job`, `Remove-Job`) con un rendimiento muy superior.
 
-#### Tabla resumen de equivalencias Linux — CMD — PowerShell
-
-| Tarea administrativa | Linux (Bash) | Windows (CMD) | Windows (PowerShell) |
-| --- | --- | --- | --- |
-| **Listar procesos activos** | `ps aux` | `tasklist` | `Get-Process` |
-| **Ver `PID`, `PPID` y argumentos** | `ps -ef` | `tasklist /v` | `Get-CimInstance Win32_Process` |
-| **Ver servicios dentro de procesos** | `systemctl status` | `tasklist /svc` | `Get-CimInstance Win32_Service` |
-| **Lanzar con prioridad baja** | `nice -n 10 cmd` | `start /belownormal cmd` | `Start-Process` + `.PriorityClass = 'BelowNormal'` |
-| **Cambiar prioridad en caliente** | `renice -n 10 -p PID` | *(Requiere PowerShell / WMI)* | `(Get-Process -Id PID).PriorityClass = 'Low'` |
-| **Finalizar proceso por ID** | `kill -9 PID` | `taskkill /PID PID /F` | `Stop-Process -Id PID -Force` |
-| **Finalizar por nombre** | `pkill -9 nombre` | `taskkill /IM nombre.exe /F` | `Stop-Process -Name nombre -Force` |
-| **Ejecutar en segundo plano** | `comando &` / `jobs` | `start /B comando` | `Start-Job` / `Get-Job` / `Receive-Job` |
