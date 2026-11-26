@@ -51,9 +51,10 @@ title: ADMINISTRACIÓN DE SISTEMAS OPERATIVOS (Curso 2026-27)
 | **UT05** | **GESTIÓN Y MONITORIZACIÓN DE PROCESOS**                                                                   |                | `RA2` |
 |          | [Introducción a los procesos](./apuntes/ut05_procesos/01_introduccion_procesos.md)                         |                | `RA2` |
 |          | [Procesos en Linux](./apuntes/ut05_procesos/02_procesos_linux.md)                                          |                | `RA2` |
-|          | [Procesos en Windows]()                                                                                    |                | `RA2` |
+|          | [Procesos en Windows](./apuntes/ut05_procesos/03_procesos_windows.md)                                      |                | `RA2` |
 |          |                                                                                                            |                |       |
 |          | `PR0501` [Diagnóstico y control de procesos en Linux](./practicas/ut05/pr0501.md)                          | **xx/xx/xxxx** | `RA2` |
+|          | `PR0502` [Inspección, control y diagnóstico de procesos en Windows](./practicas/ut05/pr0502.md)            | **xx/xx/xxxx** | `RA2` |
 |          |                                                                                                            |                |       |
 | **UT06** | **GESTIÓN DE TAREAS**                                                                                      |                | `RA3` |
 |          |                                                                                                            |                |       |
